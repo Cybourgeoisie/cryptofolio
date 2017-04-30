@@ -1,54 +1,908 @@
 <html>
 <head>
-	<!-- Pure.css -->
-	<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Font Awesome -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+	<!-- Metis Menu -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.css" integrity="sha256-OufFdETrXbY5YtILsSTzlY+4Ttmq+hUfR1mMYLmKlWo=" crossorigin="anonymous" />
+
+	<!-- Morris Charts -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" integrity="sha256-szHusaozbQctTn4FX+3l5E0A5zoxz7+ne4fr8NgWJlw=" crossorigin="anonymous" />
 
 	<!-- Page style -->
 	<style>
-		body { 
-			margin: 10px 20px;
+		/*!
+		 * Start Bootstrap - SB Admin 2 v3.3.7+1 (http://startbootstrap.com/template-overviews/sb-admin-2)
+		 * Copyright 2013-2016 Start Bootstrap
+		 * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+		 */
+		body {
+		  background-color: #f8f8f8;
 		}
-		div.pure-g {
-			margin: 10px 0px;
+		#wrapper {
+		  width: 100%;
+		}
+		#page-wrapper {
+		  padding: 0 15px;
+		  margin: 25px;
+		  min-height: 568px;
+		  background-color: white;
+		}
+		/*@media (min-width: 768px) {
+		  #page-wrapper {
+		    position: inherit;
+		    margin: 0 0 0 250px;
+		    padding: 0 30px;
+		    border-left: 1px solid #e7e7e7;
+		  }
+		}*/
+		.navbar-top-links {
+		  margin-right: 0;
+		}
+		.navbar-top-links li {
+		  display: inline-block;
+		}
+		.navbar-top-links li:last-child {
+		  margin-right: 15px;
+		}
+		.navbar-top-links li a {
+		  padding: 15px;
+		  min-height: 50px;
+		}
+		.navbar-top-links .dropdown-menu li {
+		  display: block;
+		}
+		.navbar-top-links .dropdown-menu li:last-child {
+		  margin-right: 0;
+		}
+		.navbar-top-links .dropdown-menu li a {
+		  padding: 3px 20px;
+		  min-height: 0;
+		}
+		.navbar-top-links .dropdown-menu li a div {
+		  white-space: normal;
+		}
+		.navbar-top-links .dropdown-messages,
+		.navbar-top-links .dropdown-tasks,
+		.navbar-top-links .dropdown-alerts {
+		  width: 310px;
+		  min-width: 0;
+		}
+		.navbar-top-links .dropdown-messages {
+		  margin-left: 5px;
+		}
+		.navbar-top-links .dropdown-tasks {
+		  margin-left: -59px;
+		}
+		.navbar-top-links .dropdown-alerts {
+		  margin-left: -123px;
+		}
+		.navbar-top-links .dropdown-user {
+		  right: 0;
+		  left: auto;
+		}
+		.sidebar .sidebar-nav.navbar-collapse {
+		  padding-left: 0;
+		  padding-right: 0;
+		}
+		.sidebar .sidebar-search {
+		  padding: 15px;
+		}
+		.sidebar ul li {
+		  border-bottom: 1px solid #e7e7e7;
+		}
+		.sidebar ul li a.active {
+		  background-color: #eeeeee;
+		}
+		.sidebar .arrow {
+		  float: right;
+		}
+		.sidebar .fa.arrow:before {
+		  content: "\f104";
+		}
+		.sidebar .active > a > .fa.arrow:before {
+		  content: "\f107";
+		}
+		.sidebar .nav-second-level li,
+		.sidebar .nav-third-level li {
+		  border-bottom: none !important;
+		}
+		.sidebar .nav-second-level li a {
+		  padding-left: 37px;
+		}
+		.sidebar .nav-third-level li a {
+		  padding-left: 52px;
+		}
+		@media (min-width: 768px) {
+		  .sidebar {
+		    z-index: 1;
+		    position: absolute;
+		    width: 250px;
+		    margin-top: 51px;
+		  }
+		  .navbar-top-links .dropdown-messages,
+		  .navbar-top-links .dropdown-tasks,
+		  .navbar-top-links .dropdown-alerts {
+		    margin-left: auto;
+		  }
+		}
+		.btn-outline {
+		  color: inherit;
+		  background-color: transparent;
+		  transition: all .5s;
+		}
+		.btn-primary.btn-outline {
+		  color: #428bca;
+		}
+		.btn-success.btn-outline {
+		  color: #5cb85c;
+		}
+		.btn-info.btn-outline {
+		  color: #5bc0de;
+		}
+		.btn-warning.btn-outline {
+		  color: #f0ad4e;
+		}
+		.btn-danger.btn-outline {
+		  color: #d9534f;
+		}
+		.btn-primary.btn-outline:hover,
+		.btn-success.btn-outline:hover,
+		.btn-info.btn-outline:hover,
+		.btn-warning.btn-outline:hover,
+		.btn-danger.btn-outline:hover {
+		  color: white;
+		}
+		.chat {
+		  margin: 0;
+		  padding: 0;
+		  list-style: none;
+		}
+		.chat li {
+		  margin-bottom: 10px;
+		  padding-bottom: 5px;
+		  border-bottom: 1px dotted #999999;
+		}
+		.chat li.left .chat-body {
+		  margin-left: 60px;
+		}
+		.chat li.right .chat-body {
+		  margin-right: 60px;
+		}
+		.chat li .chat-body p {
+		  margin: 0;
+		}
+		.panel .slidedown .glyphicon,
+		.chat .glyphicon {
+		  margin-right: 5px;
+		}
+		.chat-panel .panel-body {
+		  height: 350px;
+		  overflow-y: scroll;
+		}
+		.login-panel {
+		  margin-top: 25%;
+		}
+		.flot-chart {
+		  display: block;
+		  height: 400px;
+		}
+		.flot-chart-content {
+		  width: 100%;
+		  height: 100%;
+		}
+		table.dataTable thead .sorting,
+		table.dataTable thead .sorting_asc,
+		table.dataTable thead .sorting_desc,
+		table.dataTable thead .sorting_asc_disabled,
+		table.dataTable thead .sorting_desc_disabled {
+		  background: transparent;
+		}
+		table.dataTable thead .sorting_asc:after {
+		  content: "\f0de";
+		  float: right;
+		  font-family: fontawesome;
+		}
+		table.dataTable thead .sorting_desc:after {
+		  content: "\f0dd";
+		  float: right;
+		  font-family: fontawesome;
+		}
+		table.dataTable thead .sorting:after {
+		  content: "\f0dc";
+		  float: right;
+		  font-family: fontawesome;
+		  color: rgba(50, 50, 50, 0.5);
+		}
+		.btn-circle {
+		  width: 30px;
+		  height: 30px;
+		  padding: 6px 0;
+		  border-radius: 15px;
+		  text-align: center;
+		  font-size: 12px;
+		  line-height: 1.428571429;
+		}
+		.btn-circle.btn-lg {
+		  width: 50px;
+		  height: 50px;
+		  padding: 10px 16px;
+		  border-radius: 25px;
+		  font-size: 18px;
+		  line-height: 1.33;
+		}
+		.btn-circle.btn-xl {
+		  width: 70px;
+		  height: 70px;
+		  padding: 10px 16px;
+		  border-radius: 35px;
+		  font-size: 24px;
+		  line-height: 1.33;
+		}
+		.show-grid [class^="col-"] {
+		  padding-top: 10px;
+		  padding-bottom: 10px;
+		  border: 1px solid #ddd;
+		  background-color: #eee !important;
+		}
+		.show-grid {
+		  margin: 15px 0;
+		}
+		.huge {
+		  font-size: 40px;
+		}
+		.panel-green {
+		  border-color: #5cb85c;
+		}
+		.panel-green > .panel-heading {
+		  border-color: #5cb85c;
+		  color: white;
+		  background-color: #5cb85c;
+		}
+		.panel-green > a {
+		  color: #5cb85c;
+		}
+		.panel-green > a:hover {
+		  color: #3d8b3d;
+		}
+		.panel-red {
+		  border-color: #d9534f;
+		}
+		.panel-red > .panel-heading {
+		  border-color: #d9534f;
+		  color: white;
+		  background-color: #d9534f;
+		}
+		.panel-red > a {
+		  color: #d9534f;
+		}
+		.panel-red > a:hover {
+		  color: #b52b27;
+		}
+		.panel-yellow {
+		  border-color: #f0ad4e;
+		}
+		.panel-yellow > .panel-heading {
+		  border-color: #f0ad4e;
+		  color: white;
+		  background-color: #f0ad4e;
+		}
+		.panel-yellow > a {
+		  color: #f0ad4e;
+		}
+		.panel-yellow > a:hover {
+		  color: #df8a13;
+		}
+		.timeline {
+		  position: relative;
+		  padding: 20px 0 20px;
+		  list-style: none;
+		}
+		.timeline:before {
+		  content: " ";
+		  position: absolute;
+		  top: 0;
+		  bottom: 0;
+		  left: 50%;
+		  width: 3px;
+		  margin-left: -1.5px;
+		  background-color: #eeeeee;
+		}
+		.timeline > li {
+		  position: relative;
+		  margin-bottom: 20px;
+		}
+		.timeline > li:before,
+		.timeline > li:after {
+		  content: " ";
+		  display: table;
+		}
+		.timeline > li:after {
+		  clear: both;
+		}
+		.timeline > li:before,
+		.timeline > li:after {
+		  content: " ";
+		  display: table;
+		}
+		.timeline > li:after {
+		  clear: both;
+		}
+		.timeline > li > .timeline-panel {
+		  float: left;
+		  position: relative;
+		  width: 46%;
+		  padding: 20px;
+		  border: 1px solid #d4d4d4;
+		  border-radius: 2px;
+		  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+		  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+		}
+		.timeline > li > .timeline-panel:before {
+		  content: " ";
+		  display: inline-block;
+		  position: absolute;
+		  top: 26px;
+		  right: -15px;
+		  border-top: 15px solid transparent;
+		  border-right: 0 solid #ccc;
+		  border-bottom: 15px solid transparent;
+		  border-left: 15px solid #ccc;
+		}
+		.timeline > li > .timeline-panel:after {
+		  content: " ";
+		  display: inline-block;
+		  position: absolute;
+		  top: 27px;
+		  right: -14px;
+		  border-top: 14px solid transparent;
+		  border-right: 0 solid #fff;
+		  border-bottom: 14px solid transparent;
+		  border-left: 14px solid #fff;
+		}
+		.timeline > li > .timeline-badge {
+		  z-index: 100;
+		  position: absolute;
+		  top: 16px;
+		  left: 50%;
+		  width: 50px;
+		  height: 50px;
+		  margin-left: -25px;
+		  border-radius: 50% 50% 50% 50%;
+		  text-align: center;
+		  font-size: 1.4em;
+		  line-height: 50px;
+		  color: #fff;
+		  background-color: #999999;
+		}
+		.timeline > li.timeline-inverted > .timeline-panel {
+		  float: right;
+		}
+		.timeline > li.timeline-inverted > .timeline-panel:before {
+		  right: auto;
+		  left: -15px;
+		  border-right-width: 15px;
+		  border-left-width: 0;
+		}
+		.timeline > li.timeline-inverted > .timeline-panel:after {
+		  right: auto;
+		  left: -14px;
+		  border-right-width: 14px;
+		  border-left-width: 0;
+		}
+		.timeline-badge.primary {
+		  background-color: #2e6da4 !important;
+		}
+		.timeline-badge.success {
+		  background-color: #3f903f !important;
+		}
+		.timeline-badge.warning {
+		  background-color: #f0ad4e !important;
+		}
+		.timeline-badge.danger {
+		  background-color: #d9534f !important;
+		}
+		.timeline-badge.info {
+		  background-color: #5bc0de !important;
+		}
+		.timeline-title {
+		  margin-top: 0;
+		  color: inherit;
+		}
+		.timeline-body > p,
+		.timeline-body > ul {
+		  margin-bottom: 0;
+		}
+		.timeline-body > p + p {
+		  margin-top: 5px;
+		}
+		@media (max-width: 767px) {
+		  ul.timeline:before {
+		    left: 40px;
+		  }
+		  ul.timeline > li > .timeline-panel {
+		    width: calc(10%);
+		    width: -moz-calc(10%);
+		    width: -webkit-calc(10%);
+		  }
+		  ul.timeline > li > .timeline-badge {
+		    top: 16px;
+		    left: 15px;
+		    margin-left: 0;
+		  }
+		  ul.timeline > li > .timeline-panel {
+		    float: right;
+		  }
+		  ul.timeline > li > .timeline-panel:before {
+		    right: auto;
+		    left: -15px;
+		    border-right-width: 15px;
+		    border-left-width: 0;
+		  }
+		  ul.timeline > li > .timeline-panel:after {
+		    right: auto;
+		    left: -14px;
+		    border-right-width: 14px;
+		    border-left-width: 0;
+		  }
 		}
 	</style>
 
-	<title>Cryptofolio - Calculate Your Cryptocurrency Portfolio</title>
+	<title>Cryptofolio - View Your Cryptocurrency Portfolio</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="View your cryptocurrency investments and profits in one portfolio.">
+	<meta name="author" content="Ben">
 </head>
 <body>
-	<h1>Cryptofolio</h1>
-	<div class="portfolio">
-		<div class="pure-g">
-			<div class="pure-u-1-5">
-				<select class="cc-select"></select>
-			</div>
-			<div class="pure-u-1-5">
-				<input type="number" class="cc-value" style="width:120px;"></input> 
-				<span class="cc-abbr">BTC</span>
-			</div>
-			<div class="pure-u-1-5">
-				<span class="cc-usd"></span>
-			</div>
+	<!-- Navigation -->
+	<!--
+	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">Cryptocurrency Portfolio</a>
 		</div>
-	</div>
+	-->
 
-	<div class="totals">
-		<h3>Summary</h3>
-		<div class="pure-g">
-			<div class="pure-u-1-5">
-				Total
-			</div>
-			<div class="pure-u-1-5">
-				<span class="total"></span>
+	<!--
+		<ul class="nav navbar-top-links navbar-right">
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-messages">
+					<li>
+						<a href="#">
+							<div>
+								<strong>John Smith</strong>
+								<span class="pull-right text-muted">
+									<em>Yesterday</em>
+								</span>
+							</div>
+							<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="#">
+							<div>
+								<strong>John Smith</strong>
+								<span class="pull-right text-muted">
+									<em>Yesterday</em>
+								</span>
+							</div>
+							<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="#">
+							<div>
+								<strong>John Smith</strong>
+								<span class="pull-right text-muted">
+									<em>Yesterday</em>
+								</span>
+							</div>
+							<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a class="text-center" href="#">
+							<strong>Read All Messages</strong>
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-tasks">
+					<li>
+						<a href="#">
+							<div>
+								<p>
+									<strong>Task 1</strong>
+									<span class="pull-right text-muted">40% Complete</span>
+								</p>
+								<div class="progress progress-striped active">
+									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+										<span class="sr-only">40% Complete (success)</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="#">
+							<div>
+								<p>
+									<strong>Task 2</strong>
+									<span class="pull-right text-muted">20% Complete</span>
+								</p>
+								<div class="progress progress-striped active">
+									<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+										<span class="sr-only">20% Complete</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="#">
+							<div>
+								<p>
+									<strong>Task 3</strong>
+									<span class="pull-right text-muted">60% Complete</span>
+								</p>
+								<div class="progress progress-striped active">
+									<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+										<span class="sr-only">60% Complete (warning)</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="#">
+							<div>
+								<p>
+									<strong>Task 4</strong>
+									<span class="pull-right text-muted">80% Complete</span>
+								</p>
+								<div class="progress progress-striped active">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+										<span class="sr-only">80% Complete (danger)</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a class="text-center" href="#">
+							<strong>See All Tasks</strong>
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-alerts">
+					<li>
+						<a href="#">
+							<div>
+								<i class="fa fa-comment fa-fw"></i> New Comment
+								<span class="pull-right text-muted small">4 minutes ago</span>
+							</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="#">
+							<div>
+								<i class="fa fa-twitter fa-fw"></i> 3 New Followers
+								<span class="pull-right text-muted small">12 minutes ago</span>
+							</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="#">
+							<div>
+								<i class="fa fa-envelope fa-fw"></i> Message Sent
+								<span class="pull-right text-muted small">4 minutes ago</span>
+							</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="#">
+							<div>
+								<i class="fa fa-tasks fa-fw"></i> New Task
+								<span class="pull-right text-muted small">4 minutes ago</span>
+							</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="#">
+							<div>
+								<i class="fa fa-upload fa-fw"></i> Server Rebooted
+								<span class="pull-right text-muted small">4 minutes ago</span>
+							</div>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a class="text-center" href="#">
+							<strong>See All Alerts</strong>
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-user">
+					<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+					</li>
+					<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+					</li>
+					<li class="divider"></li>
+					<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	-->
+
+	<!--
+		<div class="navbar-default sidebar" role="navigation">
+			<div class="sidebar-nav navbar-collapse">
+				<ul class="nav" id="side-menu">
+					<li class="sidebar-search">
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control" placeholder="Search...">
+							<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+						</div>
+					</li>
+					<li>
+						<a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="flot.html">Flot Charts</a>
+							</li>
+							<li>
+								<a href="morris.html">Morris.js Charts</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
 			</div>
 		</div>
+	-->
+	<!--</nav>-->
+
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1 class="page-header">Cryptocurrency Portfolio</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-12">
+								<span class="cf-total huge"></span>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<span class="pull-left"><strong>Total</strong></span>
+						<span class="pull-right"><i class="fa fa-money"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-7">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-12">
+										<span class="cf-investment"></span>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<span class="pull-left"><strong>Investment</strong></span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-12">
+										<span class="cf-diff"></span>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<span class="pull-left"><strong>Difference</strong></span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-12">
+										<span class="cf-diff-perc"></span>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<span class="pull-left"><strong>Change (%)</strong></span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="clear"></div>
+
+		<div class="portfolio">
+			<div class="row form-group cc-header">
+				<div class="col-sm-2">
+					<strong>Coin</strong>
+				</div>
+				<div class="col-sm-2">
+					<strong>Hodlings</strong>
+				</div>
+				<div class="col-sm-2">
+					<strong>Current ($USD)</strong>
+				</div>
+				<div class="col-sm-2">
+					<strong>Purchase Price</strong>
+				</div>
+				<div class="col-sm-2">
+					<strong>Difference ($)</strong>
+				</div>
+				<div class="col-sm-2">
+					<strong>Change (%)</strong>
+				</div>
+			</div>
+
+			<div class="row form-group cc-row">
+				<div class="col-sm-2">
+					<select class="cc-select"></select>
+				</div>
+				<div class="col-sm-2">
+					<input type="number" class="cc-value" style="width:80px;"></input> 
+					<span class="cc-abbr">BTC</span>
+				</div>
+				<div class="col-sm-2">
+					<span class="cc-usd"></span>
+				</div>
+				<div class="col-sm-2">
+					$ <input type="number" class="cc-buy-price" style="width:100px;"></input> 
+				</div>
+				<div class="col-sm-2">
+					<span class="cc-diff"></span>
+				</div>
+				<div class="col-sm-2">
+					<span class="cc-diff-perc"></span>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
+	<!-- Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- Metis Menu -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js" integrity="sha256-EdeVuolWxmuLTapvaUaXTYIYKTIlhc0nUEGPEMn8MhQ=" crossorigin="anonymous"></script>
+
+	<!-- Morris Charts -->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js" integrity="sha256-0rg2VtfJo3VUij/UY9X0HJP7NET6tgAY98aMOfwP0P8=" crossorigin="anonymous"></script>-->
+
 	<!-- Logic -->
 	<script type="text/javascript">
+		/*!
+		 * Start Bootstrap - SB Admin 2 v3.3.7+1 (http://startbootstrap.com/template-overviews/sb-admin-2)
+		 * Copyright 2013-2016 Start Bootstrap
+		 * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+		 */
+		$(function() {
+			$('#side-menu').metisMenu();
+		});
+
+		//Loads the correct sidebar on window load,
+		//collapses the sidebar on window resize.
+		// Sets the min-height of #page-wrapper to window size
+		$(function() {
+			$(window).bind("load resize", function() {
+				var topOffset = 50;
+				var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
+				if (width < 768) {
+					$('div.navbar-collapse').addClass('collapse');
+					topOffset = 100; // 2-row-menu
+				} else {
+					$('div.navbar-collapse').removeClass('collapse');
+				}
+
+				var height = ((this.window.innerHeight > 0) ? this.window.innerHeight : this.screen.height) - 1;
+				height = height - topOffset;
+				if (height < 1) height = 1;
+				if (height > topOffset) {
+					$("#page-wrapper").css("min-height", (height) + "px");
+				}
+			});
+
+			var url = window.location;
+			// var element = $('ul.nav a').filter(function() {
+			//     return this.href == url;
+			// }).addClass('active').parent().parent().addClass('in').parent();
+			var element = $('ul.nav a').filter(function() {
+				return this.href == url;
+			}).addClass('active').parent();
+
+			while (true) {
+				if (element.is('li')) {
+					element = element.parent().addClass('in').parent();
+				} else {
+					break;
+				}
+			}
+		});
+
 		$(document).ready(function() {
 			// Cryptocurrencies
 			var cryptos = {};
@@ -70,9 +924,10 @@
 
 			$('.cc-select').change(updateSelection);
 			$('.cc-value').change(updatePrice);
+			$('.cc-buy-price').change(updateBuyDifference);
 
 			function updateSelection() {
-				var row = $(this).closest('.pure-g');
+				var row = $(this).closest('.cc-row');
 				var val = row.find('.cc-select').val();
 				if (!val) {
 					save();
@@ -82,21 +937,41 @@
 				var crypto = cryptos[val];
 				row.find('.cc-abbr').html(crypto.symbol);
 				updatePrice.call(this);
+				updateBuyDifference.call(this);
 
 				// Add a new row if we've used all ours up
 				var last = $('.cc-select:last').find('option:selected').val();
-				console.log(last);
 				if (last) {
 					var newRow = row.clone(true);
-					newRow.find('.cc-abbr').html('');
-					newRow.find('.cc-value').val('');
-					newRow.find('.cc-usd').html('');
+					newRow.find('.cc-select, .cc-value, .cc-buy-price').val('');
+					newRow.find('.cc-usd, .cc-abbr, .cc-diff, .cc-diff-perc').html('');
 					newRow.appendTo('.portfolio');
 				}
 			}
 
+			function updateBuyDifference() {
+				var row = $(this).closest('.cc-row');
+				var val = row.find('.cc-select').val();
+				if (!val) return;
+
+				var crypto = cryptos[val];
+				var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd);
+				var buy = parseFloat(row.find('.cc-buy-price').val());
+				if (!buy) return;
+				
+				var diff = (usd - buy);
+				var diff_perc = (buy > 0.01) ? (diff / buy * 100) : (0);
+				var color = 'red';
+				if (diff >= 0) color = 'green';
+
+				row.find('.cc-diff').html('<span style="color:' + color + '">$' + diff.toFixed(2) + '</span>');
+				row.find('.cc-diff-perc').html('<span style="color:' + color + '">' + diff_perc.toFixed(2) + '%</span>');
+
+				updatePrice.call(this);
+			}
+
 			function updatePrice() {
-				var row = $(this).closest('.pure-g');
+				var row = $(this).closest('.cc-row');
 				var val = row.find('.cc-select').val();
 				if (!val) return;
 
@@ -108,18 +983,31 @@
 			}
 
 			function updateTotal() {
-				var total = 0;
+				var total = 0, investment = 0;
 				$.each($('.cc-value'), function(key, val) {
-					var row = $(val).closest('.pure-g');
+					var row = $(val).closest('.cc-row');
 					var val = row.find('.cc-select').val();
 					if (!val) return;
 
 					var crypto = cryptos[val];
 					var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd);
+					var buy = parseFloat(row.find('.cc-buy-price').val());
 					total = parseFloat(total + usd);
+					investment = parseFloat(investment + buy);
 				});
 
-				$('.total').html('$' + total.toFixed(2));
+				$('.cf-total').html('$' + total.toFixed(2));
+				if (!investment) return;
+			
+				$('.cf-investment').html('$' + investment.toFixed(2));
+
+				var diff = (total - investment);
+				var diff_perc = (investment > 0.01) ? (diff / investment * 100) : (0);
+				var color = 'red';
+				if (diff >= 0) color = 'green';
+
+				$('.cf-diff').html('<span style="color:' + color + '">$' + diff.toFixed(2) + '</span>');
+				$('.cf-diff-perc').html('<span style="color:' + color + '">' + diff_perc.toFixed(2) + '%</span>');
 
 				// Now save the user's options
 				save();
@@ -127,14 +1015,15 @@
 
 			function save() {
 				var cryptofolio = [];
-				$.each($('.portfolio').find('.pure-g'), function(key, val) {
+				$.each($('.portfolio').find('.cc-row'), function(key, val) {
 					var row = $(val);
 					var val = row.find('.cc-select').val();
 					if (!val) return;
 
 					cryptofolio.push({
-						'id' : val,
-						'value' : row.find('.cc-value').val()
+						'id'    : val,
+						'value' : row.find('.cc-value').val(),
+						'buy'   : row.find('.cc-buy-price').val()
 					});
 				});
 				localStorage.setItem('cryptocurrency-portfolio', JSON.stringify(cryptofolio));
@@ -148,11 +1037,12 @@
 				cryptofolio = JSON.parse(cryptofolio);
 
 				$.each(cryptofolio, function(key, val) {
-					var row = $('.portfolio').find('.pure-g:last');
+					var row = $('.portfolio').find('.cc-row:last');
 
 					// Then modify the current row
 					row.find('.cc-select').val(val['id']);
 					row.find('.cc-value').val(val['value']);
+					row.find('.cc-buy-price').val(val['buy']);
 
 					// And trigger the event - handles creating a new row
 					updateSelection.call(row);
