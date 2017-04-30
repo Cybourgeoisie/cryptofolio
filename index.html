@@ -1,0 +1,164 @@
+<html>
+<head>
+	<!-- Pure.css -->
+	<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+
+	<!-- Page style -->
+	<style>
+		body { 
+			margin: 10px 20px;
+		}
+		div.pure-g {
+			margin: 10px 0px;
+		}
+	</style>
+
+	<title>Cryptofolio - Calculate Your Cryptocurrency Portfolio</title>
+</head>
+<body>
+	<h1>Cryptofolio</h1>
+	<div class="portfolio">
+		<div class="pure-g">
+			<div class="pure-u-1-5">
+				<select class="cc-select"></select>
+			</div>
+			<div class="pure-u-1-5">
+				<input type="number" class="cc-value" style="width:120px;"></input> 
+				<span class="cc-abbr">BTC</span>
+			</div>
+			<div class="pure-u-1-5">
+				<span class="cc-usd"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="totals">
+		<h3>Summary</h3>
+		<div class="pure-g">
+			<div class="pure-u-1-5">
+				Total
+			</div>
+			<div class="pure-u-1-5">
+				<span class="total"></span>
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+	<!-- Logic -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Cryptocurrencies
+			var cryptos = {};
+
+			// Get the coin values
+			$.getJSON('https://api.coinmarketcap.com/v1/ticker/?limit=20', function( data ) {
+				var items = ["<option selected></option>"];
+				$.each(data, function(key, val) {
+					items.push("<option value='" + val.id + "'>" + val.name + "</option>");
+					cryptos[val.id] = val;
+				});
+
+				// Add our list
+				$('.cc-select').html(items.join(''));
+
+				// Load any previous values
+				load();
+			});
+
+			$('.cc-select').change(updateSelection);
+			$('.cc-value').change(updatePrice);
+
+			function updateSelection() {
+				var row = $(this).closest('.pure-g');
+				var val = row.find('.cc-select').val();
+				if (!val) {
+					save();
+					return;
+				}
+
+				var crypto = cryptos[val];
+				row.find('.cc-abbr').html(crypto.symbol);
+				updatePrice.call(this);
+
+				// Add a new row if we've used all ours up
+				var last = $('.cc-select:last').find('option:selected').val();
+				console.log(last);
+				if (last) {
+					var newRow = row.clone(true);
+					newRow.find('.cc-abbr').html('');
+					newRow.find('.cc-value').val('');
+					newRow.find('.cc-usd').html('');
+					newRow.appendTo('.portfolio');
+				}
+			}
+
+			function updatePrice() {
+				var row = $(this).closest('.pure-g');
+				var val = row.find('.cc-select').val();
+				if (!val) return;
+
+				var crypto = cryptos[val];
+				var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd).toFixed(2);
+				row.find('.cc-usd').html('$' + usd);
+
+				updateTotal.call(this);
+			}
+
+			function updateTotal() {
+				var total = 0;
+				$.each($('.cc-value'), function(key, val) {
+					var row = $(val).closest('.pure-g');
+					var val = row.find('.cc-select').val();
+					if (!val) return;
+
+					var crypto = cryptos[val];
+					var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd);
+					total = parseFloat(total + usd);
+				});
+
+				$('.total').html('$' + total.toFixed(2));
+
+				// Now save the user's options
+				save();
+			}
+
+			function save() {
+				var cryptofolio = [];
+				$.each($('.portfolio').find('.pure-g'), function(key, val) {
+					var row = $(val);
+					var val = row.find('.cc-select').val();
+					if (!val) return;
+
+					cryptofolio.push({
+						'id' : val,
+						'value' : row.find('.cc-value').val()
+					});
+				});
+				localStorage.setItem('cryptocurrency-portfolio', JSON.stringify(cryptofolio));
+			}
+
+			function load() {
+				var cryptofolio = localStorage.getItem('cryptocurrency-portfolio');
+				if (!cryptofolio)
+					return;
+
+				cryptofolio = JSON.parse(cryptofolio);
+
+				$.each(cryptofolio, function(key, val) {
+					var row = $('.portfolio').find('.pure-g:last');
+
+					// Then modify the current row
+					row.find('.cc-select').val(val['id']);
+					row.find('.cc-value').val(val['value']);
+
+					// And trigger the event - handles creating a new row
+					updateSelection.call(row);
+				});
+			}
+		});
+	</script>
+</body>
+</html>
