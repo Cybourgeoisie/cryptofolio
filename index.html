@@ -9,9 +9,6 @@
 	<!-- Font Awesome -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-	<!-- Metis Menu -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.css" integrity="sha256-OufFdETrXbY5YtILsSTzlY+4Ttmq+hUfR1mMYLmKlWo=" crossorigin="anonymous" />
-
 	<!-- Morris Charts -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" integrity="sha256-szHusaozbQctTn4FX+3l5E0A5zoxz7+ne4fr8NgWJlw=" crossorigin="anonymous" />
 
@@ -30,18 +27,21 @@
 		}
 		#page-wrapper {
 		  padding: 0 15px;
-		  margin: 25px;
+		  /*margin: 25px;*/
 		  min-height: 568px;
 		  background-color: white;
 		}
-		/*@media (min-width: 768px) {
+		.small-page-header {
+			margin: 14px 0px;
+		}
+		@media (min-width: 768px) {
 		  #page-wrapper {
 		    position: inherit;
 		    margin: 0 0 0 250px;
 		    padding: 0 30px;
 		    border-left: 1px solid #e7e7e7;
 		  }
-		}*/
+		}
 		.navbar-top-links {
 		  margin-right: 0;
 		}
@@ -257,6 +257,9 @@
 		.huge {
 		  font-size: 40px;
 		}
+		.large {
+		  font-size: 25px;
+		}
 		.panel-green {
 		  border-color: #5cb85c;
 		}
@@ -461,7 +464,7 @@
 </head>
 <body>
 	<!-- Navigation -->
-	<!--
+
 	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -472,7 +475,7 @@
 			</button>
 			<a class="navbar-brand" href="index.html">Cryptocurrency Portfolio</a>
 		</div>
-	-->
+
 
 	<!--
 		<ul class="nav navbar-top-links navbar-right">
@@ -680,11 +683,11 @@
 		</ul>
 	-->
 
-	<!--
+	
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav" id="side-menu">
-					<li class="sidebar-search">
+					<!--<li class="sidebar-search">
 						<div class="input-group custom-search-form">
 							<input type="text" class="form-control" placeholder="Search...">
 							<span class="input-group-btn">
@@ -693,165 +696,224 @@
 							</button>
 						</span>
 						</div>
+					</li>-->
+					<li>
+						<a href="#" class="page-toggle" data-page="page-index"><i class="fa fa-bank fa-fw"></i> Overview</a>
 					</li>
 					<li>
-						<a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="flot.html">Flot Charts</a>
-							</li>
-							<li>
-								<a href="morris.html">Morris.js Charts</a>
-							</li>
-						</ul>
+						<a href="#" class="page-toggle" data-page="page-manage"><i class="fa fa-cogs fa-fw"></i> Manage</a>
 					</li>
 				</ul>
 			</div>
 		</div>
-	-->
-	<!--</nav>-->
+	
+	</nav>
 
 	<div id="page-wrapper">
-		<div class="row">
-			<div class="col-sm-12">
-				<h1 class="page-header">Cryptocurrency Portfolio</h1>
+		<div id="page-index" class="page-item">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="page-header">At A Glance</h1>
+				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-sm-5">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<div class="row">
-							<div class="col-xs-12">
-								<span class="cf-total huge"></span>
+			<div class="row">
+				<div class="col-sm-5">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-12">
+									<span class="cf-total huge"></span>
+								</div>
 							</div>
 						</div>
+						<div class="panel-footer">
+							<span class="pull-left"><strong>Total</strong></span>
+							<span class="pull-right"><i class="fa fa-money"></i></span>
+							<div class="clearfix"></div>
+						</div>
 					</div>
-					<div class="panel-footer">
-						<span class="pull-left"><strong>Total</strong></span>
-						<span class="pull-right"><i class="fa fa-money"></i></span>
-						<div class="clearfix"></div>
+				</div>
+
+				<div class="col-sm-7">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-12">
+											<span class="cf-investment large"></span>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									<span class="pull-left"><strong>Investment</strong></span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-4">
+							<div class="panel panel-success">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-12">
+											<span class="cf-diff large"></span>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									<span class="pull-left"><strong>Difference</strong></span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-4">
+							<div class="panel panel-success">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-12">
+											<span class="cf-diff-perc large"></span>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									<span class="pull-left"><strong>Change (%)</strong></span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-sm-7">
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="panel panel-info">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-xs-12">
-										<span class="cf-investment"></span>
-									</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 class="page-header small-page-header">Coin Prices</h3>
+				</div>
+			</div>
+
+			<div class="row cp-coin-prices">
+				<div class="col-sm-3 cp-row">
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-12">
+									<span class="cp-price-usd large">$0.00</span><br />
+									<span class="cp-price-btc">0.0</span> <i class="fa fa-btc" aria-hidden="true"></i>
 								</div>
 							</div>
-							<div class="panel-footer">
-								<span class="pull-left"><strong>Investment</strong></span>
-								<div class="clearfix"></div>
-							</div>
+						</div>
+						<div class="panel-footer">
+							<span class="pull-left cp-name">Bitcoin</span>
+							<div class="clearfix"></div>
 						</div>
 					</div>
+				</div>
+			</div>
 
-					<div class="col-sm-4">
-						<div class="panel panel-success">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-xs-12">
-										<span class="cf-diff"></span>
-									</div>
-								</div>
-							</div>
-							<div class="panel-footer">
-								<span class="pull-left"><strong>Difference</strong></span>
-								<div class="clearfix"></div>
-							</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 class="page-header small-page-header">Past 3 Months</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<!--<div class="col-sm-3">
+					<div id="daily-chart"></div>
+				</div>
+				<div class="col-sm-3">
+					<div id="daily-chart-diff"></div>
+				</div>-->
+				<div class="col-sm-6">
+					<div id="monthly-chart"></div>
+				</div>
+				<div class="col-sm-6">
+					<div id="monthly-chart-diff"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="page-manage" class="page-item" style="display:none;">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="page-header">Manage Your Portfolio</h1>
+				</div>
+			</div>
+
+			<div class="portfolio">
+				<div class="row form-group cc-header">
+					<div class="col-sm-2">
+						<strong>Coin</strong>
+					</div>
+					<div class="col-sm-3">
+						<strong>Hodlings</strong>
+					</div>
+					<div class="col-sm-2">
+						<strong>Current ($USD)</strong>
+					</div>
+					<div class="col-sm-2">
+						<strong>Purchase Price</strong>
+					</div>
+					<div class="col-sm-2">
+						<strong>Difference</strong>
+					</div>
+					<div class="col-sm-1">
+						<strong>Change</strong>
+					</div>
+				</div>
+
+				<div class="row form-group cc-row">
+					<div class="col-sm-2">
+						<div class="input-group">
+							<select class="form-control cc-select"></select>
 						</div>
 					</div>
-
-					<div class="col-sm-4">
-						<div class="panel panel-success">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-xs-12">
-										<span class="cf-diff-perc"></span>
-									</div>
-								</div>
-							</div>
-							<div class="panel-footer">
-								<span class="pull-left"><strong>Change (%)</strong></span>
-								<div class="clearfix"></div>
-							</div>
+					<div class="col-sm-3">
+						<div class="input-group">
+							<input type="number" class="form-control cc-value"></input> 
+							<span class="input-group-addon cc-abbr">BTC</span>
 						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="input-group">
+							<span class="cc-usd"></span>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="input-group">
+							<span class="input-group-addon">$</span>
+							<input type="number" class="form-control cc-buy-price"></input> 
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<span class="cc-diff"></span>
+					</div>
+					<div class="col-sm-1">
+						<span class="cc-diff-perc"></span>
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<br />
 		<div class="clear"></div>
-
-		<div class="portfolio">
-			<div class="row form-group cc-header">
-				<div class="col-sm-2">
-					<strong>Coin</strong>
-				</div>
-				<div class="col-sm-2">
-					<strong>Hodlings</strong>
-				</div>
-				<div class="col-sm-2">
-					<strong>Current ($USD)</strong>
-				</div>
-				<div class="col-sm-2">
-					<strong>Purchase Price</strong>
-				</div>
-				<div class="col-sm-2">
-					<strong>Difference ($)</strong>
-				</div>
-				<div class="col-sm-2">
-					<strong>Change (%)</strong>
-				</div>
-			</div>
-
-			<div class="row form-group cc-row">
-				<div class="col-sm-2">
-					<select class="cc-select"></select>
-				</div>
-				<div class="col-sm-2">
-					<input type="number" class="cc-value" style="width:80px;"></input> 
-					<span class="cc-abbr">BTC</span>
-				</div>
-				<div class="col-sm-2">
-					<span class="cc-usd"></span>
-				</div>
-				<div class="col-sm-2">
-					$ <input type="number" class="cc-buy-price" style="width:100px;"></input> 
-				</div>
-				<div class="col-sm-2">
-					<span class="cc-diff"></span>
-				</div>
-				<div class="col-sm-2">
-					<span class="cc-diff-perc"></span>
-				</div>
-			</div>
-		</div>
 
 	</div>
 
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
+	<!-- Raphael -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+
 	<!-- Bootstrap JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-	<!-- Metis Menu -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js" integrity="sha256-EdeVuolWxmuLTapvaUaXTYIYKTIlhc0nUEGPEMn8MhQ=" crossorigin="anonymous"></script>
-
 	<!-- Morris Charts -->
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js" integrity="sha256-0rg2VtfJo3VUij/UY9X0HJP7NET6tgAY98aMOfwP0P8=" crossorigin="anonymous"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js" integrity="sha256-0rg2VtfJo3VUij/UY9X0HJP7NET6tgAY98aMOfwP0P8=" crossorigin="anonymous"></script>
 
 	<!-- Logic -->
 	<script type="text/javascript">
@@ -860,10 +922,6 @@
 		 * Copyright 2013-2016 Start Bootstrap
 		 * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
 		 */
-		$(function() {
-			$('#side-menu').metisMenu();
-		});
-
 		//Loads the correct sidebar on window load,
 		//collapses the sidebar on window resize.
 		// Sets the min-height of #page-wrapper to window size
@@ -906,6 +964,7 @@
 		$(document).ready(function() {
 			// Cryptocurrencies
 			var cryptos = {};
+			var cc_investments = {};
 
 			// Get the coin values
 			$.getJSON('https://api.coinmarketcap.com/v1/ticker/?limit=20', function( data ) {
@@ -926,6 +985,18 @@
 			$('.cc-value').change(updatePrice);
 			$('.cc-buy-price').change(updateBuyDifference);
 
+			$('.page-toggle').click(function(event) {
+				event.preventDefault();
+				var page = $(this).data('page');
+
+				if (!$('#' + page).is(":visible"))
+				{
+					$('.page-item').hide('slow', 'swing', function() {
+						$('#' + page).show('slow', 'swing');
+					});
+				}
+			});
+
 			function updateSelection() {
 				var row = $(this).closest('.cc-row');
 				var val = row.find('.cc-select').val();
@@ -938,6 +1009,10 @@
 				row.find('.cc-abbr').html(crypto.symbol);
 				updatePrice.call(this);
 				updateBuyDifference.call(this);
+				updateCoinPrices.call(this);
+
+				//getLastDayPrices(crypto.symbol);
+				getLastMonthPrices(crypto.symbol);
 
 				// Add a new row if we've used all ours up
 				var last = $('.cc-select:last').find('option:selected').val();
@@ -949,6 +1024,175 @@
 				}
 			}
 
+			function updateCoinPrices() {
+				var cp = $('.cp-coin-prices');
+
+				// Get the first cp-row
+				var row = cp.find('.cp-row:last');
+
+				// Remove all other cp-rows
+				cp.empty();
+
+				$.each($('.cc-select'), function(key, val) {
+					var id = $(val).val();
+					if (!id) return;
+
+					var crypto = cryptos[id];
+
+					var newRow = row.clone(true);
+					newRow.find('.cp-price-usd').html('$' + crypto.price_usd);
+					newRow.find('.cp-price-btc').html(crypto.price_btc);
+					newRow.find('.cp-name').html(crypto.name);
+					newRow.appendTo('.cp-coin-prices');
+				});
+			}
+
+			var price_data_minute = [], price_labels_minute = [];
+			function getLastDayPrices(coin_id) {
+				// Don't retrieve data we already have
+				if (price_labels_minute && price_labels_minute.indexOf(coin_id) !== -1) return;
+
+				// Get the coin's prices over the last day
+				$.getJSON('https://min-api.cryptocompare.com/data/histominute?fsym=' + coin_id + '&tsym=USD&limit=24&aggregate=60', function( data ) {
+
+					if (!data.hasOwnProperty('Data')) return;
+					price_labels_minute.push(coin_id);
+
+					if (price_data_minute.length > 0)
+					{
+						var i = 0;
+						$.each(data.Data, function(key, val) {
+							price_data_minute[i++][coin_id] = val.close;
+						});
+					}
+					else
+					{
+						$.each(data.Data, function(key, val) {
+							var item = {
+								'y': val.time*1000
+							};
+							item[coin_id] = val.close;
+							price_data_minute.push(item);
+						});
+					}
+
+					// Clear the existing graph
+					$('#daily-chart').empty();
+
+					Morris.Line({
+						element: 'daily-chart',
+						data: price_data_minute,
+						parseTime: true,
+						xkey: 'y',
+						ykeys: price_labels_minute,
+						labels: price_labels_minute,
+						pointSize: 1
+					});
+
+					var diff_data = [];
+					$.each(price_data_minute, function(key, val) {
+						var total = 0;
+						$.each(val, function(k, v) {
+							var value = (cc_investments.hasOwnProperty(k)) ? cc_investments[k] : 0;
+							if (k != 'y') total += (v * value);
+						});
+
+						var item = {
+							'y': val.y,
+							'total': total
+						};
+
+						diff_data.push(item);
+					});
+
+					// Clear the existing graph
+					$('#daily-chart-diff').empty();
+
+					Morris.Line({
+						element: 'daily-chart-diff',
+						data: diff_data,
+						parseTime: true,
+						xkey: 'y',
+						ykeys: ['total'],
+						labels: ['Total ($)'],
+						pointSize: 1
+					});
+				});
+			}
+
+			var price_data_daily = [], price_labels_daily = [];
+			function getLastMonthPrices(coin_id) {
+				// Don't retrieve data we already have
+				if (price_labels_daily && price_labels_daily.indexOf(coin_id) !== -1) return;
+
+				// Get the coin's prices over the last day
+				$.getJSON('https://min-api.cryptocompare.com/data/histoday?fsym=' + coin_id + '&tsym=USD&limit=90', function( data ) {
+
+					if (!data.hasOwnProperty('Data')) return;
+					price_labels_daily.push(coin_id);
+
+					if (price_data_daily.length > 0)
+					{
+						var i = 0;
+						$.each(data.Data, function(key, val) {
+							price_data_daily[i++][coin_id] = val.close;
+						});
+					}
+					else
+					{
+						$.each(data.Data, function(key, val) {
+							var item = {
+								'y': val.time*1000
+							};
+							item[coin_id] = val.close;
+							price_data_daily.push(item);
+						});
+					}
+
+					// Clear the existing graph
+					$('#monthly-chart').empty();
+
+					Morris.Line({
+						element: 'monthly-chart',
+						data: price_data_daily,
+						parseTime: true,
+						xkey: 'y',
+						ykeys: price_labels_daily,
+						labels: price_labels_daily,
+						pointSize: 1
+					});
+
+					var diff_data = [];
+					$.each(price_data_daily, function(key, val) {
+						var total = 0;
+						$.each(val, function(k, v) {
+							var value = (cc_investments.hasOwnProperty(k)) ? cc_investments[k] : 0;
+							if (k != 'y') total += (v * value);
+						});
+
+						var item = {
+							'y': val.y,
+							'total': total
+						};
+
+						diff_data.push(item);
+					});
+
+					// Clear the existing graph
+					$('#monthly-chart-diff').empty();
+
+					Morris.Line({
+						element: 'monthly-chart-diff',
+						data: diff_data,
+						parseTime: true,
+						xkey: 'y',
+						ykeys: ['total'],
+						labels: ['Total ($)'],
+						pointSize: 1
+					});
+				});
+			}
+
 			function updateBuyDifference() {
 				var row = $(this).closest('.cc-row');
 				var val = row.find('.cc-select').val();
@@ -958,7 +1202,7 @@
 				var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd);
 				var buy = parseFloat(row.find('.cc-buy-price').val());
 				if (!buy) return;
-				
+
 				var diff = (usd - buy);
 				var diff_perc = (buy > 0.01) ? (diff / buy * 100) : (0);
 				var color = 'red';
@@ -976,8 +1220,11 @@
 				if (!val) return;
 
 				var crypto = cryptos[val];
-				var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd).toFixed(2);
+				var value = row.find('.cc-value').val();
+				var usd = parseFloat(value * crypto.price_usd).toFixed(2);
 				row.find('.cc-usd').html('$' + usd);
+
+				cc_investments[crypto.symbol] = value;
 
 				updateTotal.call(this);
 			}
