@@ -12,6 +12,9 @@
 	<!-- Morris Charts -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" integrity="sha256-szHusaozbQctTn4FX+3l5E0A5zoxz7+ne4fr8NgWJlw=" crossorigin="anonymous" />
 
+	<!-- Bootstrap Date Range Picker -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.css" integrity="sha256-RqJuUJ19HEfsKUNMC+6GLSatrHeroWygib75lro4BMU=" crossorigin="anonymous" />
+
 	<!-- Page style -->
 	<style>
 		/*!
@@ -46,6 +49,12 @@
 		    margin: 0 0 0 175px;
 		    padding: 0 30px;
 		    border-left: 1px solid #e7e7e7;
+		  }
+		}
+		@media (max-width: 768px) {
+		  .half-padding {
+		  	padding-left:7.5px;
+		  	padding-right:7.5px;
 		  }
 		}
 		.navbar-top-links {
@@ -165,33 +174,6 @@
 		.btn-danger.btn-outline:hover {
 		  color: white;
 		}
-		.chat {
-		  margin: 0;
-		  padding: 0;
-		  list-style: none;
-		}
-		.chat li {
-		  margin-bottom: 10px;
-		  padding-bottom: 5px;
-		  border-bottom: 1px dotted #999999;
-		}
-		.chat li.left .chat-body {
-		  margin-left: 60px;
-		}
-		.chat li.right .chat-body {
-		  margin-right: 60px;
-		}
-		.chat li .chat-body p {
-		  margin: 0;
-		}
-		.panel .slidedown .glyphicon,
-		.chat .glyphicon {
-		  margin-right: 5px;
-		}
-		.chat-panel .panel-body {
-		  height: 350px;
-		  overflow-y: scroll;
-		}
 		.login-panel {
 		  margin-top: 25%;
 		}
@@ -261,10 +243,18 @@
 		  margin: 15px 0;
 		}
 		.huge {
-		  font-size: 40px;
+		  font-size: 30px;
 		}
 		.large {
-		  font-size: 22px;
+		  font-size: 18px;
+		}
+		@media (min-width: 992px) {
+			.huge {
+			  font-size: 34px;
+			}
+			.large {
+			  font-size: 20px;
+			}
 		}
 		.panel-green {
 		  border-color: #5cb85c;
@@ -308,165 +298,11 @@
 		.panel-yellow > a:hover {
 		  color: #df8a13;
 		}
-		.timeline {
-		  position: relative;
-		  padding: 20px 0 20px;
-		  list-style: none;
-		}
-		.timeline:before {
-		  content: " ";
-		  position: absolute;
-		  top: 0;
-		  bottom: 0;
-		  left: 50%;
-		  width: 3px;
-		  margin-left: -1.5px;
-		  background-color: #eeeeee;
-		}
-		.timeline > li {
-		  position: relative;
-		  margin-bottom: 20px;
-		}
-		.timeline > li:before,
-		.timeline > li:after {
-		  content: " ";
-		  display: table;
-		}
-		.timeline > li:after {
-		  clear: both;
-		}
-		.timeline > li:before,
-		.timeline > li:after {
-		  content: " ";
-		  display: table;
-		}
-		.timeline > li:after {
-		  clear: both;
-		}
-		.timeline > li > .timeline-panel {
-		  float: left;
-		  position: relative;
-		  width: 46%;
-		  padding: 20px;
-		  border: 1px solid #d4d4d4;
-		  border-radius: 2px;
-		  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-		  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-		}
-		.timeline > li > .timeline-panel:before {
-		  content: " ";
-		  display: inline-block;
-		  position: absolute;
-		  top: 26px;
-		  right: -15px;
-		  border-top: 15px solid transparent;
-		  border-right: 0 solid #ccc;
-		  border-bottom: 15px solid transparent;
-		  border-left: 15px solid #ccc;
-		}
-		.timeline > li > .timeline-panel:after {
-		  content: " ";
-		  display: inline-block;
-		  position: absolute;
-		  top: 27px;
-		  right: -14px;
-		  border-top: 14px solid transparent;
-		  border-right: 0 solid #fff;
-		  border-bottom: 14px solid transparent;
-		  border-left: 14px solid #fff;
-		}
-		.timeline > li > .timeline-badge {
-		  z-index: 100;
-		  position: absolute;
-		  top: 16px;
-		  left: 50%;
-		  width: 50px;
-		  height: 50px;
-		  margin-left: -25px;
-		  border-radius: 50% 50% 50% 50%;
-		  text-align: center;
-		  font-size: 1.4em;
-		  line-height: 50px;
-		  color: #fff;
-		  background-color: #999999;
-		}
-		.timeline > li.timeline-inverted > .timeline-panel {
-		  float: right;
-		}
-		.timeline > li.timeline-inverted > .timeline-panel:before {
-		  right: auto;
-		  left: -15px;
-		  border-right-width: 15px;
-		  border-left-width: 0;
-		}
-		.timeline > li.timeline-inverted > .timeline-panel:after {
-		  right: auto;
-		  left: -14px;
-		  border-right-width: 14px;
-		  border-left-width: 0;
-		}
-		.timeline-badge.primary {
-		  background-color: #2e6da4 !important;
-		}
-		.timeline-badge.success {
-		  background-color: #3f903f !important;
-		}
-		.timeline-badge.warning {
-		  background-color: #f0ad4e !important;
-		}
-		.timeline-badge.danger {
-		  background-color: #d9534f !important;
-		}
-		.timeline-badge.info {
-		  background-color: #5bc0de !important;
-		}
-		.timeline-title {
-		  margin-top: 0;
-		  color: inherit;
-		}
-		.timeline-body > p,
-		.timeline-body > ul {
-		  margin-bottom: 0;
-		}
-		.timeline-body > p + p {
-		  margin-top: 5px;
-		}
-		@media (max-width: 767px) {
-		  ul.timeline:before {
-		    left: 40px;
-		  }
-		  ul.timeline > li > .timeline-panel {
-		    width: calc(10%);
-		    width: -moz-calc(10%);
-		    width: -webkit-calc(10%);
-		  }
-		  ul.timeline > li > .timeline-badge {
-		    top: 16px;
-		    left: 15px;
-		    margin-left: 0;
-		  }
-		  ul.timeline > li > .timeline-panel {
-		    float: right;
-		  }
-		  ul.timeline > li > .timeline-panel:before {
-		    right: auto;
-		    left: -15px;
-		    border-right-width: 15px;
-		    border-left-width: 0;
-		  }
-		  ul.timeline > li > .timeline-panel:after {
-		    right: auto;
-		    left: -14px;
-		    border-right-width: 14px;
-		    border-left-width: 0;
-		  }
-		}
 	</style>
 
-	<title>Cryptofolio - View Your Cryptocurrency Portfolio</title>
+	<title>View Your Cryptocurrency Portfolio</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="View your cryptocurrency investments and profits in one portfolio.">
-	<meta name="author" content="Ben">
 </head>
 <body>
 	<!-- Navigation -->
@@ -497,24 +333,32 @@
 
 	
 		<div class="navbar-default sidebar" role="navigation">
-			<div class="sidebar-nav navbar-collapse">
+			<div class="sidebar-nav navbar-collapse collapse">
 				<ul class="nav" id="side-menu">
-					<!--<li class="sidebar-search">
-						<div class="input-group custom-search-form">
-							<input type="text" class="form-control" placeholder="Search...">
-							<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
-								<i class="fa fa-search"></i>
-							</button>
-						</span>
-						</div>
+					<li>
+						<a href="#" class="page-toggle" data-page="page-index">
+							<i class="fa fa-bank fa-fw"></i> Overview
+						</a>
+					</li>
+					
+					<!--<li>
+						<a href="#" class="page-toggle" data-page="page-details">
+							<i class="fa fa-line-chart fa-fw"></i> Portfolio Details
+						</a>
 					</li>-->
+
 					<li>
-						<a href="#" class="page-toggle" data-page="page-index"><i class="fa fa-bank fa-fw"></i> Overview</a>
+						<a href="#" class="page-toggle" data-page="page-manage">
+							<i class="fa fa-cogs fa-fw"></i> Manage
+						</a>
 					</li>
-					<li>
-						<a href="#" class="page-toggle" data-page="page-manage"><i class="fa fa-cogs fa-fw"></i> Manage</a>
-					</li>
+					
+					<!--<li>
+						<a href="#" class="page-toggle" data-page="page-coin-analysis">
+							<i class="fa fa-btc fa-fw"></i> Coin Analysis
+						</a>
+					</li>-->
+
 				</ul>
 			</div>
 		</div>
@@ -548,8 +392,8 @@
 				</div>
 
 				<div class="col-sm-7">
-					<div class="row">
-						<div class="col-sm-4">
+					<div class="row half-padding">
+						<div class="col-xs-4 half-padding">
 							<div class="panel panel-info">
 								<div class="panel-heading">
 									<div class="row">
@@ -565,7 +409,7 @@
 							</div>
 						</div>
 
-						<div class="col-sm-4">
+						<div class="col-xs-4 half-padding">
 							<div class="panel panel-success">
 								<div class="panel-heading">
 									<div class="row">
@@ -581,7 +425,7 @@
 							</div>
 						</div>
 
-						<div class="col-sm-4">
+						<div class="col-xs-4 half-padding">
 							<div class="panel panel-success">
 								<div class="panel-heading">
 									<div class="row">
@@ -591,7 +435,8 @@
 									</div>
 								</div>
 								<div class="panel-footer">
-									<span class="pull-left"><strong>Change (%)</strong></span>
+									<span class="pull-left"><strong>Change</strong></span>
+									<span class="pull-right"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
 									<div class="clearfix"></div>
 								</div>
 							</div>
@@ -606,16 +451,12 @@
 				</div>
 			</div>
 
-			<div class="row cp-coin-prices">
-				<div class="col-sm-3 cp-row">
+			<div class="row cp-coin-prices half-padding">
+				<div class="col-xs-4 col-sm-3 cp-row half-padding">
 					<div class="panel panel-warning">
 						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-12">
 									<span class="cp-price-usd large">$0.00</span><br />
 									<span class="cp-price-btc">0.0</span> <i class="fa fa-btc" aria-hidden="true"></i>
-								</div>
-							</div>
 						</div>
 						<div class="panel-footer">
 							<span class="pull-left cp-name">Bitcoin</span>
@@ -659,7 +500,7 @@
 
 			<div class="portfolio">
 				<div class="row form-group cc-header hidden-xs">
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<strong>Coin</strong>
 					</div>
 					<div class="col-sm-3">
@@ -668,6 +509,10 @@
 					<div class="col-sm-3">
 						<strong>Purchased At</strong>
 					</div>
+					<div class="col-sm-2">
+						<strong>Purchase Date</strong>
+					</div>
+					<!--
 					<div class="col-sm-1">
 						<strong>Current</strong>
 					</div>
@@ -677,10 +522,14 @@
 					<div class="col-sm-1">
 						<strong>Change</strong>
 					</div>
+					-->
+					<div class="col-sm-1">
+						<strong>Remove</strong>
+					</div>
 				</div>
 
 				<div class="row cc-row">
-					<div class="col-xs-4 col-sm-2 form-group">
+					<div class="col-xs-4 col-sm-3 form-group">
 						<label class="visible-xs-block">Coin</label>
 						<div class="input-group">
 							<select class="form-control cc-select"></select>
@@ -689,7 +538,7 @@
 					<div class="col-xs-4 col-sm-3 form-group">
 						<label class="visible-xs-block"># Coins</label>
 						<div class="input-group">
-							<input type="text" class="form-control cc-value"></input> 
+							<input type="number" class="form-control cc-value"></input> 
 							<span class="input-group-addon cc-input-addon-span cc-abbr"></span>
 						</div>
 					</div>
@@ -697,9 +546,21 @@
 						<label class="visible-xs-block">Purchased At</label>
 						<div class="input-group">
 							<span class="input-group-addon cc-input-addon-span">$</span>
-							<input type="text" class="form-control cc-buy-price"></input> 
+							<input type="number" class="form-control cc-buy-price"></input> 
 						</div>
 					</div>
+					<div class="col-xs-4 col-sm-2 form-group">
+						<label class="visible-xs-block">Purchase Date</label>
+						<input type="text" class="cc-buy-date form-control" />
+					</div>
+					<div class="col-xs-4 col-sm-1 form-group">
+						<label class="visible-xs-block">Remove</label>
+						<button type="button" class="btn btn-danger btn-outline cc-remove-coin">
+							<span class="visible-xs-block">Remove <i class="fa fa-trash" aria-hidden="true"></i></span>
+							<span class="hidden-xs"><i class="fa fa-trash" aria-hidden="true"></i></span>
+						</button>
+					</div>
+					<!--
 					<div class="col-xs-4 col-sm-1 form-group">
 						<label class="visible-xs-block">Current</label>
 						<span class="cc-usd"></span>
@@ -712,13 +573,33 @@
 						<label class="visible-xs-block">Change</label>
 						<span class="cc-diff-perc"></span>
 					</div>
+					-->
 				</div>
 			</div>
+			<button type="button" class="btn btn-primary btn-outline cc-add-coin">Add <i class="fa fa-plus" aria-hidden="true"></i></button>
 		</div>
 
 		<br />
 		<div class="clear"></div>
 
+	</div>
+
+	<div class="modal fade" id="removeCoinRow" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="modalLabel">Remove Coin</h4>
+				</div>
+				<div class="modal-body">
+					Are you sure you want to remove this row?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-danger cc-remove-coin-confirm" data-dismiss="modal">Remove <i class="fa fa-trash" aria-hidden="true"></i></button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- jQuery -->
@@ -733,56 +614,20 @@
 	<!-- Morris Charts -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js" integrity="sha256-0rg2VtfJo3VUij/UY9X0HJP7NET6tgAY98aMOfwP0P8=" crossorigin="anonymous"></script>
 
+	<!-- Moment.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg=" crossorigin="anonymous"></script>
+
+	<!-- Bootstrap Date Range Picker -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.js" integrity="sha256-WniDtKHyk2OPgNtTFKu/sL8zGBzmCfMcmEKRAqfi25c=" crossorigin="anonymous"></script>
+
+
 	<!-- Logic -->
 	<script type="text/javascript">
-		/*!
-		 * Start Bootstrap - SB Admin 2 v3.3.7+1 (http://startbootstrap.com/template-overviews/sb-admin-2)
-		 * Copyright 2013-2016 Start Bootstrap
-		 * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
-		 */
-		//Loads the correct sidebar on window load,
-		//collapses the sidebar on window resize.
-		// Sets the min-height of #page-wrapper to window size
-		$(function() {
-			$(window).bind("load resize", function() {
-				var topOffset = 50;
-				var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
-				if (width < 768) {
-					$('div.navbar-collapse').addClass('collapse');
-					topOffset = 100; // 2-row-menu
-				} else {
-					$('div.navbar-collapse').removeClass('collapse');
-				}
-
-				var height = ((this.window.innerHeight > 0) ? this.window.innerHeight : this.screen.height) - 1;
-				height = height - topOffset;
-				if (height < 1) height = 1;
-				if (height > topOffset) {
-					$("#page-wrapper").css("min-height", (height) + "px");
-				}
-			});
-
-			var url = window.location;
-			// var element = $('ul.nav a').filter(function() {
-			//     return this.href == url;
-			// }).addClass('active').parent().parent().addClass('in').parent();
-			var element = $('ul.nav a').filter(function() {
-				return this.href == url;
-			}).addClass('active').parent();
-
-			while (true) {
-				if (element.is('li')) {
-					element = element.parent().addClass('in').parent();
-				} else {
-					break;
-				}
-			}
-		});
-
 		$(document).ready(function() {
 			// Cryptocurrencies
 			var cryptos = {"BTC": {"id": "bitcoin", "name": "Bitcoin", "symbol": "BTC", }, "ETH": {"id": "ethereum", "name": "Ethereum", "symbol": "ETH", }, "XRP": {"id": "ripple", "name": "Ripple", "symbol": "XRP", }, "LTC": {"id": "litecoin", "name": "Litecoin", "symbol": "LTC", }, "DASH": {"id": "dash", "name": "Dash", "symbol": "DASH", }, "ETC": {"id": "ethereum-classic", "name": "Ethereum Classic", "symbol": "ETC", }, "XEM": {"id": "nem", "name": "NEM", "symbol": "XEM", }, "XMR": {"id": "monero", "name": "Monero", "symbol": "XMR", }, "GNT": {"id": "golem-network-tokens", "name": "Golem", "symbol": "GNT", }, "REP": {"id": "augur", "name": "Augur", "symbol": "REP", }, "MAID": {"id": "maidsafecoin", "name": "MaidSafeCoin", "symbol": "MAID", }, "ZEC": {"id": "zcash", "name": "Zcash", "symbol": "ZEC", }, "GNO": {"id": "gnosis-gno", "name": "Gnosis", "symbol": "GNO", }, "PIVX": {"id": "pivx", "name": "PIVX", "symbol": "PIVX", }, "STRAT": {"id": "stratis", "name": "Stratis", "symbol": "STRAT", }, "DOGE": {"id": "dogecoin", "name": "Dogecoin", "symbol": "DOGE", }, "DCR": {"id": "decred", "name": "Decred", "symbol": "DCR", }, "FCT": {"id": "factom", "name": "Factom", "symbol": "FCT", }, "STEEM": {"id": "steem", "name": "Steem", "symbol": "STEEM", }, "DGD": {"id": "digixdao", "name": "DigixDAO", "symbol": "DGD", }, "WAVES": {"id": "waves", "name": "Waves", "symbol": "WAVES", }, "USDT": {"id": "tether", "name": "Tether", "symbol": "USDT", }};
 			var cc_investments = {};
+			var morris_charts = {};
 
 			// Get the coin values
 			var keys = Object.keys(cryptos);
@@ -805,11 +650,12 @@
 				load();
 			});
 
-			$('.cc-select').change(updateSelection);
-			$('.cc-value').change(updatePrice);
-			$('.cc-buy-price').change(updateBuyDifference);
+			// Set the initial events
+			setCoinRowEvents($('.cc-row:last'));
+			$('.cc-add-coin').click(addCoinRow);
+			$('.page-toggle').click(pageToggle);
 
-			$('.page-toggle').click(function(event) {
+			function pageToggle(event) {
 				event.preventDefault();
 				var page = $(this).data('page');
 
@@ -817,16 +663,22 @@
 				{
 					$('.page-item').hide();
 					$('#' + page).show();
+
+					// If we're showing the index page, redraw the charts
+					if (page == 'page-index')
+					{
+						$.each(morris_charts, function(key, val) {
+							val.redraw();
+						});
+					}
 				}
-			});
+			}
 
 			function updateSelection() {
 				var row = $(this).closest('.cc-row');
 				var val = row.find('.cc-select').val();
-				if (!val) {
-					save();
+				if (!val)
 					return;
-				}
 
 				var crypto = cryptos[val];
 				row.find('.cc-abbr').html(crypto.symbol);
@@ -836,15 +688,63 @@
 
 				//getLastDayPrices(crypto.symbol);
 				getLastMonthPrices(crypto.symbol);
+			}
 
-				// Add a new row if we've used all ours up
-				var last = $('.cc-select:last').find('option:selected').val();
-				if (last) {
-					var newRow = row.clone(true);
-					newRow.find('.cc-select, .cc-value, .cc-buy-price').val('');
-					newRow.find('.cc-usd, .cc-abbr, .cc-diff, .cc-diff-perc').html('');
-					newRow.appendTo('.portfolio');
-				}
+			function addCoinRow() {
+				var newRow = $('.cc-row:last').clone(false);
+				newRow.find('.cc-select, .cc-value, .cc-buy-price, .cc-buy-date').val('');
+				newRow.find('.cc-usd, .cc-abbr, .cc-diff, .cc-diff-perc').html('');
+				setCoinRowEvents(newRow);
+				newRow.appendTo('.portfolio');
+			}
+
+			function setCoinRowEvents(row) {
+				row.find('.cc-select').change(updateSelection);
+				row.find('.cc-select').change(save);
+				row.find('.cc-value').change(updatePrice);
+				row.find('.cc-value').change(save);
+				row.find('.cc-value').change(generateMonthlyPortfolioChart);
+				row.find('.cc-buy-price').change(updateBuyDifference);
+				row.find('.cc-buy-price').change(save);
+				row.find('.cc-remove-coin').click(removeCoinRow);
+				row.find('.cc-buy-date').daterangepicker({
+					singleDatePicker: true,
+					showDropdowns: true
+				});
+				row.find('.cc-buy-date').on('apply.daterangepicker', save);
+			}
+
+			function removeCoinRow() {
+				var row = $(this).closest('.cc-row');
+
+				// Verify that the user wants to do this
+				var modal = $('#removeCoinRow').modal('show');
+				modal.find('.cc-remove-coin-confirm').click(function() {
+					// If this is the last row, just clear it
+					if ($('.cc-row').length <= 1)
+					{
+						row.find('.cc-select, .cc-value, .cc-buy-price').val('');
+						row.find('.cc-usd, .cc-abbr, .cc-diff, .cc-diff-perc').html('');
+					}
+					else
+					{
+						row.remove();
+					}
+
+					// Reload the data
+					updateCoinPrices();
+					updateBuyDifference();
+					generateMonthlyChart();
+					generateMonthlyPortfolioChart();
+
+					// And save
+					save();
+				});
+
+				modal.on('hidden.bs.modal', function () {
+					// Remove the event attached to this
+					modal.find('.cc-remove-coin-confirm').off('click');
+				});
 			}
 
 			function updateCoinPrices() {
@@ -856,9 +756,11 @@
 				// Remove all other cp-rows
 				cp.empty();
 
+				var coins = [];
 				$.each($('.cc-select'), function(key, val) {
 					var id = $(val).val();
-					if (!id) return;
+					if (!id || coins.indexOf(id) !== -1) return;
+					coins.push(id);
 
 					var crypto = cryptos[id];
 
@@ -946,7 +848,11 @@
 			var price_data_daily = [], price_labels_daily = [];
 			function getLastMonthPrices(coin_id) {
 				// Don't retrieve data we already have
-				if (price_labels_daily && price_labels_daily.indexOf(coin_id) !== -1) return;
+				if (price_labels_daily && price_labels_daily.indexOf(coin_id) !== -1) {
+					setTimeout(generateMonthlyChart, 0);
+					setTimeout(generateMonthlyPortfolioChart, 0);
+					return;
+				}
 
 				// Get the coin's prices over the last day
 				$.getJSON('https://min-api.cryptocompare.com/data/histoday?fsym=' + coin_id + '&tsym=USD&limit=90', function( data ) {
@@ -972,47 +878,116 @@
 						});
 					}
 
-					// Clear the existing graph
-					$('#monthly-chart').empty();
+					generateMonthlyChart();
+					generateMonthlyPortfolioChart();
+				});
+			}
 
-					Morris.Line({
-						element: 'monthly-chart',
-						data: price_data_daily,
-						parseTime: true,
-						xkey: 'y',
-						ykeys: price_labels_daily,
-						labels: price_labels_daily,
-						pointSize: 1
+			function generateMonthlyChart() {
+				// Pick the data we want to show
+				var coin_labels = [], coin_ids = [];
+				$.each($('.cc-select'), function(key, val) {
+					var value = $(val).val();
+					if (value && coin_ids.indexOf(value) == -1)
+					{
+						coin_ids.push(value);
+						coin_labels.push(value);
+					}
+				});
+
+				// If we don't have anything, use bitcoin if provided
+				if (coin_ids.length < 1)
+				{
+					coin_ids.push('BTC');
+					coin_labels.push('BTC');
+				}
+
+				var coin_prices = [];
+				$.each(coin_ids, function(key, coin_id) {
+					$.each(price_data_daily, function(inner_key, inner_val)
+					{
+						if (inner_val.hasOwnProperty(coin_id))
+						{
+							if (!coin_prices[inner_key])
+								coin_prices[inner_key] = {'y': inner_val['y']};
+							coin_prices[inner_key][coin_id] = inner_val[coin_id];
+						}
+					});
+				});
+
+				// Clear the existing graph
+				$('#monthly-chart').empty();
+
+				morris_charts['monthly-chart'] = Morris.Line({
+					element: 'monthly-chart',
+					data: coin_prices,
+					parseTime: true,
+					xkey: 'y',
+					ykeys: coin_labels,
+					labels: coin_labels,
+					pointSize: 1
+				});
+			}
+
+			function generateMonthlyPortfolioChart() {
+				// Pick the data we want to show
+				var coin_labels = [], coin_ids = [];
+				$.each($('.cc-select'), function(key, val) {
+					var value = $(val).val();
+					if (value)
+					{
+						coin_ids.push(value);
+						coin_labels.push(value);
+					}
+				});
+
+				// If we don't have anything, use bitcoin if provided
+				if (coin_ids.length < 1)
+				{
+					coin_ids.push('BTC');
+					coin_labels.push('BTC');
+				}
+
+				var coin_prices = [];
+				$.each(coin_ids, function(key, coin_id) {
+					$.each(price_data_daily, function(inner_key, inner_val)
+					{
+						if (inner_val.hasOwnProperty(coin_id))
+						{
+							if (!coin_prices[inner_key])
+								coin_prices[inner_key] = {'y': inner_val['y']};
+							coin_prices[inner_key][coin_id] = inner_val[coin_id];
+						}
+					});
+				});
+
+				var diff_data = [];
+				$.each(coin_prices, function(key, val) {
+					var total = 0;
+					$.each(val, function(k, v) {
+						var value = (cc_investments.hasOwnProperty(k)) ? cc_investments[k] : 0;
+						if (k != 'y') total += (v * value);
 					});
 
-					var diff_data = [];
-					$.each(price_data_daily, function(key, val) {
-						var total = 0;
-						$.each(val, function(k, v) {
-							var value = (cc_investments.hasOwnProperty(k)) ? cc_investments[k] : 0;
-							if (k != 'y') total += (v * value);
-						});
+					var item = {
+						'y': val.y,
+						'total': total
+					};
 
-						var item = {
-							'y': val.y,
-							'total': total
-						};
+					diff_data.push(item);
+				});
 
-						diff_data.push(item);
-					});
+				// Clear the existing graph
+				$('#monthly-chart-diff').empty();
 
-					// Clear the existing graph
-					$('#monthly-chart-diff').empty();
-
-					Morris.Line({
-						element: 'monthly-chart-diff',
-						data: diff_data,
-						parseTime: true,
-						xkey: 'y',
-						ykeys: ['total'],
-						labels: ['Total ($)'],
-						pointSize: 1
-					});
+				morris_charts['monthly-chart-diff'] = Morris.Line({
+					element: 'monthly-chart-diff',
+					data: diff_data,
+					parseTime: true,
+					xkey: 'y',
+					ykeys: ['total'],
+					labels: ['Total ($)'],
+					pointSize: 1
 				});
 			}
 
@@ -1024,10 +999,9 @@
 				var crypto = cryptos[val];
 				var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd);
 				var buy = parseFloat(row.find('.cc-buy-price').val());
-				if (!buy) return;
 
-				var diff = (usd - buy);
-				var diff_perc = (buy > 0.01) ? (diff / buy * 100) : (0);
+				var diff = (buy >= 0.01) ? (usd - buy) : (0);
+				var diff_perc = (buy >= 0.01) ? (diff / buy * 100) : (0);
 				var color = 'darkred';
 				if (diff >= 0) color = 'green';
 
@@ -1063,16 +1037,17 @@
 					var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd);
 					var buy = parseFloat(row.find('.cc-buy-price').val());
 					total = parseFloat(total + usd);
-					investment = parseFloat(investment + buy);
+					if (buy > 0)
+						investment = parseFloat(investment + buy);
 				});
 
 				$('.cf-total').html('$' + total.toFixed(2));
-				if (!investment) return;
+				if (!investment) investment = 0;
 			
 				$('.cf-investment').html('$' + investment.toFixed(2));
 
-				var diff = (total - investment);
-				var diff_perc = (investment > 0.01) ? (diff / investment * 100) : (0);
+				var diff = (investment >= 0.01) ? (total - investment) : (0);
+				var diff_perc = (investment >= 0.01) ? (diff / investment * 100) : (0);
 
 				var $cf_diff      = $('.cf-diff');
 				var $cf_diff_perc = $('.cf-diff-perc');
@@ -1106,9 +1081,10 @@
 					if (!val) return;
 
 					cryptofolio.push({
-						'id'    : val,
-						'value' : row.find('.cc-value').val(),
-						'buy'   : row.find('.cc-buy-price').val()
+						'id'       : val,
+						'value'    : row.find('.cc-value').val(),
+						'buy'      : row.find('.cc-buy-price').val(),
+						'buy-date' : row.find('.cc-buy-date').val()
 					});
 				});
 				localStorage.setItem('cryptocurrency-portfolio', JSON.stringify(cryptofolio));
@@ -1131,10 +1107,11 @@
 					row.find('.cc-value').val(1);
 					row.find('.cc-buy-price').val(bitcoin.price_usd);
 
-					// And trigger the event - handles creating a new row
+					// And trigger the event
 					updateSelection.call(row);
 
 					// Now delete the row & resave - total hack for now
+					addCoinRow();
 					row.remove();
 					save();
 				}
@@ -1142,12 +1119,19 @@
 				$.each(cryptofolio, function(key, val) {
 					var row = $('.portfolio').find('.cc-row:last');
 
+					if (row.find('.cc-select').val() != '') {
+						addCoinRow();
+						row = $('.portfolio').find('.cc-row:last');
+					}
+
 					// Then modify the current row
 					row.find('.cc-select').val(val['id']);
 					row.find('.cc-value').val(val['value']);
 					row.find('.cc-buy-price').val(val['buy']);
+					row.find('.cc-buy-date').data('daterangepicker').setStartDate(val['buy-date']);
+					row.find('.cc-buy-date').data('daterangepicker').setEndDate(val['buy-date']);
 
-					// And trigger the event - handles creating a new row
+					// And trigger the event
 					updateSelection.call(row);
 				});
 			}
