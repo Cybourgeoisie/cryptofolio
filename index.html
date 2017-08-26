@@ -3,6 +3,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+	<title>10K Pizza: View Your Cryptocurrency Portfolio</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Track and view your cryptocurrency investments and profits in a private, secure portfolio.">
+	<meta name="keywords" content="bitcoin, ethereum, litecoin, altcoin, btc, eth, ltc, cryptocurrency, crypto, cryptocurrency portfolio, investing, short, long, hodl, economy, finance, track cryptocurrency, dash, monero, iota, neo, pivx, ubiq, decred, viacoin, vertcoin, dogecoin, ripple" />
+
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -14,6 +19,22 @@
 
 	<!-- Bootstrap Date Range Picker -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.css" integrity="sha256-RqJuUJ19HEfsKUNMC+6GLSatrHeroWygib75lro4BMU=" crossorigin="anonymous" />
+
+	<!-- Metis Menu -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.css" integrity="sha256-OufFdETrXbY5YtILsSTzlY+4Ttmq+hUfR1mMYLmKlWo=" crossorigin="anonymous" />
+
+	<!--
+		TODO:
+			- DONE - Fix IOTA issue
+			- DONE - Reduce page time from drawing charts on initial load
+			- DONE - Add ability to change reference currency from USD to other major currency
+			- Add coin performance information (not sure where to put it... maybe a UI change for it)
+			- Matching colors for breakdown and wallet contributions
+			- Logarithmic scaling: (https://www.reddit.com/r/BitcoinMarkets/comments/6uh9da/best_porfolio_tracker_with_api_automatic_updates/dlt28xa/)
+			- Attach balances to addresses: (https://www.reddit.com/r/CryptoMarkets/comments/6ui0yf/just_released_10k_pizza_a_privacyfocused_open/dlsytro/)
+			- Pull wallet balances via API: (same as above)
+			- Consider a better UI
+	 -->
 
 	<!-- Page style -->
 	<style>
@@ -42,14 +63,16 @@
 		}
 		#page-wrapper {
 		  padding: 0 15px;
-		  /*margin: 25px;*/
 		  min-height: 568px;
 		  background-color: white;
 		}
 		.small-page-header {
 			margin: 14px 0px;
 		}
-		.cc-buy-price, .cc-value {
+		.page-header {
+			margin-top: 20px;
+		}
+		.cc-trade-value, .cc-value {
 			padding: 4px;
 		}
 		.cc-input-addon-span {
@@ -67,6 +90,9 @@
 		  .half-padding {
 		  	padding-left:7.5px;
 		  	padding-right:7.5px;
+		  }
+		  .page-wrapper-buffer {
+		    margin: 0px 8px;
 		  }
 		}
 		.navbar-top-links {
@@ -311,10 +337,6 @@
 		  color: #df8a13;
 		}
 	</style>
-
-	<title>10k Pizza: View Your Cryptocurrency Portfolio</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="View your cryptocurrency investments and profits in one portfolio.">
 </head>
 <body>
 	<!-- Navigation -->
@@ -328,17 +350,17 @@
 				<span class="icon-bar"></span>
 			</button>
 			
-			<a class="navbar-brand" href="index.html">10k Pizza</a>
+			<a class="navbar-brand page-toggle" href="#" data-page="page-index">10K Pizza</a>
 
 			<div class="navbar-brand">
 				<div class="visible-xs-block">
-					<small><i class="fa fa-btc fa-fw"></i><span class="btc-price">
-						<i class="fa fa-spinner fa-fw"></i>
+					<small><i class="fa fa-btc fa-fw"></i><span class="btc-price-fiat">
+						<i class="fa fa-spinner fa-pulse fa-fw"></i>
 					</span></small>
 				</div>
 				<div class="visible-sm-block visible-md-block visible-lg-block">
-					<i class="fa fa-btc fa-fw"></i><span class="btc-price">
-						<i class="fa fa-spinner fa-fw"></i>
+					<i class="fa fa-btc fa-fw"></i><span class="btc-price-fiat">
+						<i class="fa fa-spinner fa-pulse fa-fw"></i>
 					</span>
 				</div>
 			</div>
@@ -373,15 +395,43 @@
 						</a>
 					</li>
 
+
+
 					<li>
-						<a href="#" class="page-toggle" data-page="page-manage">
-							<i class="fa fa-cogs fa-fw"></i> Manage
+						<a href="#"><i class="fa fa-cogs fa-fw"></i> Manage<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="#" class="page-toggle" data-page="page-manage">
+									<i class="fa fa-exchange fa-fw"></i> Trades
+								</a>
+							</li>
+
+							<li>
+								<a href="#" class="page-toggle" data-page="page-settings">
+									<i class="fa fa-cog fa-fw"></i> Settings
+								</a>
+							</li>
+
+							<!--<li>
+								<a href="#" class="page-toggle" data-page="page-save-restore">
+									<i class="fa fa-hdd-o fa-fw"></i> Save / Restore
+								</a>
+							</li>-->
+
+						</ul>
+					</li>
+
+					<!--
+					<li>
+						<a href="#" class="page-toggle" data-page="page-live-charts">
+							<i class="fa fa-line-chart fa-fw"></i> Live Charts
 						</a>
 					</li>
+					-->
 
 					<li>
 						<a href="#" class="page-toggle" data-page="page-analysis">
-							<i class="fa fa-line-chart fa-fw"></i> Analysis
+							<i class="fa fa-area-chart fa-fw"></i> Analysis
 						</a>
 					</li>
 
@@ -484,67 +534,24 @@
 			</div>
 
 			<div class="row cp-coin-prices half-padding">
-				<div class="col-xs-4 col-sm-3 cp-row half-padding">
-					<div class="panel panel-warning">
+				<div class="col-xs-6 col-sm-4 col-md-3 cp-row half-padding">
+					<div class="panel cp-price-panel panel-success">
 						<div class="panel-heading">
-									<span class="cp-price-usd large">$0.00</span><br />
-									<span class="cp-price-btc">0.0</span> <i class="fa fa-btc" aria-hidden="true"></i>
+							<span class="cp-price-fiat large">$0.00</span>
+							<span class="cp-price-change-arrow" style="float:right">
+								<i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+							</span>
+							<br />
+							<span class="cp-price-btc">0.0</span> <i class="fa fa-btc" aria-hidden="true"></i>
+							<span class="cp-price-delta" style="float:right">
+								0.00%
+							</span>
 						</div>
 						<div class="panel-footer">
 							<span class="pull-left cp-name">Bitcoin</span>
 							<div class="clearfix"></div>
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<!--
-			<div class="row">
-				<div class="col-sm-12">
-					<h3 class="page-header small-page-header">Wallet Balances</h3>
-				</div>
-			</div>
-
-			<div class="cp-breakdown half-padding">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Coin</th>
-							<th>Balance</th>
-							<th>USD</th>
-						</tr>
-					</thead>
-					<tbody class="cp-breakdown-tbody">
-						<tr class="cp-breakdown-row">
-							<td class="cp-breakdown-name">Bitcoin</th>
-							<td class="cp-breakdown-balance">1.0 BTC</td>
-							<td class="cp-breakdown-usd"><i class="fa fa-spinner fa-fw"></i></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			-->
-
-			<div class="row">
-				<div class="col-sm-12">
-					<h3 class="page-header small-page-header">Past 3 Months</h3>
-				</div>
-			</div>
-
-			<div class="row">
-				<!--<div class="col-sm-3">
-					<div id="daily-chart"></div>
-				</div>
-				<div class="col-sm-3">
-					<div id="daily-chart-diff"></div>
-				</div>-->
-				<div class="col-sm-6">
-					<center><strong>Cryptocurrency Values</strong></center>
-					<div id="monthly-chart"></div>
-				</div>
-				<div class="col-sm-6">
-					<center><strong>Portfolio Value</strong></center>
-					<div id="monthly-chart-diff"></div>
 				</div>
 			</div>
 		</div>
@@ -569,14 +576,14 @@
 							<tr>
 								<th>Coin</th>
 								<th>Balance</th>
-								<th>USD</th>
+								<th>Fiat</th>
 							</tr>
 						</thead>
 						<tbody class="cp-breakdown-tbody">
 							<tr class="cp-breakdown-row">
 								<td class="cp-breakdown-name">Bitcoin</th>
 								<td class="cp-breakdown-balance">1.0 BTC</td>
-								<td class="cp-breakdown-usd"><i class="fa fa-spinner fa-fw"></i></td>
+								<td class="cp-breakdown-fiat"><i class="fa fa-spinner fa-pulse fa-fw"></i></td>
 							</tr>
 						</tbody>
 					</table>
@@ -584,7 +591,9 @@
 
 				<div class="col-xs-12 col-sm-6">
 					<center><strong>Breakdown</strong></center>
-					<div id="monthly-chart-breakdown-pie"></div>
+					<div id="monthly-chart-breakdown-pie">
+						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+					</div>
 				</div>
 			</div>
 
@@ -595,12 +604,66 @@
 			</div>
 
 			<div class="row">
+				<div class="col-sm-6">
+					<center><strong>Cryptocurrency Values</strong></center>
+					<div id="monthly-chart">
+						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<center><strong>Portfolio Value</strong></center>
+					<div id="monthly-chart-diff">
+						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
 				<div class="col-sm-12">
 					<center><strong>Wallet Contributions</strong></center>
-					<div id="monthly-chart-breakdown"></div>
+					<div id="monthly-chart-breakdown">
+						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+					</div>
 				</div>
 			</div>
 		</div>
+
+		<!--
+		<div id="page-live-charts" class="page-item" style="display:none;">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="page-header">Live Charts</h1>
+				</div>
+			</div>
+
+			<div class="cc-row-analysis">
+				<div class="row form-group cc-header hidden-xs">
+					<div class="col-xs-6 col-sm-3">
+						<strong>Chart Coin</strong>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-6 col-sm-3 form-group">
+						<label class="visible-xs-block">Chart Coin</label>
+						<div class="input-group">
+							<select class="form-control cc-select-live-chart"></select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<center><strong>Current Performance</strong></center>
+					<div id="live-performance-chart">
+						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		-->
 
 		<div id="page-analysis" class="page-item" style="display:none;">
 			<div class="row">
@@ -645,116 +708,162 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<center><strong>Relative Value - Past 3 Months</strong></center>
-					<div id="comparison-chart"></div>
+					<div id="comparison-chart">
+						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+					</div>
 				</div>
 
 				<div class="col-sm-12">
 					<center><strong>Price Chart - Past 3 Months</strong></center>
-					<div id="comparison-price-chart"></div>
+					<div id="comparison-price-chart">
+						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<div id="page-manage" class="page-item" style="display:none;">
+		<div id="page-manage" class="page-item page-wrapper-buffer" style="display:none;">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1 class="page-header">Manage Your Portfolio</h1>
+					<h1 class="page-header">
+						Your Trades
+						<button type="button" class="btn btn-primary btn-outline cc-add-coin" style="float:right">Add <i class="fa fa-plus" aria-hidden="true"></i></button>
+					</h1>
 				</div>
 			</div>
 
 			<div class="portfolio">
-				<div class="row form-group cc-header hidden-xs">
-					<div class="col-sm-3">
-						<strong>Coin</strong>
-					</div>
-					<div class="col-sm-3">
-						<strong># Coins</strong>
-					</div>
-					<div class="col-sm-3">
-						<strong>Purchased At</strong>
-					</div>
-					<div class="col-sm-2">
-						<strong>Purchase Date</strong>
-					</div>
-					<!--
-					<div class="col-sm-1">
-						<strong>Current</strong>
-					</div>
-					<div class="col-sm-1">
-						<strong>Profit</strong>
-					</div>
-					<div class="col-sm-1">
-						<strong>Change</strong>
-					</div>
-					-->
-					<div class="col-sm-1">
-						<strong>Remove</strong>
-					</div>
-				</div>
-
 				<div class="row cc-row">
-					<div class="col-xs-4 col-sm-3 form-group">
-						<label class="visible-xs-block">Coin</label>
-						<div class="input-group">
-							<select class="form-control cc-select"></select>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							Traded on &nbsp;<input type="text" class="cc-buy-date form-control" style="display:inline-block; width:100px" />
+
+							<button type="button" class="btn btn-danger btn-outline cc-remove-coin" style="float:right">
+								<i class="fa fa-trash" aria-hidden="true"></i>
+							</button>
+						</div>
+						<div class="panel-body">
+							<div class="col-xs-6 col-sm-3 form-group">
+								<label>Bought</label>
+								<div class="input-group">
+									<select class="form-control cc-select"></select>
+								</div>
+							</div>
+							<div class="col-xs-6 col-sm-3 form-group">
+								<label>Value</label>
+								<div class="input-group">
+									<input type="number" class="form-control cc-value"></input> 
+									<span class="input-group-addon cc-input-addon-span cc-abbr"></span>
+								</div>
+							</div>
+
+							<div class="col-xs-6 col-sm-3 form-group">
+								<label>Traded</label>
+								<div class="input-group">
+									<select class="form-control cc-select-trade">
+										<option value=""></option>
+										<optgroup label="Fiat Currency">
+											<option value="CNY">Chinese Yuan</option>
+											<option value="EUR">Euro</option>
+											<option value="GBP">British Pound</option>
+											<option value="JPY">Japanese Yen</option>
+											<option value="USD">US Dollars</option>
+										</optgroup>
+									</select>
+								</div>
+							</div>
+							<div class="col-xs-6 col-sm-3 form-group">
+								<label>Value</label>
+								<div class="input-group">
+									<span class="input-group-addon cc-input-addon-span cc-abbr-fiat-trade">$</span>
+									<input type="number" class="form-control cc-trade-value"></input> 
+									<span class="input-group-addon cc-input-addon-span cc-abbr-crypto-trade" style="display:none;">BTC</span>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="col-xs-4 col-sm-3 form-group">
-						<label class="visible-xs-block"># Coins</label>
-						<div class="input-group">
-							<input type="number" class="form-control cc-value"></input> 
-							<span class="input-group-addon cc-input-addon-span cc-abbr"></span>
-						</div>
-					</div>
-					<div class="col-xs-4 col-sm-3 form-group">
-						<label class="visible-xs-block">Purchased At</label>
-						<div class="input-group">
-							<span class="input-group-addon cc-input-addon-span">$</span>
-							<input type="number" class="form-control cc-buy-price"></input> 
-						</div>
-					</div>
-					<div class="col-xs-4 col-sm-2 form-group">
-						<label class="visible-xs-block">Purchase Date</label>
-						<input type="text" class="cc-buy-date form-control" />
-					</div>
-					<div class="col-xs-4 col-sm-1 form-group">
-						<label class="visible-xs-block">Remove</label>
-						<button type="button" class="btn btn-danger btn-outline cc-remove-coin">
-							<span class="visible-xs-block">Remove <i class="fa fa-trash" aria-hidden="true"></i></span>
-							<span class="hidden-xs"><i class="fa fa-trash" aria-hidden="true"></i></span>
-						</button>
-					</div>
-					<!--
-					<div class="col-xs-4 col-sm-1 form-group">
-						<label class="visible-xs-block">Current</label>
-						<span class="cc-usd"></span>
-					</div>
-					<div class="col-xs-4 col-sm-1 form-group">
-						<label class="visible-xs-block">Difference</label>
-						<span class="cc-diff"></span>
-					</div>
-					<div class="col-xs-4 col-sm-1 form-group">
-						<label class="visible-xs-block">Change</label>
-						<span class="cc-diff-perc"></span>
-					</div>
-					-->
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary btn-outline cc-add-coin">Add <i class="fa fa-plus" aria-hidden="true"></i></button>
+		</div>
+
+		<div id="page-settings" class="page-item page-wrapper-buffer" style="display:none;">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="page-header">
+						Settings
+					</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Defaults
+					</div>
+					<div class="panel-body">
+						<div class="col-xs-6 col-sm-3 form-group">
+							<div class="input-group">
+								<label>Fiat Currency</label>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-3 form-group">
+							<div class="input-group">
+								<select class="form-control cc-select-fiat">
+									<option value="CNY">CNY &yen;</option>
+									<option value="EUR">EUR &euro;</option>
+									<option value="GBP">GBP &pound;</option>
+									<option value="JPY">JPY &yen;</option>
+									<option value="USD" selected="selected">USD $</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="page-save-restore" class="page-item page-wrapper-buffer" style="display:none;">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="page-header">
+						Save / Restore Portfolio
+					</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Cryptocurrency Portfolio Data
+					</div>
+					<div class="panel-body">
+						<div class="col-xs-12 form-group">
+							<textarea class="form-control" rows="5"></textarea>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<button type="button" class="btn btn-primary cc-save-portfolio">
+							Restore <i class="fa fa-plus" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div id="page-about" class="page-item" style="display:none;">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1 class="page-header">About 10k Pizza</h1>
+					<h1 class="page-header">About 10K Pizza</h1>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-sm-12">
-					<p>10k Pizza is a side project by <a href="https://github.com/Cybourgeoisie">Cybourgeoisie</a>, who wanted a simple website to review the value of his cryptocurrency holdings without user logins or sharing his personal information.</p>
+					<p>10K Pizza is a side project by <a target="blank" href="https://github.com/Cybourgeoisie">Cybourgeoisie</a>, who wanted a simple website to review the value of his cryptocurrency holdings without user logins or sharing his personal information.</p>
 
-					<p>This website can be audited directly by viewing the page source, and the code is <a href="https://github.com/Cybourgeoisie/cryptofolio">maintained on Github</a>. There is no backend server logic, and the entire site is statically generated with API calls to retrieve current and historical cryptocurrency price information. None of your personally-entered information is sent to or from any sources, and your data stays entirely on your computer (or phone / tablet).</p>
+					<p>This website can be audited directly by viewing the page source, and the code is <a target="blank" href="https://github.com/Cybourgeoisie/cryptofolio">maintained on Github</a>. There is no backend server logic, and the entire site is statically generated with API calls to retrieve current and historical cryptocurrency price information. None of your personally-entered information is sent to or from any sources, and your data stays entirely on your computer (or phone / tablet).</p>
+
+					<p>The cryptocurrency market data and listings are retrieved from <a target="blank" href="https://www.cryptocompare.com/">CryptoCompare</a> and <a target="blank" href="https://coinmarketcap.com/">CoinMarketCap</a>, respectively. Both websites provide excellent APIs that have made this application possible, and both accept donations for their free services.</p>
 				</div>
 			</div>
 
@@ -800,7 +909,7 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<p>You can reach out to me on <a href="https://twitter.com/cybourgeoisie">Twitter</a> or send me an email to my Gmail account (cybourgeoisie).</p>
+					<p>You can reach out to me on <a target="blank" href="https://twitter.com/cybourgeoisie">Twitter</a> or send me an email to my Gmail account (cybourgeoisie).</p>
 				</div>
 			</div>
 		</div>
@@ -846,116 +955,111 @@
 	<!-- Bootstrap Date Range Picker -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.js" integrity="sha256-WniDtKHyk2OPgNtTFKu/sL8zGBzmCfMcmEKRAqfi25c=" crossorigin="anonymous"></script>
 
+	<!-- Metis Menu -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js" integrity="sha256-EdeVuolWxmuLTapvaUaXTYIYKTIlhc0nUEGPEMn8MhQ=" crossorigin="anonymous"></script>
+
+	<!-- Socket.io -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js" integrity="sha256-WKvqiY0jZHWQZIohYEmr9KUC5rEaYEOFTq+ByllJK8w=" crossorigin="anonymous"></script>
+
+	<!-- CryptoCompare Streamer Utils -->
+	<script src="./ccc-streamer-utilities.js"></script>
+
 
 	<!-- Logic -->
 	<script type="text/javascript">
 		$(document).ready(function() {
-			// Cryptocurrencies
-			var cryptos = {
-				"BTC": {"id": "bitcoin", "name": "Bitcoin", "symbol": "BTC"}, 
-				"ETH": {"id": "ethereum", "name": "Ethereum", "symbol": "ETH"}, 
-				//"XRP": {"id": "ripple", "name": "Ripple", "symbol": "XRP"}, 
-				"LTC": {"id": "litecoin", "name": "Litecoin", "symbol": "LTC"}, 
-				"DASH": {"id": "dash", "name": "Dash", "symbol": "DASH"}, 
-				//"ETC": {"id": "ethereum-classic", "name": "Ethereum Classic", "symbol": "ETC"}, 
-				"XEM": {"id": "nem", "name": "NEM", "symbol": "XEM"}, 
-				"XMR": {"id": "monero", "name": "Monero", "symbol": "XMR"},
-				"NEO": {"id": "neo", "name": "NEO", "symbol": "NEO"},
-				//"GNT": {"id": "golem-network-tokens", "name": "Golem", "symbol": "GNT"}, 
-				//"REP": {"id": "augur", "name": "Augur", "symbol": "REP"}, 
-				"MAID": {"id": "maidsafecoin", "name": "MaidSafeCoin", "symbol": "MAID"}, 
-				"ZEC": {"id": "zcash", "name": "Zcash", "symbol": "ZEC"}, 
-				//"GNO": {"id": "gnosis-gno", "name": "Gnosis", "symbol": "GNO"}, 
-				"PIVX": {"id": "pivx", "name": "PIVX", "symbol": "PIVX"}, 
-				//"STRAT": {"id": "stratis", "name": "Stratis", "symbol": "STRAT"}, 
-				"DOGE": {"id": "dogecoin", "name": "Dogecoin", "symbol": "DOGE"}, 
-				"DCR": {"id": "decred", "name": "Decred", "symbol": "DCR"}, 
-				"XEL": {"id": "elastic", "name": "Elastic", "symbol": "XEL"}, 
-				//"STEEM": {"id": "steem", "name": "Steem", "symbol": "STEEM"}, 
-				//"DGD": {"id": "digixdao", "name": "DigixDAO", "symbol": "DGD"}, 
-				//"WAVES": {"id": "waves", "name": "Waves", "symbol": "WAVES"}, 
-				//"USDT": {"id": "tether", "name": "Tether", "symbol": "USDT"}, 
-				"LSK": {"id": "lisk", "name": "Lisk", "symbol": "LSK"}, 
-				//"XLM": {"id": "stellar", "name": "Stellar Lumens", "symbol": "XLM"}, 
-				//"BCN": {"id": "bytecoin-bcn", "name": "Bytecoin", "symbol": "BCN"}, 
-				//"BTS": {"id": "bitshares", "name": "BitShares", "symbol": "BTS"}, 
-				"SC": {"id": "siacoin", "name": "Siacoin", "symbol": "SC"}, 
-				//"WINGS": {"id": "wings", "name": "Wings", "symbol": "WINGS"}, 
-				"UBQ": {"id": "ubiq", "name": "Ubiq", "symbol": "UBQ"}, 
-				//"DGB": {"id": "digibyte", "name": "DigiByte", "symbol": "DGB"}, 
-				//"GRC": {"id": "gridcoin", "name": "GridCoin", "symbol": "GRC"}, 
-				"VTC": {"id": "vertcoin", "name": "Vertcoin", "symbol": "VTC"}, 
-				//"CLAM": {"id": "clams", "name": "Clams", "symbol": "CLAM"}, 
-				"VIA": {"id": "viacoin", "name": "Viacoin", "symbol": "VIA"}, 
-				//"VASH": {"id": "vpncoin", "name": "VPNCoin", "symbol": "VASH"}, 
-				"SHIFT": {"id": "shift", "name": "Shift", "symbol": "SHIFT"}, 
-				"RDD": {"id": "reddcoin", "name": "ReddCoin", "symbol": "RDD"}, 
-				//"XBB": {"id": "boolberry", "name": "Boolberry", "symbol": "XBB"}, 
-				//"BITB": {"id": "bitbean", "name": "BitBean", "symbol": "BITB"}, 
-				//"VOX": {"id": "voxels", "name": "Voxels", "symbol": "VOX"},
-				"MCO" : {"id" : "monaco", "name": "Monaco", "symbol": "MCO"},
+			$('#side-menu').metisMenu();
+
+			var fiat_currencies = {
+				'CNY' : {'symbol': '¥', 'name': 'CNY', 'rate': 1.0},
+				'EUR' : {'symbol': '€', 'name': 'GBP', 'rate': 1.0},
+				'GBP' : {'symbol': '£', 'name': 'GBP', 'rate': 1.0},
+				'JPY' : {'symbol': '¥', 'name': 'JPY', 'rate': 1.0},
+				'USD' : {'symbol': '$', 'name': 'USD', 'rate': 1.0}
 			};
 
+			var cryptos = {};
 			var cc_investments = {};
+			var fiat = {'symbol': '$', 'name': 'USD', 'rate': 1.0};
 			var morris_charts = {};
+
+			// First, load all of the user's basic settings
+			loadSettings();
+
+			// Get the fiat exchange rates
+			$.getJSON("https://api.fixer.io/latest?base=USD", function(data) {
+				$.each(fiat_currencies, function(k, v) {
+					if (k == 'USD') return;
+					fiat_currencies[k].rate = data.rates[k];
+				});
+			});
 
 			// Get the coin values
 			var keys = Object.keys(cryptos);
 
-			// TODO - Retrieve the values automatically via our stored API results
-			var chunk = 30;
-			for (var i = 0, j = keys.length; i < j; i += chunk)
-			{
-				// Always include BTC in the call
-				keys_chunk = keys.slice(i, i + chunk);
-				keys_chunk.push('BTC');
+			$.getJSON('https://api.coinmarketcap.com/v1/ticker/', function(data) {
+				var items = [];
 
-				var num_calls = 0;
-				$.getJSON('https://min-api.cryptocompare.com/data/pricemulti?fsyms=' + keys_chunk.join() + '&tsyms=USD,EUR', function( data ) {
-
-					var items = [];
-					if (num_calls == 0) {
-						items = ["<option selected></option>"];
+				$.each(data, function(key, crypto) {
+					if (cryptos.hasOwnProperty(crypto.symbol)) {
+						return;
 					}
-					num_calls++;
 
-					$.each(cryptos, function(key, val) {
-						if (!data.hasOwnProperty(key)) return;
-						if (key == 'BTC' && cryptos['BTC'].hasOwnProperty('price_usd')) return;
-						items.push("<option value='" + key + "'>" + val.name + "</option>");
-						cryptos[key].price_usd = data[key].USD;
-						cryptos[key].price_btc = parseFloat((data[key].USD / data['BTC'].USD));
-						if (cryptos[key].price_btc < 0.000001)
-							cryptos[key].price_btc = cryptos[key].price_btc.toFixed(10);
-						else
-							cryptos[key].price_btc = cryptos[key].price_btc.toFixed(6);
-					});
+					if (crypto.symbol == 'BTC') {
+						BTC_PRICE = parseFloat(crypto.price_usd);
+					}
 
-					// Add our list
-					$('.cc-select').html($('.cc-select').html() + items.join(''));
-					$('.cc-select-analysis').html($('.cc-select-analysis').html() + items.join(''));
+					cryptos[crypto.symbol] = {
+						'id'        : crypto.id,
+						'name'      : crypto.name,
+						'symbol'    : crypto.symbol,
+						'price_usd' : parseFloat(crypto.price_usd),
+						'price_btc' : parseFloat(crypto.price_btc),
+						'delta_1h'  : parseFloat(crypto.percent_change_1h),
+						'delta_24h' : parseFloat(crypto.percent_change_24h),
+						'delta_7d'  : parseFloat(crypto.percent_change_7d)
+					};
 
-					// Set BTC & ETH by default in coin analysis
-					var $first_coin_analysis = $('.cc-select-analysis:first');
-					$first_coin_analysis.val('BTC');
-					var $last_coin_analysis = $('.cc-select-analysis:last');
-					$last_coin_analysis.val('ETH');
-					updateCoinAnalysis.call($first_coin_analysis, true);
-					updateCoinAnalysis.call($last_coin_analysis, false);
+					cryptos[crypto.symbol].price_usd = parseFloat(cryptos[crypto.symbol].price_usd.toFixed(2));
 
-					// Set the BTC price
-					$('span.btc-price').html('$' + (cryptos['BTC']['price_usd']).toFixed(2))
+					items.push("<option value='" + crypto.symbol + "'>" + crypto.name + "</option>");
 
-					// Load any previous values
-					load();
+					if (cryptos[crypto.symbol].price_btc < 0.000001)
+						cryptos[crypto.symbol].price_btc = cryptos[crypto.symbol].price_btc.toFixed(10);
+					else
+						cryptos[crypto.symbol].price_btc = cryptos[crypto.symbol].price_btc.toFixed(6);
 				});
-			}
+
+				// Add our list
+				$('.cc-select').html($('.cc-select').html() + "<option selected></option>" + items.join(''));
+				//$('.cc-select-trade').html($('.cc-select-trade').html() + '<optgroup label="Cryptocurrency">' + items.join('') + '</optgroup>');
+				$('.cc-select-analysis').html($('.cc-select-analysis').html() + "<option selected></option>" + items.join(''));
+				$('.cc-select-live-chart').html($('.cc-select-live-chart').html() + "<option selected></option>" + items.join(''));
+
+				// Set BTC & ETH by default in coin analysis
+				var $first_coin_analysis = $('.cc-select-analysis:first');
+				$first_coin_analysis.val('BTC');
+				var $last_coin_analysis = $('.cc-select-analysis:last');
+				$last_coin_analysis.val('BTC');
+
+				// Set BTC by default in live chart
+				var $first_coin_live_chart = $('.cc-select-live-chart:first');
+				$first_coin_live_chart.val('BTC');
+
+				// Set the BTC price
+				$('span.btc-price-fiat').html(fiat.symbol + (cryptos['BTC']['price_usd'] * fiat.rate).toFixed(2))
+
+				// Load any previous values
+				load();
+			});
 
 			// Set the initial events
 			setCoinRowEvents($('.cc-row:last'));
 			$('.cc-add-coin').click(addCoinRow);
 			$('.page-toggle').click(pageToggle);
 			$('.cc-select-analysis').change(updateCoinAnalysis);
+			$('.cc-select-fiat').change(setFiat);
+			$('.cc-select-fiat').change(saveSettings);
 
 			function pageToggle(event) {
 				event.preventDefault();
@@ -969,16 +1073,21 @@
 					// If we're showing the index page, redraw the charts
 					if (page == 'page-index')
 					{
-						generateMonthlyChartData();
-						displayMonthlyChart();
+						//generateMonthlyChartData();
 					}
 					else if (page == 'page-details')
 					{
 						generateMonthlyChartData();
+						displayMonthlyChart();
 						displayMonthlyChartBreakdown();
 					}
 					else if (page == 'page-analysis')
 					{
+						var $first_coin_analysis = $('.cc-select-analysis:first');
+						var $last_coin_analysis = $('.cc-select-analysis:last');
+						updateCoinAnalysis.call($first_coin_analysis, true);
+						updateCoinAnalysis.call($last_coin_analysis, false);
+
 						if (morris_charts.hasOwnProperty('comparison-price-chart') &&
 							morris_charts.hasOwnProperty('comparison-chart'))
 						{
@@ -990,23 +1099,45 @@
 							generateComparisonChart();
 						}
 					}
+					else if (page == 'page-live-charts')
+					{
+						//initiateLiveChart();
+					}
 				}
 			}
 
-			function updateSelection() {
+			function updateSelection(b_suppress_chart_generation) {
 				var row = $(this).closest('.cc-row');
 				var val = row.find('.cc-select').val();
 				if (!val)
 					return;
 
+				if (!b_suppress_chart_generation || typeof(b_suppress_chart_generation) !== "boolean")
+					b_suppress_chart_generation = false;
+
 				var crypto = cryptos[val];
 				row.find('.cc-abbr').html(crypto.symbol);
 				updatePrice.call(this);
-				updateBuyDifference.call(this);
 				updateCoinPrices.call(this);
-				updateWalletBalances.call(this);
+				initializeWalletBalances.call(this);
 
-				getLastMonthPrices(crypto.symbol);
+				getLastMonthPrices(crypto.symbol, false, b_suppress_chart_generation);
+			}
+
+			function updateSelectionTrade() {
+				var row = $(this).closest('.cc-row');
+				var val = row.find('.cc-select-trade').val();
+				if (!val)
+					return;
+
+				if (fiat_currencies.hasOwnProperty(val)) {
+					row.find('.cc-abbr-crypto-trade').hide();
+					row.find('.cc-abbr-fiat-trade').show().html(fiat_currencies[val].symbol);
+				} else {
+					var crypto = cryptos[val];
+					row.find('.cc-abbr-fiat-trade').hide();
+					row.find('.cc-abbr-crypto-trade').show().html(crypto.symbol);
+				}
 			}
 
 			function updateCoinAnalysis(b_suppress_chart_generation) {
@@ -1022,25 +1153,157 @@
 				getLastMonthPrices(crypto.symbol, true, b_suppress_chart_generation);
 			}
 
+			var BTC_PRICE = 1;
+			function displayQuote(quote) {
+				var symbol = quote.FROMSYMBOL;
+				if (alternate_coin_symbols_inverted.hasOwnProperty(symbol)) {
+					symbol = alternate_coin_symbols_inverted[symbol];
+				}
+
+				var row = document.getElementById(symbol);
+				var breakdownRow = document.getElementsByClassName('cp-breakdown-' + symbol)[0];
+
+				var inTheGreen = (quote.CHANGEPCT24H >= 0.0);
+
+				if (row) {
+					row.getElementsByClassName('cp-price-panel')[0].className = "panel cp-price-panel " + (inTheGreen ? 'panel-success' : 'panel-danger');
+					row.querySelector('.cp-price-change-arrow i').className = "fa " + (inTheGreen ? 'fa-arrow-up' : 'fa-arrow-down');
+					row.getElementsByClassName('cp-price-delta')[0].innerHTML = quote.CHANGEPCT24H.toFixed(2) + "%";
+				}
+
+				quote.PRICE = parseFloat(quote.PRICE);
+
+				if (symbol == 'BTC') {
+					BTC_PRICE = quote.PRICE;
+
+					if (row) {
+						row.getElementsByClassName('cp-price-fiat')[0].innerHTML = fiat.symbol + (quote.PRICE * fiat.rate).toFixed(2);
+						row.getElementsByClassName('cp-price-btc')[0].innerHTML = '1.0';
+					}
+
+					cryptos[symbol].price_usd = quote.PRICE.toFixed(2);
+					cryptos[symbol].price_btc = 1.0;
+
+					// Update the other places where BTC is used
+					$('span.btc-price-fiat').html(fiat.symbol + (quote.PRICE * fiat.rate).toFixed(2));
+
+					if (breakdownRow) {
+						breakdownRow.getElementsByClassName('cp-breakdown-fiat')[0].innerHTML = fiat.symbol + (cc_investments[symbol] * quote.PRICE * fiat.rate).toFixed(2);
+					}
+				}
+				else
+				{
+					if (quote.PRICE < 0.000001)
+						quote.PRICE = quote.PRICE.toFixed(10);
+					else
+						quote.PRICE = quote.PRICE.toFixed(6);
+
+					if (row) {
+						row.getElementsByClassName('cp-price-fiat')[0].innerHTML = fiat.symbol + (quote.PRICE * BTC_PRICE * fiat.rate).toFixed(2);
+						row.getElementsByClassName('cp-price-btc')[0].innerHTML = quote.PRICE;
+					}
+
+					cryptos[symbol].price_usd = (quote.PRICE * BTC_PRICE).toFixed(2);
+					cryptos[symbol].price_btc = quote.PRICE;
+
+					if (breakdownRow) {
+						breakdownRow.getElementsByClassName('cp-breakdown-fiat')[0].innerHTML = fiat.symbol + (cc_investments[symbol] * (quote.PRICE * BTC_PRICE * fiat.rate)).toFixed(2);
+					}
+				}
+
+				updateTotal();
+			}
+
+			var socket, socket_subscription;
+			function initiateLiveQuotes() {
+				if (!socket)
+					socket = io.connect('https://streamer.cryptocompare.com/');
+
+				// Clear out the existing subscriptions
+				if (socket_subscription) {
+					socket.emit('SubRemove', {subs:socket_subscription} );
+				}
+
+				//Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
+				//Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG
+				//For aggregate quote updates use CCCAGG as market
+				socket_subscription = ['5~CCCAGG~BTC~USD'];
+				var coins = [];
+				$.each($('.cc-select'), function(key, val) {
+					var row = $(val).closest('.cc-row');
+					var id = $(val).val();
+					if (!id || coins.indexOf(id) !== -1) return;
+					coins.push(id);
+					var symbol = cryptos[id].symbol;
+
+					if (symbol == 'BTC') {
+						return;
+					}
+
+					if (alternate_coin_symbols.hasOwnProperty(id)) {
+						symbol = alternate_coin_symbols[id];
+					}
+
+					if (!symbol) return;
+					socket_subscription.push('5~CCCAGG~' + symbol + '~BTC');
+				});
+
+				socket.emit('SubAdd', {subs:socket_subscription} );
+
+				socket.on("m", function(message){
+					var messageType = message.substring(0, message.indexOf("~"));
+					var res = {};
+					if (messageType === CCC.STATIC.TYPE.CURRENTAGG) {
+						res = CCC.CURRENT.unpack(message);
+						updateQuote(res);
+					}
+				});
+			}
+
+			var quotes = {};
+			var updateQuote = function(result) {
+				var keys = Object.keys(result);
+				var pair = result.FROMSYMBOL + "-" + result.TOSYMBOL;
+
+				if (!quotes.hasOwnProperty(pair)) {
+					quotes[pair] = {}
+				}
+
+				for (var i = 0; i < keys.length; ++i) {
+					quotes[pair][keys[i]] = result[keys[i]];
+				}
+				quotes[pair]["CHANGE24H"] = quotes[pair]["PRICE"] - quotes[pair]["OPEN24HOUR"];
+				quotes[pair]["CHANGEPCT24H"] = quotes[pair]["CHANGE24H"]/quotes[pair]["OPEN24HOUR"] * 100;
+				displayQuote(quotes[pair]);
+			}
+
 			function addCoinRow() {
-				var newRow = $('.cc-row:last').clone(false);
-				newRow.find('.cc-select, .cc-value, .cc-buy-price, .cc-buy-date').val('');
-				newRow.find('.cc-usd, .cc-abbr, .cc-diff, .cc-diff-perc').html('');
+				var newRow = $('.cc-row:first').clone(false);
+				newRow.find('.cc-select, .cc-value, .cc-select-trade, .cc-trade-value, .cc-buy-date').val('');
+				newRow.find('.cc-select-trade').val('USD');
+				newRow.find('.cc-abbr').html('');
 				setCoinRowEvents(newRow);
-				newRow.appendTo('.portfolio');
+				newRow.prependTo('.portfolio');
 			}
 
 			function setCoinRowEvents(row) {
-				row.find('.cc-select').change(updateSelection);
-				row.find('.cc-select').change(updateWalletBalances);
-				row.find('.cc-select').change(save);
-				row.find('.cc-value').change(updatePrice);
-				row.find('.cc-value').change(updateWalletBalances);
-				row.find('.cc-value').change(save);
-				row.find('.cc-value').change(refreshCharts);
-				row.find('.cc-value').change(refreshCharts);
-				row.find('.cc-buy-price').change(updateBuyDifference);
-				row.find('.cc-buy-price').change(save);
+				var $cc_select = row.find('.cc-select');
+				var $cc_value = row.find('.cc-value');
+				var $cc_select_trade = row.find('.cc-select-trade');
+				var $cc_buy_price = row.find('.cc-trade-value');
+				$cc_select.change(updateSelection);
+				$cc_select.change(initializeWalletBalances);
+				$cc_select.change(save);
+				$cc_select.change(initiateLiveQuotes);
+				$cc_value.change(updatePrice);
+				$cc_value.change(initializeWalletBalances);
+				$cc_value.change(save);
+				$cc_value.change(refreshCharts);
+				$cc_value.change(initiateLiveQuotes);
+				$cc_select_trade.change(updateSelectionTrade);
+				$cc_select_trade.change(save);
+				$cc_buy_price.change(updatePrice);
+				$cc_buy_price.change(save);
 				row.find('.cc-remove-coin').click(removeCoinRow);
 				row.find('.cc-buy-date').daterangepicker({
 					singleDatePicker: true,
@@ -1058,8 +1321,8 @@
 					// If this is the last row, just clear it
 					if ($('.cc-row').length <= 1)
 					{
-						row.find('.cc-select, .cc-value, .cc-buy-price').val('');
-						row.find('.cc-usd, .cc-abbr, .cc-diff, .cc-diff-perc').html('');
+						row.find('.cc-select, .cc-value, .cc-select-trade, .cc-trade-value').val('');
+						row.find('.cc-usd, .cc-abbr').html('');
 					}
 					else
 					{
@@ -1069,9 +1332,10 @@
 					// Reload the data
 					updateTotal();
 					updateCoinPrices();
-					updateWalletBalances();
-					updateBuyDifference();
+					initializeWalletBalances();
+					updatePrice();
 					refreshCharts();
+					initiateLiveQuotes();
 
 					// And save
 					save();
@@ -1092,10 +1356,10 @@
 				// If we're showing the index page, redraw the charts
 				if ($page.attr('id') == 'page-index')
 				{
-					displayMonthlyChart();
 				}
 				else if ($page.attr('id') == 'page-details')
 				{
+					displayMonthlyChart();
 					displayMonthlyChartBreakdown();						
 				}
 			}
@@ -1118,38 +1382,58 @@
 					var crypto = cryptos[id];
 
 					var newRow = row.clone(true);
-					newRow.find('.cp-price-usd').html('$' + crypto.price_usd);
-					newRow.find('.cp-price-btc').html(crypto.price_btc);
+					newRow.attr('id', crypto.symbol);
 					newRow.find('.cp-name').html(crypto.name);
 					newRow.appendTo('.cp-coin-prices');
 				});
 			}
 
-			function updateWalletBalances() {
-				var cp = $('.cp-breakdown-tbody');
-
-				// Get the last row
-				var br_row = cp.find('.cp-breakdown-row:last');
-
-				// Remove all other cp-rows
-				cp.empty();
-
-				var coins = [];
+			function initializeWalletBalances() {
+				var coins = {};
 				$.each($('.cc-select'), function(key, val) {
 					var row = $(val).closest('.cc-row');
 					var id = $(val).val();
-					if (!id || coins.indexOf(id) !== -1) return;
-					coins.push(id);
+					if (!id) return;
 
 					var crypto = cryptos[id];
 
+					if (coins.hasOwnProperty(id)) {
+						coins[id].value += parseFloat(row.find('.cc-value').val());
+						coins[id].fiat += parseFloat(row.find('.cc-value').val() * crypto.price_usd);
+					} else {
+						coins[id] = {
+							'symbol' : crypto.symbol,
+							'name'   : crypto.name,
+							'value'  : parseFloat(row.find('.cc-value').val()),
+							'fiat'   : parseFloat(row.find('.cc-value').val() * crypto.price_usd)
+						};
+					}
+				});
+
+				// Get the last row
+				var br_row = $('.cp-breakdown-tbody').find('.cp-breakdown-row:last');
+
+				// Remove all other cp-rows
+				$('.cp-breakdown-tbody').empty();
+
+				$.each(coins, function(k, crypto) {
 					var newRow = br_row.clone(true);
+					newRow.removeClass().addClass('cp-breakdown-row cp-breakdown-' + crypto.symbol);
 					newRow.find('.cp-breakdown-name').html(crypto.name);
-					newRow.find('.cp-breakdown-balance').html((row.find('.cc-value').val()) + " " + crypto.symbol);
-					newRow.find('.cp-breakdown-usd').html("$" + (row.find('.cc-value').val() * crypto.price_usd).toFixed(2));
+					newRow.find('.cp-breakdown-balance').html(crypto.value.toFixed(2) + " " + crypto.symbol);
+					newRow.find('.cp-breakdown-fiat').html(fiat.symbol + (crypto.fiat * fiat.rate).toFixed(2));
 					newRow.appendTo('.cp-breakdown-tbody');
 				});
 			}
+
+			// Deal with differences in the crypto symbols
+			var alternate_coin_symbols = {
+				'MIOTA' : 'IOT'
+			};
+
+			var alternate_coin_symbols_inverted = {
+				'IOT' : 'MIOTA'
+			};
 
 			var price_data_daily = [], price_labels_daily = [];
 			function getLastMonthPrices(coin_id, b_coin_analysis, b_suppress_chart_generation) {
@@ -1165,9 +1449,14 @@
 					return;
 				}
 
-				// Get the coin's prices over the last day
-				$.getJSON('https://min-api.cryptocompare.com/data/histoday?fsym=' + coin_id + '&tsym=USD&limit=90', function( data ) {
+				var search_coin_id = coin_id;
+				if (alternate_coin_symbols.hasOwnProperty(search_coin_id)) {
+					search_coin_id = alternate_coin_symbols[search_coin_id]
+				}
 
+				// Get the coin's prices over the last day
+				//$.getJSON('http://www.10k.pizza/data/' + coin_id + '_3mo.json', function( data ) {
+				$.getJSON('https://min-api.cryptocompare.com/data/histoday?fsym=' + search_coin_id + '&tsym=USD&limit=90', function( data ) {
 					if (!data.hasOwnProperty('Data')) return;
 					price_labels_daily.push(coin_id);
 
@@ -1227,13 +1516,13 @@
 						{
 							if (!coin_prices[inner_key])
 								coin_prices[inner_key] = {'y': inner_val['y']};
-							coin_prices[inner_key][coin_id] = inner_val[coin_id];
+							coin_prices[inner_key][coin_id] = (inner_val[coin_id] * fiat.rate).toFixed(2);
 
 							if (!coin_totals[inner_key])
 								coin_totals[inner_key] = {'y': inner_val['y']};
 
 							var value = (cc_investments.hasOwnProperty(coin_id)) ? cc_investments[coin_id] : 0;
-							coin_totals[inner_key][coin_id] = (inner_val[coin_id] * value).toFixed(2);
+							coin_totals[inner_key][coin_id] = (inner_val[coin_id] * value * fiat.rate).toFixed(2);
 						}
 					});
 				});
@@ -1248,7 +1537,7 @@
 
 					var item = {
 						'y': val.y,
-						'total': total.toFixed(2)
+						'total': (total).toFixed(2)
 					};
 
 					diff_data.push(item);
@@ -1268,6 +1557,11 @@
 			}
 
 			function displayMonthlyChart() {
+				// Make sure that we have all the data first
+				if (mc_data['data'][0].length < mc_data['labels'].length) {
+					return;
+				}
+
 				// Clear the existing graph
 				$('#monthly-chart').empty();
 
@@ -1278,7 +1572,7 @@
 					xkey: 'y',
 					ykeys: mc_data['labels'],
 					labels: mc_data['labels'],
-					preUnits: '$',
+					preUnits: fiat.symbol,
 					pointSize: 1
 				});
 
@@ -1291,8 +1585,8 @@
 					parseTime: true,
 					xkey: 'y',
 					ykeys: ['total'],
-					labels: ['Total ($)'],
-					preUnits: '$',
+					labels: ['Total (' + fiat.symbol + ')'],
+					preUnits: fiat.symbol,
 					pointSize: 1
 				});
 			}
@@ -1308,7 +1602,7 @@
 					xkey: 'y',
 					ykeys: mc_breakdown_data['labels'],
 					labels: mc_breakdown_data['labels'],
-					preUnits: '$',
+					preUnits: fiat.symbol,
 					pointSize: 0
 				});
 
@@ -1365,6 +1659,11 @@
 					});
 				});
 
+				// Make sure that we have all the data first
+				if (coin_prices[0].length - 1 < coin_ids.length) {
+					return;
+				}
+
 				// Clear the existing graph
 				$('#comparison-price-chart').empty();
 
@@ -1402,37 +1701,24 @@
 				});
 			}
 
-			function updateBuyDifference() {
-				var row = $(this).closest('.cc-row');
-				var val = row.find('.cc-select').val();
-				if (!val) return;
-
-				var crypto = cryptos[val];
-				var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd);
-				var buy = parseFloat(row.find('.cc-buy-price').val());
-
-				var diff = (buy >= 0.01) ? (usd - buy) : (0);
-				var diff_perc = (buy >= 0.01) ? (diff / buy * 100) : (0);
-				var color = 'darkred';
-				if (diff >= 0) color = 'green';
-
-				row.find('.cc-diff').html('<span style="color:' + color + '">$' + diff.toFixed(2) + '</span>');
-				row.find('.cc-diff-perc').html('<span style="color:' + color + '">' + diff_perc.toFixed(2) + '%</span>');
-
-				updatePrice.call(this);
-			}
-
 			function updatePrice() {
-				var row = $(this).closest('.cc-row');
-				var val = row.find('.cc-select').val();
-				if (!val) return;
+				var coins = {};
+				$.each($('.cc-select'), function(key, val) {
+					var row = $(val).closest('.cc-row');
+					var id = $(val).val();
+					if (!id) return;
 
-				var crypto = cryptos[val];
-				var value = row.find('.cc-value').val();
-				var usd = parseFloat(value * crypto.price_usd).toFixed(2);
-				row.find('.cc-usd').html('$' + usd);
+					if (coins.hasOwnProperty(id)) {
+						coins[id] += parseFloat(row.find('.cc-value').val());
+					} else {
+						coins[id] = parseFloat(row.find('.cc-value').val());
+					}
+				});
 
-				cc_investments[crypto.symbol] = value;
+				$.each(coins, function(id, value) {
+					var crypto = cryptos[id];
+					cc_investments[crypto.symbol] = value;
+				});
 
 				updateTotal.call(this);
 			}
@@ -1446,16 +1732,23 @@
 
 					var crypto = cryptos[val];
 					var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd);
-					var buy = parseFloat(row.find('.cc-buy-price').val());
-					total = parseFloat(total + usd);
-					if (buy > 0)
-						investment = parseFloat(investment + buy);
+					var buy = parseFloat(row.find('.cc-trade-value').val());
+					total = parseFloat(total + usd * fiat.rate);
+					if (buy > 0) {
+						var traded = row.find('.cc-select-trade').val();
+
+						// Fiat Currency Purchase
+						if (fiat_currencies.hasOwnProperty(traded)) {
+							var rate = fiat.rate / fiat_currencies[traded].rate;
+							investment = parseFloat(investment + buy * rate);
+						}
+					}
 				});
 
-				$('.cf-total').html('$' + total.toFixed(2));
+				$('.cf-total').html(fiat.symbol + (total).toFixed(2));
 				if (!investment) investment = 0;
 			
-				$('.cf-investment').html('$' + investment.toFixed(2));
+				$('.cf-investment').html(fiat.symbol + (investment).toFixed(2));
 
 				var diff = (investment >= 0.01) ? (total - investment) : (0);
 				var diff_perc = (investment >= 0.01) ? (diff / investment * 100) : (0);
@@ -1477,31 +1770,72 @@
 					$cf_diff_perc.closest('.panel').removeClass('panel-success').addClass('panel-danger');
 				}
 
-				$cf_diff.html('<span style="color:' + color + '">$' + diff.toFixed(2) + '</span>');
+				$cf_diff.html('<span style="color:' + color + '">' + fiat.symbol + diff.toFixed(2) + '</span>');
 				$cf_diff_perc.html('<span style="color:' + color + '">' + diff_perc.toFixed(2) + '%</span>');
 
 				// Now save the user's options
 				save();
 			}
 
+			function setFiat() {
+				var local_fiat = $('.cc-select-fiat').val();
+				fiat = fiat_currencies[local_fiat];
+			}
+
+			function saveSettings() {
+				var settings = {
+					'fiat' : $('.cc-select-fiat').val()
+				};
+
+				localStorage.setItem('settings', JSON.stringify(settings));
+			}
+
+			function loadSettings() {
+				var settings;
+				var settings_json = localStorage.getItem('settings');
+				if (settings_json)
+					settings = JSON.parse(settings_json);
+
+				if (settings) {
+					if (settings['fiat']) {
+						$('.cc-select-fiat').val(settings['fiat']);
+						setFiat();
+					}
+				}
+			}
+
 			function save() {
-				var cryptofolio = [];
+				var cryptofolio = {};
 				$.each($('.portfolio').find('.cc-row'), function(key, val) {
 					var row = $(val);
 					var val = row.find('.cc-select').val();
 					if (!val) return;
 
-					cryptofolio.push({
+					var datetime = Date.parse(row.find('.cc-buy-date').val());
+					if (!cryptofolio.hasOwnProperty(datetime))
+						cryptofolio[datetime] = [];
+
+					cryptofolio[datetime].push({
 						'id'       : val,
 						'value'    : row.find('.cc-value').val(),
-						'buy'      : row.find('.cc-buy-price').val(),
+						'id-trade' : row.find('.cc-select-trade').val(),
+						'buy'      : row.find('.cc-trade-value').val(),
 						'buy-date' : row.find('.cc-buy-date').val()
 					});
 				});
-				localStorage.setItem('cryptocurrency-portfolio', JSON.stringify(cryptofolio));
+
+				var ordered_cryptofolio = [];
+				Object.keys(cryptofolio).sort().forEach(function(key) {
+					$.each(cryptofolio[key], function(k, v) {
+						ordered_cryptofolio.push(v);
+					});
+				});
+
+				localStorage.setItem('cryptocurrency-portfolio', JSON.stringify(ordered_cryptofolio));
 			}
 
 			function load() {
+				// Now load the cryptofolio
 				var cryptofolio_json = localStorage.getItem('cryptocurrency-portfolio');
 				if (cryptofolio_json)
 					cryptofolio = JSON.parse(cryptofolio_json);
@@ -1516,10 +1850,12 @@
 					// Then modify the current row
 					row.find('.cc-select').val('BTC');
 					row.find('.cc-value').val(1);
-					row.find('.cc-buy-price').val(bitcoin.price_usd);
+					row.find('.cc-select-trade').val('USD');
+					row.find('.cc-trade-value').val(bitcoin.price_usd);
 
 					// And trigger the event
 					updateSelection.call(row);
+					updateSelectionTrade.call(row);
 
 					// Now delete the row & resave - total hack for now
 					addCoinRow();
@@ -1527,24 +1863,29 @@
 					save();
 				}
 
+				var last_key = cryptofolio.length-1;
 				$.each(cryptofolio, function(key, val) {
-					var row = $('.portfolio').find('.cc-row:last');
+					var row = $('.portfolio').find('.cc-row:first');
 
 					if (row.find('.cc-select').val() != '') {
 						addCoinRow();
-						row = $('.portfolio').find('.cc-row:last');
+						row = $('.portfolio').find('.cc-row:first');
 					}
 
 					// Then modify the current row
 					row.find('.cc-select').val(val['id']);
 					row.find('.cc-value').val(val['value']);
-					row.find('.cc-buy-price').val(val['buy']);
+					row.find('.cc-select-trade').val(val['id-trade']);
+					row.find('.cc-trade-value').val(val['buy']);
 					row.find('.cc-buy-date').data('daterangepicker').setStartDate(val['buy-date']);
 					row.find('.cc-buy-date').data('daterangepicker').setEndDate(val['buy-date']);
 
 					// And trigger the event
 					updateSelection.call(row);
+					updateSelectionTrade.call(row);
 				});
+
+				initiateLiveQuotes();
 			}
 		});
 	</script>
