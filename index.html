@@ -25,9 +25,6 @@
 
 	<!--
 		TODO:
-			- DONE - Fix IOTA issue
-			- DONE - Reduce page time from drawing charts on initial load
-			- DONE - Add ability to change reference currency from USD to other major currency
 			- Add coin performance information (not sure where to put it... maybe a UI change for it)
 			- Matching colors for breakdown and wallet contributions
 			- Logarithmic scaling: (https://www.reddit.com/r/BitcoinMarkets/comments/6uh9da/best_porfolio_tracker_with_api_automatic_updates/dlt28xa/)
@@ -45,6 +42,10 @@
 		 */
 		body {
 		  background-color: #f8f8f8;
+		}
+
+		.cc-row-bag-item {
+			margin: 0 5px;
 		}
 
 		#monthly-chart > svg { width: 100% !important; }
@@ -390,12 +391,25 @@
 					</li>
 
 					<li>
-						<a href="#" class="page-toggle" data-page="page-details">
-							<i class="fa fa-btc fa-fw"></i> Details
-						</a>
+						<a href="#"><i class="fa fa-btc fa-fw"></i> Portfolio<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="#" class="page-toggle" data-page="page-details">
+									<i class="fa fa-pie-chart fa-fw"></i> Details
+								</a>
+							</li>
+							<!--<li>
+								<a href="#" class="page-toggle" data-page="page-performance">
+									<i class="fa fa-line-chart fa-fw"></i> Performance
+								</a>
+							</li>-->
+							<li>
+								<a href="#" class="page-toggle" data-page="page-trade-history">
+									<i class="fa fa-calendar fa-fw"></i> Trade History
+								</a>
+							</li>
+						</ul>
 					</li>
-
-
 
 					<li>
 						<a href="#"><i class="fa fa-cogs fa-fw"></i> Manage<span class="fa arrow"></span></a>
@@ -412,11 +426,11 @@
 								</a>
 							</li>
 
-							<!--<li>
+							<li>
 								<a href="#" class="page-toggle" data-page="page-save-restore">
 									<i class="fa fa-hdd-o fa-fw"></i> Save / Restore
 								</a>
-							</li>-->
+							</li>
 
 						</ul>
 					</li>
@@ -542,7 +556,9 @@
 								<i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
 							</span>
 							<br />
-							<span class="cp-price-btc">0.0</span> <i class="fa fa-btc" aria-hidden="true"></i>
+							<span class="cp-price-btc">0.0</span>
+								<span class="cp-price-btc-show-btc"><i class="fa fa-btc" aria-hidden="true"></i></span>
+								<span class="cp-price-btc-show-sat" style="display:none;"><strong><em>sat</em></strong></span>
 							<span class="cp-price-delta" style="float:right">
 								0.00%
 							</span>
@@ -629,6 +645,76 @@
 		</div>
 
 		<!--
+		<div id="page-performance" class="page-item" style="display:none;">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="page-header">Performance</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 class="page-header small-page-header">Portfolio Performance</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="monthly-chart-diff">
+						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 class="page-header small-page-header">Cryptocurrency Performance</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="monthly-chart">
+						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+					</div>
+				</div>
+			</div>
+		</div>
+		-->
+
+
+		<div id="page-trade-history" class="page-item page-wrapper-buffer" style="display:none;">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="page-header">
+						Trade History
+					</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="panel panel-default">
+					<table class="table table-hover">
+						<thead class="thead-default">
+							<tr>
+								<th>Date</th>
+								<th>Event</th>
+								<!--<th>Performance</th>-->
+							</tr>
+						</thead>
+						<tbody class="th-tbody">
+							<tr class="th-tr-event">
+								<th class="th-td-date" scope="row"></th>
+								<td class="th-td-event"></td>
+								<!--<td class="th-td-perf"></td>-->
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!--
 		<div id="page-live-charts" class="page-item" style="display:none;">
 			<div class="row">
 				<div class="col-sm-12">
@@ -668,7 +754,7 @@
 		<div id="page-analysis" class="page-item" style="display:none;">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1 class="page-header">Cryptocurrency Analysis</h1>
+					<h1 class="page-header">Comparative Analysis</h1>
 				</div>
 			</div>
 
@@ -781,6 +867,13 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="panel-footer">
+							<div class="row cc-row-bag">
+								<!--<div class="col-xs-4 col-sm-2 "></div>-->
+								<button type="button" class="btn btn-outline btn-default btn-sm cc-row-bag-item"></button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -834,11 +927,29 @@
 			<div class="row">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Cryptocurrency Portfolio Data
+						Save Cryptocurrency Portfolio Save Data
 					</div>
 					<div class="panel-body">
 						<div class="col-xs-12 form-group">
-							<textarea class="form-control" rows="5"></textarea>
+							<textarea id="portfolio-save-data-export" class="form-control" rows="5" readonly="readonly"></textarea>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<button type="button" class="btn btn-primary cc-copy-portfolio-to-clipboard">
+							Copy to Clipboard <i class="fa fa-save" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Import Cryptocurrency Portfolio Save Data
+					</div>
+					<div class="panel-body">
+						<div class="col-xs-12 form-group">
+							<textarea id="portfolio-save-data-import" class="form-control" rows="5"></textarea>
 						</div>
 					</div>
 					<div class="panel-footer">
@@ -937,6 +1048,40 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="badImportData" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="modalLabel">Bad Import Data</h4>
+				</div>
+				<div class="modal-body">
+					This import data isn't valid. Please double-check your input data and make sure that it is properly-formatted JSON. If the issue persists, you can contact the site maintainer via the About page.
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="successfulImportData" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="modalLabel">Portfolio Imported</h4>
+				</div>
+				<div class="modal-body">
+					Your portfolio data was successfully imported.
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
@@ -1013,26 +1158,19 @@
 						'id'        : crypto.id,
 						'name'      : crypto.name,
 						'symbol'    : crypto.symbol,
-						'price_usd' : parseFloat(crypto.price_usd),
+						'price_usd' : parseFloat(crypto.price_usd).toFixed(2),
 						'price_btc' : parseFloat(crypto.price_btc),
 						'delta_1h'  : parseFloat(crypto.percent_change_1h),
 						'delta_24h' : parseFloat(crypto.percent_change_24h),
 						'delta_7d'  : parseFloat(crypto.percent_change_7d)
 					};
 
-					cryptos[crypto.symbol].price_usd = parseFloat(cryptos[crypto.symbol].price_usd.toFixed(2));
-
 					items.push("<option value='" + crypto.symbol + "'>" + crypto.name + "</option>");
-
-					if (cryptos[crypto.symbol].price_btc < 0.000001)
-						cryptos[crypto.symbol].price_btc = cryptos[crypto.symbol].price_btc.toFixed(10);
-					else
-						cryptos[crypto.symbol].price_btc = cryptos[crypto.symbol].price_btc.toFixed(6);
 				});
 
 				// Add our list
 				$('.cc-select').html($('.cc-select').html() + "<option selected></option>" + items.join(''));
-				//$('.cc-select-trade').html($('.cc-select-trade').html() + '<optgroup label="Cryptocurrency">' + items.join('') + '</optgroup>');
+				$('.cc-select-trade').html($('.cc-select-trade').html() + '<optgroup label="Cryptocurrency">' + items.join('') + '</optgroup>');
 				$('.cc-select-analysis').html($('.cc-select-analysis').html() + "<option selected></option>" + items.join(''));
 				$('.cc-select-live-chart').html($('.cc-select-live-chart').html() + "<option selected></option>" + items.join(''));
 
@@ -1045,6 +1183,9 @@
 				// Set BTC by default in live chart
 				var $first_coin_live_chart = $('.cc-select-live-chart:first');
 				$first_coin_live_chart.val('BTC');
+
+				// Get the BTC history
+				getLastMonthPrices('BTC', false, false);
 
 				// Set the BTC price
 				$('span.btc-price-fiat').html(fiat.symbol + (cryptos['BTC']['price_usd'] * fiat.rate).toFixed(2))
@@ -1060,6 +1201,13 @@
 			$('.cc-select-analysis').change(updateCoinAnalysis);
 			$('.cc-select-fiat').change(setFiat);
 			$('.cc-select-fiat').change(saveSettings);
+			$('.cc-copy-portfolio-to-clipboard').click(copyPortfolioToClipboard);
+			$('.cc-save-portfolio').click(restorePortfolioFromImport);
+
+			function copyPortfolioToClipboard(element) {
+				$("textarea#portfolio-save-data-export").select();
+				document.execCommand("copy");
+			}
 
 			function pageToggle(event) {
 				event.preventDefault();
@@ -1073,13 +1221,12 @@
 					// If we're showing the index page, redraw the charts
 					if (page == 'page-index')
 					{
-						//generateMonthlyChartData();
+						initiateLiveQuotes();
 					}
 					else if (page == 'page-details')
 					{
-						generateMonthlyChartData();
-						displayMonthlyChart();
-						displayMonthlyChartBreakdown();
+						initializeWalletBalances();
+						refreshCharts();
 					}
 					else if (page == 'page-analysis')
 					{
@@ -1099,37 +1246,118 @@
 							generateComparisonChart();
 						}
 					}
-					else if (page == 'page-live-charts')
+					else if (page == 'page-trade-history')
 					{
-						//initiateLiveChart();
+						buildTradeHistory();
+					}
+					else if (page == 'page-manage')
+					{
+						calculateBag();
+					}
+
+					// Only need to retrieve live quotes for certain pages
+					if (page != 'page-index')
+					{
+						haltLiveQuotes();
 					}
 				}
 			}
 
-			function updateSelection(b_suppress_chart_generation) {
+			function buildTradeHistory() {
+				// Make sure we start by calculating the bag and trades
+				calculateBag();
+
+				// Copy the first row
+				var $th_body = $('.th-tbody');
+				$th_row = $th_body.find('.th-tr-event:first').clone(false);
+
+				// Clear out the table
+				$th_body.empty();
+
+				// For each trade, display them
+				if (Object.keys(trades).length) {
+					Object.keys(trades).sort().reverse().forEach(function(key) {
+						trades[key].forEach(function(trade) {
+							// Clone the row, replace the values
+							$new_row = $th_row.clone(false);
+
+							// Retrieve the performance
+							var bought_perf, sold_perf;
+							var performance = '<i class="fa fa-spinner fa-pulse"></i>';
+							if (price_by_date.hasOwnProperty(key) && 
+								price_by_date[key].hasOwnProperty(trade.bought) &&
+								(price_by_date[key].hasOwnProperty(trade.traded) || fiat_currencies.hasOwnProperty(trade.traded))
+								)
+							{
+								if (cryptos.hasOwnProperty(trade.bought)) {
+									bought_perf = ((cryptos[trade.bought].price_usd / price_by_date[key][trade.bought]));
+									bought_perf_color = (bought_perf > 0.99) ? '#5cb85c' : '#d9534f';
+								}
+
+								var sold_perf;
+								if (!fiat_currencies.hasOwnProperty(trade.traded) && cryptos.hasOwnProperty(trade.traded)) {
+									sold_perf = (cryptos[trade.traded].price_usd / price_by_date[key][trade.traded]);
+									sold_perf_color = (sold_perf >= 1.0) ? '#5cb85c' : '#d9534f';
+								}
+
+								performance  = trade.bought + ': ';
+
+								if (sold_perf)
+								{
+									performance += '&nbsp;&nbsp;&nbsp;'
+									performance += trade.traded + ': <span style="color:' + sold_perf_color + '">' + sold_perf.toFixed(2) + '</span>';									
+								}
+							}
+
+							// Construct the event
+							var event = "Bought <strong>" + trade.bought_value + " " + trade.bought + "</strong>";
+							//if (bought_perf) {
+							//	event += ' (<span style="color:' + bought_perf_color + '">' + bought_perf.toFixed(2) + '</span>)';
+							//}
+
+							if (trade.traded_value) {
+								event += " for <strong>" + trade.traded_value + " " + trade.traded + "</strong>.";
+							}
+
+							// Set values
+							$new_row.find('.th-td-date').html(trade.date);
+							$new_row.find('.th-td-event').html(event);
+							//$new_row.find('.th-td-perf').html(performance);
+
+							// Append to the body
+							$th_body.append($new_row);
+						});
+					});
+				} else {
+					$new_row = $th_row.clone(false);
+					$new_row.find('.th-td-date').html('');
+					$new_row.find('.th-td-event').html('You have no trades to show.');
+					$th_body.append($new_row);
+				}
+			}
+
+			function updateSelection() {
 				var row = $(this).closest('.cc-row');
 				var val = row.find('.cc-select').val();
 				if (!val)
 					return;
 
-				if (!b_suppress_chart_generation || typeof(b_suppress_chart_generation) !== "boolean")
-					b_suppress_chart_generation = false;
+				calculateBag();
+				updateTotal();
+				updateCoinPrices();
 
 				var crypto = cryptos[val];
 				row.find('.cc-abbr').html(crypto.symbol);
-				updatePrice.call(this);
-				updateCoinPrices.call(this);
-				initializeWalletBalances.call(this);
-
-				getLastMonthPrices(crypto.symbol, false, b_suppress_chart_generation);
+				getLastMonthPrices(crypto.symbol, false, false);
 			}
 
-			function updateSelectionTrade() {
+			function updateSelectionTradeSymbol() {
 				var row = $(this).closest('.cc-row');
 				var val = row.find('.cc-select-trade').val();
 				if (!val)
 					return;
 
+				// Update the symbol
 				if (fiat_currencies.hasOwnProperty(val)) {
 					row.find('.cc-abbr-crypto-trade').hide();
 					row.find('.cc-abbr-fiat-trade').show().html(fiat_currencies[val].symbol);
@@ -1138,6 +1366,16 @@
 					row.find('.cc-abbr-fiat-trade').hide();
 					row.find('.cc-abbr-crypto-trade').show().html(crypto.symbol);
 				}
+			}
+
+			function updateSelectionTrade() {
+				// Update the symbol
+				updateSelectionTradeSymbol();
+
+				// Recalulate relevant quantities
+				calculateBag();
+				updateTotal();
+				updateCoinPrices();
 			}
 
 			function updateCoinAnalysis(b_suppress_chart_generation) {
@@ -1187,31 +1425,50 @@
 					// Update the other places where BTC is used
 					$('span.btc-price-fiat').html(fiat.symbol + (quote.PRICE * fiat.rate).toFixed(2));
 
-					if (breakdownRow) {
-						breakdownRow.getElementsByClassName('cp-breakdown-fiat')[0].innerHTML = fiat.symbol + (cc_investments[symbol] * quote.PRICE * fiat.rate).toFixed(2);
+					if (breakdownRow && bag && bag.hasOwnProperty(symbol)) {
+						breakdownRow.getElementsByClassName('cp-breakdown-fiat')[0].innerHTML = fiat.symbol + (bag[symbol].value * quote.PRICE * fiat.rate).toFixed(2);
 					}
 				}
 				else
 				{
-					if (quote.PRICE < 0.000001)
-						quote.PRICE = quote.PRICE.toFixed(10);
-					else
-						quote.PRICE = quote.PRICE.toFixed(6);
-
-					if (row) {
-						row.getElementsByClassName('cp-price-fiat')[0].innerHTML = fiat.symbol + (quote.PRICE * BTC_PRICE * fiat.rate).toFixed(2);
-						row.getElementsByClassName('cp-price-btc')[0].innerHTML = quote.PRICE;
-					}
-
 					cryptos[symbol].price_usd = (quote.PRICE * BTC_PRICE).toFixed(2);
 					cryptos[symbol].price_btc = quote.PRICE;
 
+					if (row) {
+						if (quote.PRICE <= 0.00005) {
+							row.getElementsByClassName('cp-price-btc')[0].innerHTML = (quote.PRICE * Math.pow(10, 8)).toFixed(0);
+							row.getElementsByClassName('cp-price-btc-show-btc')[0].style.display = "none";
+							row.getElementsByClassName('cp-price-btc-show-sat')[0].style.display = "inline-block";
+							row.getElementsByClassName('cp-price-fiat')[0].innerHTML = fiat.symbol + (quote.PRICE * BTC_PRICE * fiat.rate).toFixed(4);
+						} else {
+							row.getElementsByClassName('cp-price-btc')[0].innerHTML = quote.PRICE.toFixed(6);
+							row.getElementsByClassName('cp-price-btc-show-btc')[0].style.display = "inline-block";
+							row.getElementsByClassName('cp-price-btc-show-sat')[0].style.display = "none";
+							row.getElementsByClassName('cp-price-fiat')[0].innerHTML = fiat.symbol + (quote.PRICE * BTC_PRICE * fiat.rate).toFixed(2);
+						}
+					}
+
 					if (breakdownRow) {
-						breakdownRow.getElementsByClassName('cp-breakdown-fiat')[0].innerHTML = fiat.symbol + (cc_investments[symbol] * (quote.PRICE * BTC_PRICE * fiat.rate)).toFixed(2);
+						breakdownRow.getElementsByClassName('cp-breakdown-fiat')[0].innerHTML = fiat.symbol + (bag[symbol].value * (quote.PRICE * BTC_PRICE * fiat.rate)).toFixed(2);
 					}
 				}
 
+				// Update the fiat value of this symbol
+				if (bag && bag.hasOwnProperty(symbol)) {
+					bag[symbol].fiat = bag[symbol].value * cryptos[symbol].price_usd;
+				}
+
 				updateTotal();
+			}
+
+			function haltLiveQuotes() {
+				if (!socket)
+					return;
+
+				// Clear out the existing subscriptions
+				if (socket_subscription) {
+					socket.emit('SubRemove', {subs:socket_subscription} );
+				}
 			}
 
 			var socket, socket_subscription;
@@ -1229,19 +1486,17 @@
 				//For aggregate quote updates use CCCAGG as market
 				socket_subscription = ['5~CCCAGG~BTC~USD'];
 				var coins = [];
-				$.each($('.cc-select'), function(key, val) {
-					var row = $(val).closest('.cc-row');
-					var id = $(val).val();
-					if (!id || coins.indexOf(id) !== -1) return;
-					coins.push(id);
-					var symbol = cryptos[id].symbol;
+				$.each(bag, function(key, crypto) {
+					var symbol = crypto.symbol;
+					if (!symbol || coins.indexOf(symbol) !== -1) return;
+					coins.push(symbol);
 
 					if (symbol == 'BTC') {
 						return;
 					}
 
-					if (alternate_coin_symbols.hasOwnProperty(id)) {
-						symbol = alternate_coin_symbols[id];
+					if (alternate_coin_symbols.hasOwnProperty(symbol)) {
+						symbol = alternate_coin_symbols[symbol];
 					}
 
 					if (!symbol) return;
@@ -1261,7 +1516,7 @@
 			}
 
 			var quotes = {};
-			var updateQuote = function(result) {
+			function updateQuote(result) {
 				var keys = Object.keys(result);
 				var pair = result.FROMSYMBOL + "-" + result.TOSYMBOL;
 
@@ -1279,9 +1534,10 @@
 
 			function addCoinRow() {
 				var newRow = $('.cc-row:first').clone(false);
-				newRow.find('.cc-select, .cc-value, .cc-select-trade, .cc-trade-value, .cc-buy-date').val('');
-				newRow.find('.cc-select-trade').val('USD');
+				newRow.find('.cc-select, .cc-value, .cc-trade-value, .cc-buy-date').val('');
 				newRow.find('.cc-abbr').html('');
+				newRow.find('.cc-select-trade').val('USD');
+				updateSelectionTradeSymbol.call(newRow);
 				setCoinRowEvents(newRow);
 				newRow.prependTo('.portfolio');
 			}
@@ -1291,25 +1547,198 @@
 				var $cc_value = row.find('.cc-value');
 				var $cc_select_trade = row.find('.cc-select-trade');
 				var $cc_buy_price = row.find('.cc-trade-value');
+				var $cc_buy_date = row.find('.cc-buy-date');
+				var $cc_remove = row.find('.cc-remove-coin');
+
 				$cc_select.change(updateSelection);
-				$cc_select.change(initializeWalletBalances);
 				$cc_select.change(save);
-				$cc_select.change(initiateLiveQuotes);
-				$cc_value.change(updatePrice);
-				$cc_value.change(initializeWalletBalances);
+				$cc_value.change(updateTradeValue);
 				$cc_value.change(save);
-				$cc_value.change(refreshCharts);
-				$cc_value.change(initiateLiveQuotes);
 				$cc_select_trade.change(updateSelectionTrade);
 				$cc_select_trade.change(save);
-				$cc_buy_price.change(updatePrice);
+				$cc_buy_price.change(updateBuyPrice);
 				$cc_buy_price.change(save);
-				row.find('.cc-remove-coin').click(removeCoinRow);
-				row.find('.cc-buy-date').daterangepicker({
+				$cc_remove.click(removeCoinRow);
+				$cc_buy_date.daterangepicker({
 					singleDatePicker: true,
 					showDropdowns: true
 				});
-				row.find('.cc-buy-date').on('apply.daterangepicker', save);
+				$cc_buy_date.on('apply.daterangepicker', save);
+				$cc_buy_date.on('apply.daterangepicker', calculateBag);
+			}
+
+			function updateTradeValue() {
+				calculateBag();
+				updateTotal();
+				updateCoinPrices();
+			}
+
+			function updateBuyPrice() {
+				calculateBag();
+				updateTotal();
+				updateCoinPrices();
+			}
+
+			var bag = {}, trades = [];
+			function calculateBag() {
+				function toSatoshis(v) {
+					return parseFloat(v) * 100000000;
+				}
+
+				function fromSatoshis(v) {
+					return Math.floor(v / 1000) / 100000;
+				}
+
+				// Wipe out the existing bag and trades
+				bag = {};
+				trades = [];
+
+				// Start at the last row, work to the front
+				var $rows = $('.cc-row');
+
+				// Order the rows by date
+				rows_by_date = {};
+				for (var i = $rows.length-1; i >= 0; i--) {
+					datetime = Date.parse($($rows[i]).find(".cc-buy-date").val() + " 00:00:00 GMT");
+					if (!rows_by_date.hasOwnProperty(datetime))
+						rows_by_date[datetime] = [];
+					rows_by_date[datetime].push($rows[i]);
+				}
+
+				// Now sort and reconstruct rows
+				var ordered_rows = [];
+				Object.keys(rows_by_date).sort().forEach(function(key) {
+					$.each(rows_by_date[key], function(k, v) {
+						ordered_rows.push(v);
+					});
+				});
+
+				// Reverse order - start from the earliest
+				ordered_rows = ordered_rows.reverse();
+
+				for (var i = ordered_rows.length-1; i >= 0; i--) {
+					var hodl      = $(ordered_rows[i]).find(".cc-select").val();
+					var hodl_val  = $(ordered_rows[i]).find(".cc-value").val();
+					var trade     = $(ordered_rows[i]).find(".cc-select-trade").val();
+					var trade_val = $(ordered_rows[i]).find(".cc-trade-value").val();
+					var buy_date  = $($rows[i]).find(".cc-buy-date").val();
+					var datetime  = Date.parse(buy_date + " 00:00:00 GMT");
+
+					// Prepare the bag UI and item
+					var $bag_item = $(ordered_rows[i]).find(".cc-row-bag-item:first");
+					var $bag = $(ordered_rows[i]).find(".cc-row-bag");
+					$bag.empty();
+
+					if (!hodl || !hodl_val) {
+						// Display a dummy bag UI
+						$new_bag_item = $bag_item.clone(false);
+						$new_bag_item.html("No trades to show.");
+						$bag.append($new_bag_item);
+
+						// Move along
+						continue;
+					}
+
+					// If the trade value is invalid, then skip
+					if (!trade_val || Number.isNaN(trade_val)) {
+						trade_val = 0;
+					}
+
+					// Now do some maths
+					var hodl_crypto  = cryptos[hodl];
+					hodl_val   = toSatoshis(hodl_val);
+					hodl_fiat  = hodl_val * hodl_crypto.price_usd;
+					trade_val  = toSatoshis(trade_val);
+
+					// Only convert if the value is not a fiat currency already
+					trade_fiat = 0;
+					if (!fiat_currencies.hasOwnProperty(trade)) {
+						var trade_crypto = cryptos[trade];
+						if (trade_crypto) {
+							trade_fiat = trade_val * trade_crypto.price_usd;							
+						}
+					} else {
+						trade_fiat = trade_val;
+					}
+
+					if (!trades.hasOwnProperty(datetime))
+						trades[datetime] = [];
+
+					trades[datetime].push({
+						'date'         : buy_date,
+						'bought'       : hodl,
+						'bought_value' : fromSatoshis(hodl_val),
+						'traded'       : trade,
+						'traded_value' : fromSatoshis(trade_val)
+					});
+
+					// Deal with all Math in 10^8, (in BTC, Satoshis)
+					if (!bag.hasOwnProperty(hodl)) {
+						bag[hodl] = {
+							'symbol' : hodl_crypto.symbol,
+							'name'   : hodl_crypto.name,
+							'value'  : hodl_val,
+							'fiat'   : hodl_fiat
+						};
+					} else {
+						bag[hodl].value += hodl_val;
+						bag[hodl].fiat  += hodl_fiat;
+					}
+
+					if (!bag.hasOwnProperty(trade)) {
+						if (!fiat_currencies.hasOwnProperty(trade)) {
+							var trade_crypto = cryptos[trade];
+							if (trade_crypto) {
+								bag[trade] = {
+									'symbol' : trade_crypto.symbol,
+									'name'   : trade_crypto.name,
+									'value'  : -1 * trade_val,
+									'fiat'   : -1 * trade_fiat
+								};
+							}
+						}
+					} else {
+						if (!fiat_currencies.hasOwnProperty(trade)) {
+							bag[trade].value -= trade_val;
+							bag[trade].fiat  -= trade_fiat;
+						}
+					}
+
+					// Now print out the bag
+					for (var coin in bag) {
+						if (fiat_currencies.hasOwnProperty(coin)) {
+							continue;
+						}
+
+						if (bag.hasOwnProperty(coin)) {
+							// Neglect "essentially 0" values
+							if (bag[coin].value <= 5000) {
+								continue;
+							}
+
+							$new_bag_item = $bag_item.clone(false);
+							$new_bag_item.html(fromSatoshis(bag[coin].value) + " " + coin);
+							$bag.append($new_bag_item);
+						}
+					}
+				}
+
+				// Now clean up the bag for use elsewhere
+				for (var coin in bag) {
+					if (fiat_currencies.hasOwnProperty(coin)) {
+						continue;
+					}
+
+					if (bag.hasOwnProperty(coin)) {
+						// Neglect "essentially 0" values
+						if (bag[coin].value <= 5000) {
+							delete bag[coin];
+						} else {
+							bag[coin].value = fromSatoshis(bag[coin].value);
+							bag[coin].fiat = fromSatoshis(bag[coin].fiat);
+						}
+					}
+				}
 			}
 
 			function removeCoinRow() {
@@ -1330,12 +1759,9 @@
 					}
 
 					// Reload the data
+					calculateBag();
 					updateTotal();
 					updateCoinPrices();
-					initializeWalletBalances();
-					updatePrice();
-					refreshCharts();
-					initiateLiveQuotes();
 
 					// And save
 					save();
@@ -1360,70 +1786,70 @@
 				else if ($page.attr('id') == 'page-details')
 				{
 					displayMonthlyChart();
-					displayMonthlyChartBreakdown();						
+					displayMonthlyChartBreakdown();
+				}
+				else if ($page.attr('id') == 'page-performance')
+				{
+					//displayMonthlyChart();
 				}
 			}
 
 			function updateCoinPrices() {
-				var cp = $('.cp-coin-prices');
+				// Make sure the bag is calculated
+				if (!bag)
+					calculateBag();
 
 				// Get the first cp-row
+				var cp = $('.cp-coin-prices');
 				var row = cp.find('.cp-row:last');
 
 				// Remove all other cp-rows
 				cp.empty();
 
-				var coins = [];
-				$.each($('.cc-select'), function(key, val) {
-					var id = $(val).val();
-					if (!id || coins.indexOf(id) !== -1) return;
-					coins.push(id);
-
-					var crypto = cryptos[id];
-
+				// Nothing in bag - show BTC
+				if (Object.keys(bag).length < 1)
+				{
 					var newRow = row.clone(true);
-					newRow.attr('id', crypto.symbol);
-					newRow.find('.cp-name').html(crypto.name);
+					newRow.attr('id', 'BTC');
+					newRow.find('.cp-name').html('Bitcoin');
 					newRow.appendTo('.cp-coin-prices');
-				});
+				}
+				else
+				{
+					$.each(bag, function(key, crypto) {
+						var newRow = row.clone(true);
+						newRow.attr('id', crypto.symbol);
+						newRow.find('.cp-name').html(crypto.name);
+						newRow.appendTo('.cp-coin-prices');
+					});
+				}
 			}
 
 			function initializeWalletBalances() {
-				var coins = {};
-				$.each($('.cc-select'), function(key, val) {
-					var row = $(val).closest('.cc-row');
-					var id = $(val).val();
-					if (!id) return;
-
-					var crypto = cryptos[id];
-
-					if (coins.hasOwnProperty(id)) {
-						coins[id].value += parseFloat(row.find('.cc-value').val());
-						coins[id].fiat += parseFloat(row.find('.cc-value').val() * crypto.price_usd);
-					} else {
-						coins[id] = {
-							'symbol' : crypto.symbol,
-							'name'   : crypto.name,
-							'value'  : parseFloat(row.find('.cc-value').val()),
-							'fiat'   : parseFloat(row.find('.cc-value').val() * crypto.price_usd)
-						};
-					}
-				});
+				// Make sure the bag is initialized
+				if (!bag)
+					calculateBag();
 
 				// Get the last row
-				var br_row = $('.cp-breakdown-tbody').find('.cp-breakdown-row:last');
+				var $br_row = $('.cp-breakdown-tbody').find('.cp-breakdown-row:last');
 
 				// Remove all other cp-rows
 				$('.cp-breakdown-tbody').empty();
 
-				$.each(coins, function(k, crypto) {
-					var newRow = br_row.clone(true);
-					newRow.removeClass().addClass('cp-breakdown-row cp-breakdown-' + crypto.symbol);
-					newRow.find('.cp-breakdown-name').html(crypto.name);
-					newRow.find('.cp-breakdown-balance').html(crypto.value.toFixed(2) + " " + crypto.symbol);
-					newRow.find('.cp-breakdown-fiat').html(fiat.symbol + (crypto.fiat * fiat.rate).toFixed(2));
-					newRow.appendTo('.cp-breakdown-tbody');
-				});
+				if (Object.keys(bag).length) {
+					$.each(bag, function(k, crypto) {
+						var newRow = $br_row.clone(true);
+						newRow.removeClass().addClass('cp-breakdown-row cp-breakdown-' + crypto.symbol);
+						newRow.find('.cp-breakdown-name').html(crypto.name);
+						newRow.find('.cp-breakdown-balance').html(crypto.value.toFixed(2) + " " + crypto.symbol);
+						newRow.find('.cp-breakdown-fiat').html(fiat.symbol + (crypto.value * cryptos[crypto.symbol].price_btc * BTC_PRICE * fiat.rate).toFixed(2));
+						newRow.appendTo('.cp-breakdown-tbody');
+					});
+				} else {
+					$('.cp-breakdown-tbody').append('<tr class="cp-breakdown-row"><td colspan="3">You have no holdings to show.</td></tr>');
+				}
+
+				
 			}
 
 			// Deal with differences in the crypto symbols
@@ -1435,7 +1861,7 @@
 				'IOT' : 'MIOTA'
 			};
 
-			var price_data_daily = [], price_labels_daily = [];
+			var price_data_daily = [], price_labels_daily = [], price_by_date = [];
 			function getLastMonthPrices(coin_id, b_coin_analysis, b_suppress_chart_generation) {
 				// Don't retrieve data we already have
 				if (price_labels_daily && price_labels_daily.indexOf(coin_id) !== -1) {
@@ -1455,7 +1881,6 @@
 				}
 
 				// Get the coin's prices over the last day
-				//$.getJSON('http://www.10k.pizza/data/' + coin_id + '_3mo.json', function( data ) {
 				$.getJSON('https://min-api.cryptocompare.com/data/histoday?fsym=' + search_coin_id + '&tsym=USD&limit=90', function( data ) {
 					if (!data.hasOwnProperty('Data')) return;
 					price_labels_daily.push(coin_id);
@@ -1464,17 +1889,27 @@
 					{
 						var i = 0;
 						$.each(data.Data, function(key, val) {
+							var datetime = val.time*1000;
 							price_data_daily[i++][coin_id] = val.close;
+
+							if (!price_by_date.hasOwnProperty(datetime))
+								price_by_date[datetime] = {};
+							price_by_date[datetime][coin_id] = val.close
 						});
 					}
 					else
 					{
 						$.each(data.Data, function(key, val) {
+							var datetime = val.time*1000;
 							var item = {
-								'y': val.time*1000
+								'y': datetime
 							};
 							item[coin_id] = val.close;
 							price_data_daily.push(item);
+
+							if (!price_by_date.hasOwnProperty(datetime))
+								price_by_date[datetime] = {};
+							price_by_date[datetime][coin_id] = val.close
 						});
 					}
 
@@ -1490,14 +1925,17 @@
 
 			var mc_data, mc_portfolio_data, mc_breakdown_data, mc_breakdown_pie_data;
 			function generateMonthlyChartData() {
+				// Make sure the bag is calculated
+				if (!bag)
+					calculateBag();
+
 				// Pick the data we want to show
 				var coin_labels = [], coin_ids = [];
-				$.each($('.cc-select'), function(key, val) {
-					var value = $(val).val();
-					if (value && coin_ids.indexOf(value) == -1)
+				$.each(bag, function(key, crypto) {
+					if (coin_ids.indexOf(crypto.symbol) == -1)
 					{
-						coin_ids.push(value);
-						coin_labels.push(value);
+						coin_ids.push(crypto.symbol);
+						coin_labels.push(crypto.symbol);
 					}
 				});
 
@@ -1521,7 +1959,7 @@
 							if (!coin_totals[inner_key])
 								coin_totals[inner_key] = {'y': inner_val['y']};
 
-							var value = (cc_investments.hasOwnProperty(coin_id)) ? cc_investments[coin_id] : 0;
+							var value = (bag.hasOwnProperty(coin_id)) ? bag[coin_id].value : 0;
 							coin_totals[inner_key][coin_id] = (inner_val[coin_id] * value * fiat.rate).toFixed(2);
 						}
 					});
@@ -1531,7 +1969,7 @@
 				$.each(coin_prices, function(key, val) {
 					var total = 0;
 					$.each(val, function(k, v) {
-						var value = (cc_investments.hasOwnProperty(k)) ? cc_investments[k] : 0;
+						var value = (bag.hasOwnProperty(k)) ? bag[k].value : 0;
 						if (k != 'y') total += (v * value);
 					});
 
@@ -1595,26 +2033,41 @@
 				// Portfolio totals breakdown
 				$('#monthly-chart-breakdown').empty();
 
-				morris_charts['monthly-chart-breakdown'] = Morris.Area({
-					element: 'monthly-chart-breakdown',
-					data: mc_breakdown_data['data'],
-					parseTime: true,
-					xkey: 'y',
-					ykeys: mc_breakdown_data['labels'],
-					labels: mc_breakdown_data['labels'],
-					preUnits: fiat.symbol,
-					pointSize: 0
-				});
+				// If there is no data, show a message
+				if (mc_breakdown_data['data'].length)
+				{
+					morris_charts['monthly-chart-breakdown'] = Morris.Area({
+						element: 'monthly-chart-breakdown',
+						data: mc_breakdown_data['data'],
+						parseTime: true,
+						xkey: 'y',
+						ykeys: mc_breakdown_data['labels'],
+						labels: mc_breakdown_data['labels'],
+						preUnits: fiat.symbol,
+						pointSize: 0
+					});
+				}
+				else
+				{
+					$('#monthly-chart-breakdown').html('<div>No breakdown to display.</div>');
+				}
 
 				// Totals Pie Chart
 				$('#monthly-chart-breakdown-pie').empty();
 
-				var sum_total = mc_breakdown_pie_data['total'];
-				morris_charts['monthly-chart-breakdown-pie'] = Morris.Donut({
-					element: 'monthly-chart-breakdown-pie',
-					data: mc_breakdown_pie_data['data'],
-					formatter: function (y, data) { return (y/sum_total * 100).toFixed(2) + '%' }
-				});
+				if (mc_breakdown_pie_data['total'] > 0)
+				{
+					var sum_total = mc_breakdown_pie_data['total'];
+					morris_charts['monthly-chart-breakdown-pie'] = Morris.Donut({
+						element: 'monthly-chart-breakdown-pie',
+						data: mc_breakdown_pie_data['data'],
+						formatter: function (y, data) { return (y/sum_total * 100).toFixed(2) + '%' }
+					});
+				}
+				else
+				{
+					$('#monthly-chart-breakdown-pie').html('<div>No breakdown to display.</div>');
+				}
 			}
 
 			function generateComparisonChart() {
@@ -1674,8 +2127,7 @@
 					xkey: 'y',
 					ykeys: coin_labels,
 					labels: coin_labels,
-					pointSize: 1,
-					resize: true
+					pointSize: 1
 				});
 
 				// Generate the comparison prices
@@ -1701,49 +2153,30 @@
 				});
 			}
 
-			function updatePrice() {
-				var coins = {};
-				$.each($('.cc-select'), function(key, val) {
-					var row = $(val).closest('.cc-row');
-					var id = $(val).val();
-					if (!id) return;
-
-					if (coins.hasOwnProperty(id)) {
-						coins[id] += parseFloat(row.find('.cc-value').val());
-					} else {
-						coins[id] = parseFloat(row.find('.cc-value').val());
-					}
-				});
-
-				$.each(coins, function(id, value) {
-					var crypto = cryptos[id];
-					cc_investments[crypto.symbol] = value;
-				});
-
-				updateTotal.call(this);
-			}
-
 			function updateTotal() {
-				var total = 0, investment = 0;
-				$.each($('.cc-value'), function(key, val) {
-					var row = $(val).closest('.cc-row');
-					var val = row.find('.cc-select').val();
-					if (!val) return;
+				// Make sure all calculations are up to date
+				if (!bag)
+					calculateBag();
 
-					var crypto = cryptos[val];
-					var usd = parseFloat(row.find('.cc-value').val() * crypto.price_usd);
-					var buy = parseFloat(row.find('.cc-trade-value').val());
-					total = parseFloat(total + usd * fiat.rate);
-					if (buy > 0) {
-						var traded = row.find('.cc-select-trade').val();
-
-						// Fiat Currency Purchase
-						if (fiat_currencies.hasOwnProperty(traded)) {
-							var rate = fiat.rate / fiat_currencies[traded].rate;
-							investment = parseFloat(investment + buy * rate);
-						}
-					}
+				var total = 0;
+				$.each(bag, function(key, crypto) {
+					total = parseFloat(total + crypto.fiat * fiat.rate);
 				});
+
+				var investment = 0;
+				if (Object.keys(trades).length) {
+					Object.keys(trades).forEach(function(key) {
+						trades[key].forEach(function(trade) {
+							var buy = parseFloat(trade.traded_value);
+							if (buy > 0) {
+								if (fiat_currencies.hasOwnProperty(trade.traded)) {
+									var rate = fiat.rate / fiat_currencies[trade.traded].rate;
+									investment = parseFloat(investment + buy * rate);
+								}
+							}
+						});
+					});
+				}
 
 				$('.cf-total').html(fiat.symbol + (total).toFixed(2));
 				if (!investment) investment = 0;
@@ -1772,9 +2205,6 @@
 
 				$cf_diff.html('<span style="color:' + color + '">' + fiat.symbol + diff.toFixed(2) + '</span>');
 				$cf_diff_perc.html('<span style="color:' + color + '">' + diff_perc.toFixed(2) + '%</span>');
-
-				// Now save the user's options
-				save();
 			}
 
 			function setFiat() {
@@ -1834,36 +2264,72 @@
 				localStorage.setItem('cryptocurrency-portfolio', JSON.stringify(ordered_cryptofolio));
 			}
 
+			function restorePortfolioFromImport()
+			{
+				// Validate the input first
+				var import_data = $("textarea#portfolio-save-data-import").val();
+				
+				var bPassValidation = false;
+				if (import_data) {
+					try
+					{
+						var cryptofolio = JSON.parse(import_data);
+						if (cryptofolio && cryptofolio.length > 0 && cryptofolio[0].hasOwnProperty('id')) {
+							bPassValidation = true;
+						}
+					}
+					catch (ex) {} // This is handled by failing the validation check
+				}
+
+				// If good, restore
+				if (bPassValidation)
+				{
+					// Restore, clear, load, notify
+					localStorage.setItem('cryptocurrency-portfolio', import_data);
+					clear();
+					load();
+					$('#successfulImportData').modal('show');
+				}
+				// If it doesn't pass, notify the user
+				else
+				{
+					// Verify that the user wants to do this
+					$('#badImportData').modal('show');
+				}
+			}
+
+			function clear() {
+				// Save the first row
+				var $portfolio = $('.portfolio');
+				var $portfolio_row = $portfolio.find('.cc-row:first');
+
+				// Remove all others
+				$portfolio.html("");
+
+				// Clean out this row
+				$portfolio_row.find('.cc-select').val('');
+				$portfolio_row.find('.cc-value').val('');
+				$portfolio_row.find('.cc-select-trade').val('');
+				$portfolio_row.find('.cc-trade-value').val('');
+				$portfolio_row.find('.cc-buy-date').daterangepicker({
+					singleDatePicker: true,
+					showDropdowns: true
+				});
+
+				// Put the cleaned row back
+				$portfolio.append($portfolio_row);
+			}
+
 			function load() {
 				// Now load the cryptofolio
+				var cryptofolio;
 				var cryptofolio_json = localStorage.getItem('cryptocurrency-portfolio');
 				if (cryptofolio_json)
 					cryptofolio = JSON.parse(cryptofolio_json);
 
-				if (!cryptofolio_json || !cryptofolio || cryptofolio.length == 0)
-				{
-					// Use 1 BTC as default
-					var bitcoin = cryptos['BTC'];
+				// Display the save data in the export box
+				$('#portfolio-save-data-export').html(cryptofolio_json);
 
-					var row = $('.portfolio').find('.cc-row:last');
-
-					// Then modify the current row
-					row.find('.cc-select').val('BTC');
-					row.find('.cc-value').val(1);
-					row.find('.cc-select-trade').val('USD');
-					row.find('.cc-trade-value').val(bitcoin.price_usd);
-
-					// And trigger the event
-					updateSelection.call(row);
-					updateSelectionTrade.call(row);
-
-					// Now delete the row & resave - total hack for now
-					addCoinRow();
-					row.remove();
-					save();
-				}
-
-				var last_key = cryptofolio.length-1;
 				$.each(cryptofolio, function(key, val) {
 					var row = $('.portfolio').find('.cc-row:first');
 
@@ -1880,11 +2346,16 @@
 					row.find('.cc-buy-date').data('daterangepicker').setStartDate(val['buy-date']);
 					row.find('.cc-buy-date').data('daterangepicker').setEndDate(val['buy-date']);
 
-					// And trigger the event
-					updateSelection.call(row);
-					updateSelectionTrade.call(row);
+					// Get the price history
+					getLastMonthPrices(val['id'], false, false);
+
+					// And update the trade symbol
+					updateSelectionTradeSymbol.call(row);
 				});
 
+				calculateBag();
+				updateTotal();
+				updateCoinPrices();
 				initiateLiveQuotes();
 			}
 		});
