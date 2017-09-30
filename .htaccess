@@ -1,0 +1,4 @@
+# Force www: 
+RewriteEngine on 
+RewriteCond %{HTTP_HOST} ^10k.pizza [NC] 
+RewriteRule ^(.*)$ http://www.10k.pizza/$1 [L,R=301,NC]

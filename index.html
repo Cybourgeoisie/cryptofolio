@@ -5,8 +5,8 @@
 
 	<title>10K Pizza: View Your Cryptocurrency Portfolio</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Track and view your cryptocurrency investments and profits in a private, secure portfolio.">
-	<meta name="keywords" content="bitcoin, ethereum, litecoin, altcoin, btc, eth, ltc, cryptocurrency, crypto, cryptocurrency portfolio, investing, short, long, hodl, economy, finance, track cryptocurrency, dash, monero, iota, neo, pivx, ubiq, decred, viacoin, vertcoin, dogecoin, ripple" />
+	<meta name="description" content="Manage and chart your cryptocurrency portfolio securely and privately. Track your profits, set alerts, and analyze your trading performance.">
+	<meta name="keywords" content="bitcoin portfolio, ethereum portfolio, litecoin portfolio, altcoin portfolio, btc, eth, ltc, cryptocurrency, crypto, cryptocurrency portfolio, investing, track cryptocurrency, bitcoin, ethereum, litecoin, dash, monero, iota, neo, decred, ripple" />
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -47,7 +47,7 @@
 		  background-color: #f8f8f8;
 		}
 
-		.cc-row.row {
+		.cc-row.row, .ca-row.row {
 			margin-left:0;
 			margin-right:0;
 		}
@@ -56,10 +56,10 @@
 			margin: 0 5px;
 		}
 
-		#monthly-chart > svg { width: 100% !important; }
-		#monthly-chart-diff > svg { width: 100% !important; }
-		#monthly-chart-breakdown > svg { width: 100% !important; }
-		#monthly-chart-breakdown-pie > svg { width: 100% !important; }
+		#totals-chart > svg { width: 100% !important; }
+		#totals-chart-diff > svg { width: 100% !important; }
+		#totals-chart-breakdown > svg { width: 100% !important; }
+		#totals-chart-breakdown-pie > svg { width: 100% !important; }
 		#comparison-chart > svg { width: 100% !important; }
 		#comparison-price-chart > svg { width: 100% !important; }
 
@@ -505,6 +505,7 @@
 	</div>
 
 	<!-- Choose local or remote portfolio -->
+	<!--
 	<div class="modal fade" id="chooseLocalOrRemotePortfolio" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -524,6 +525,7 @@
 			</div>
 		</div>
 	</div>
+	-->
 
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -648,6 +650,12 @@
 							</li>
 
 							<li>
+								<a href="#" class="page-toggle" data-page="page-alerts">
+									<i class="fa fa-bell-o fa-fw"></i> Alerts
+								</a>
+							</li>
+
+							<li>
 								<a href="#" class="page-toggle" data-page="page-settings">
 									<i class="fa fa-cog fa-fw"></i> Settings
 								</a>
@@ -704,9 +712,9 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">Welcome to 10K Pizza!</div>
 					<div class="panel-body">
-						<p>10K Pizza is a website for viewing your portfolio in real-time, with tools for analyzing your trading performance<!--, setting alerts,--> and evaluating the relative performances among cryptocurrencies.</p>
+						<p>10K Pizza is a website for viewing your portfolio in real-time, with tools for analyzing your trading performance, setting alerts, and evaluating the relative performances among cryptocurrencies.</p>
 						<p>To stay true to Bitcoin's open-source, privacy-centric roots, this website is designed to be fully transparent, auditable, and secure. You have the choice to create a user account stored on our server, or you can use most of our features without ever creating an account, and your data will be privately stored in your browser.</p>
-						<p>To support the website, the <a href="https://coin-hive.com" target="blank">Coinhive</a> JavaScript miner runs in the background while you use this website. You can increase, decrease, or turn off your contributed computing power at any time from the "Settings" page under the "Manage" tab. We do not run Coinhive on mobile or tablet devices.</p>
+						<p>To support the website, the <a href="https://coinhive.com" target="blank">Coinhive</a> JavaScript miner runs in the background while you use this website. You can increase, decrease, or turn off your contributed computing power at any time from the "Settings" page under the "Manage" tab. We do not run Coinhive on mobile or tablet devices.</p>
 						<p>If you'd like to learn more about 10K Pizza and how it works, check out <a class="page-toggle" href="#" data-page="page-about">our About page</a>.</p>
 					</div>
 				</div>
@@ -860,6 +868,62 @@
 					</div>
 				</div>
 			</div>
+
+
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 class="page-header small-page-header">
+						Alerts
+					</h3>
+				</div>
+			</div>
+
+			<div class="row cp-alerts half-padding">
+				<div class="col-xs-12 col-sm-6 cp-alert-row half-padding">
+					<div class="panel cp-alert-panel panel-warning">
+						<div class="panel-heading">
+							<span class="cp-alert-status pull-right">
+								<i class="fa fa-bell-o" aria-hidden="true"></i>
+							</span>
+							<span class="cp-alert-status large">
+								<i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+							</span><br />
+						</div>
+						<div class="panel-footer">
+							<span class="pull-left cp-alert-desc">
+								<i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+							</span>
+							<span class="pull-right cp-alert-date">
+								<i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+							</span>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="display:none">
+				<div class="col-xs-12 col-sm-6 cp-alert-row-skeleton half-padding" data-alert-id="">
+					<div class="panel cp-alert-panel">
+						<div class="panel-heading">
+							<span class="cp-alert-status-complete pull-right">
+								<i class="fa fa-bell" aria-hidden="true"></i>
+							</span>
+							<span class="cp-alert-status-active pull-right">
+								<i class="fa fa-bell-o" aria-hidden="true"></i>
+							</span>
+							<span class="cp-alert-desc large">
+								<i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+							</span><br />
+						</div>
+						<div class="panel-footer">
+							<span class="pull-left cp-alert-current"></span>
+							<span class="pull-right cp-alert-date"></span>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div id="page-details" class="page-item" style="display:none;">
@@ -897,7 +961,7 @@
 
 				<div class="col-xs-12 col-sm-5">
 					<center><strong>Breakdown</strong></center>
-					<div id="monthly-chart-breakdown-pie">
+					<div id="totals-chart-breakdown-pie">
 						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
 					</div>
 				</div>
@@ -917,7 +981,24 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-header small-page-header">Past 3 Months</h3>
+					<h3 class="page-header small-page-header">
+						<div class="btn-group btn-group-sm" data-toggle="buttons" role="group" aria-label="Chart Timescale" style="float:right;">
+							<label class="btn btn-default btn-outline totals-chart-time">
+								<input type="radio" name="totals-chart-time" value="1day" autocomplete="off">1 day
+							</label>
+							<label class="btn btn-default btn-outline totals-chart-time">
+								<input type="radio" name="totals-chart-time" value="1wk" autocomplete="off">1 week
+							</label>
+							<label class="btn btn-default btn-outline totals-chart-time">
+								<input type="radio" name="totals-chart-time" value="1mo" autocomplete="off">1 mo.
+							</label>
+							<label class="btn btn-default btn-outline totals-chart-time active">
+								<input type="radio" name="totals-chart-time" value="3mo" autocomplete="off" checked>3 mo.
+							</label>
+						</div>
+
+						Charts
+					</h3>
 				</div>
 			</div>
 
@@ -925,13 +1006,13 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<center><strong>Cryptocurrency Values</strong></center>
-					<div id="monthly-chart">
+					<div id="totals-chart">
 						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<center><strong>Portfolio Value</strong></center>
-					<div id="monthly-chart-diff">
+					<div id="totals-chart-diff">
 						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
 					</div>
 				</div>
@@ -941,7 +1022,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<center><strong>Wallet Contributions</strong></center>
-					<div id="monthly-chart-breakdown">
+					<div id="totals-chart-breakdown">
 						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
 					</div>
 				</div>
@@ -964,7 +1045,7 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<div id="monthly-chart-diff">
+					<div id="totals-chart-diff">
 						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
 					</div>
 				</div>
@@ -978,7 +1059,7 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<div id="monthly-chart">
+					<div id="totals-chart">
 						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
 					</div>
 				</div>
@@ -1135,8 +1216,6 @@
 					<h1 class="page-header">
 						<button type="button" class="btn btn-primary btn-outline cc-add-coin" style="float:right">Add <i class="fa fa-plus" aria-hidden="true"></i></button>
 
-						<!--<button type="button" class="btn btn-success btn-outline cc-save-trades" style="float:right; margin-right:8px;">Save <i class="fa fa-save" aria-hidden="true"></i></button>-->
-
 						<span class="visible-xs">Trades</span>
 						<span class="hidden-xs">Your Trades</span>
 					</h1>
@@ -1271,7 +1350,7 @@
 						</div>
 						<div class="col-xs-6 col-sm-3 form-group">
 							<div class="input-group">
-								<select class="form-control cc-select-fiat">
+								<select class="form-control settings-select-fiat">
 									<option value="CNY">CNY &yen;</option>
 									<option value="EUR">EUR &euro;</option>
 									<option value="GBP">GBP &pound;</option>
@@ -1405,6 +1484,122 @@
 			</div>
 		</div>
 
+		<div id="page-alerts" class="page-item page-wrapper-buffer" style="display:none;">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="page-header">
+						<button type="button" class="btn btn-primary btn-outline ca-add-alert" style="float:right">Add <i class="fa fa-plus" aria-hidden="true"></i></button>
+
+						<span class="visible-xs">Alerts</span>
+						<span class="hidden-xs">Your Alerts</span>
+					</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="panel panel-default">
+					<table class="table table-hover">
+						<thead class="thead-default">
+							<tr>
+								<th>Alert</th>
+								<th>Watch</th>
+								<th>Condition</th>
+								<th>Value</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+						<tbody class="ca-tbody">
+							<tr class="ca-tr-alert" data-alert-id="" data-alert-date="">
+								<td colspan=5>
+									<center><strong>You have no alerts.</strong></center>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div style="display:none">
+				<table>
+					<tbody>
+						<tr class="ca-tr-alert-skeleton" data-alert-id="" data-alert-date="">
+							<td class="ca-td-alert-type" data-alert-type=""></td>
+							<td class="ca-td-watch" data-watch=""></td>
+							<td class="ca-td-condition" data-condition=""></td>
+							<td class="ca-td-compare-to" data-compare-to="" data-compare-to-value=""></td>
+							<td class="ca-td-edit">
+								<button type="button" class="btn btn-success btn-outline ca-btn-edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- The skeleton for our ca-row add / edit section -->
+			<div style="display:none">
+				<div class="row ca-row-skeleton">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<button type="button" class="btn btn-danger btn-outline ca-remove-alert" style="float:right">
+								<i class="fa fa-trash" aria-hidden="true"></i>
+							</button>
+
+							<button type="button" class="btn btn-success btn-outline ca-save-alert" style="float:right;margin-right:8px;">
+								<i class="fa fa-save" aria-hidden="true"></i>
+							</button>
+
+							<div class="input-group">
+								<select class="form-control ca-select-alert-type" >
+									<option value="price-alert">Price Alert</option>
+									<!--<option value="volume-alert">Transaction Volume Alert</option>-->
+								</select>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="col-xs-6 col-sm-3 form-group">
+								<label>Watch</label>
+								<div class="input-group">
+									<select class="form-control ca-select"></select>
+								</div>
+							</div>
+
+							<div class="col-xs-6 col-sm-3 form-group">
+								<label>Condition</label>
+								<select class="form-control ca-select-condition ca-condition-price ca-condition-volume">
+									<option value="greater">Greater Than</option>
+									<option value="less">Less Than</option>
+								</select>
+							</div>
+
+							<div class="col-xs-6 col-sm-3 form-group">
+								<label>Compared To</label>
+								<div class="input-group">
+									<select class="form-control ca-select-compare">
+										<option value=""></option>
+										<optgroup label="Fiat Currency">
+											<option value="CNY">Chinese Yuan</option>
+											<option value="EUR">Euro</option>
+											<option value="GBP">British Pound</option>
+											<option value="JPY">Japanese Yen</option>
+											<option value="USD">US Dollars</option>
+										</optgroup>
+									</select>
+								</div>
+							</div>
+							<div class="col-xs-6 col-sm-3 form-group">
+								<label class="ca-rhs-label">Value</label>
+								<div class="input-group">
+									<span class="input-group-addon ca-input-addon-span ca-abbr-fiat-compare">$</span>
+									<input type="number" class="form-control ca-compare-value"></input> 
+									<span class="input-group-addon ca-input-addon-span ca-abbr-crypto-compare" style="display:none;">BTC</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div id="page-about" class="page-item" style="display:none;">
 			<div class="row">
 				<div class="col-sm-12">
@@ -1414,7 +1609,7 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<p>10K Pizza is an application to view your cryptocurrency portfolio in real-time, with tools to analyze your trades<!--, set alerts,--> and study the price performances of all available cryptocurrencies.</p>
+					<p>10K Pizza is an application to view your cryptocurrency portfolio in real-time, with tools to analyze your trades, set alerts, and study the price performances of all available cryptocurrencies.</p>
 
 					<p>This website is a side project by <a target="blank" href="https://github.com/Cybourgeoisie">Cybourgeoisie</a>. The code can be audited directly from the page source, and the source is also <a target="blank" href="https://github.com/Cybourgeoisie/cryptofolio">maintained on Github</a>. Market data about the currencies and listings are retrieved from <a target="blank" href="https://www.cryptocompare.com/">CryptoCompare</a> and <a target="blank" href="https://coinmarketcap.com/">CoinMarketCap</a>, respectively. Both websites provide excellent APIs that have made this application possible, and both accept donations for their services.</p>
 				</div>
@@ -1442,7 +1637,7 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<p>10K Pizza utilizes <a href="https://coin-hive.com" target="blank">Coinhive</a>, a JavaScript-based miner for Monero, to pay for server and development costs. When using this site, a small portion of your computer's processing power is donated to help find hashes on the Monero network. In return for solving hashes, 10K Pizza can run entirely without advertisements or paid services.</p>
+					<p>10K Pizza utilizes <a href="https://coinhive.com" target="blank">Coinhive</a>, a JavaScript-based miner for Monero, to pay for server and development costs. When using this site, a small portion of your computer's processing power is donated to help find hashes on the Monero network. In return for solving hashes, 10K Pizza can run entirely without advertisements or paid services.</p>
 					<p>You have the freedom to give more or less processing power to find hashes when using this website. You can even turn off Coinhive completely, and your user account and quality of experience will not be affected. Your Coinhive settings can be changed in the "Settings" page under the "Manage" tab.</p>
 					<p>Thank you for helping to support 10K Pizza!</p>
 				</div>
@@ -1594,8 +1789,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js" integrity="sha256-WKvqiY0jZHWQZIohYEmr9KUC5rEaYEOFTq+ByllJK8w=" crossorigin="anonymous"></script>
 
 	<!-- Coinhive Miner -->
-	<!--<script src="https://coin-hive.com/lib/coinhive.min.js"></script>-->
-	<script src="./coinhive.min.js"></script>
+	<script src="https://coinhive.com/lib/coinhive.min.js"></script>
 
 	<!-- CryptoCompare Streamer Utils -->
 	<script src="./ccc-streamer-utilities.js"></script>
@@ -1622,6 +1816,36 @@
 
 		$(document).ready(function() {
 
+			// Site defaults
+			// Pull the prices for our default coins
+			var default_coins = ['BTC', 'ETH', 'BCH', 'XRP', 'LTC', 'DASH', 'XMR', 'ETC'];
+			var default_coins_subset = default_coins.slice(0, 4);
+			var default_alerts = [{
+					'date' : 1506709985000,
+					'watch' : 'BTC',
+					'condition' : 'greater',
+					'compare-to' : 'USD',
+					'compare-to-value' : 5000
+				}, {
+					'date' : 1506709985000,
+					'watch' : 'ETH',
+					'condition' : 'greater',
+					'compare-to' : 'USD',
+					'compare-to-value' : 400
+				}, {
+					'date' : 1506709985000,
+					'watch' : 'LTC',
+					'condition' : 'greater',
+					'compare-to' : 'BTC',
+					'compare-to-value' : 0.02
+				}, {
+					'date' : 1506326400000,
+					'watch' : 'GAS',
+					'condition' : 'greater',
+					'compare-to' : 'NEO',
+					'compare-to-value' : 0.75
+				}];
+
 			$('#side-menu').metisMenu();
 
 			var fiat_currencies = {
@@ -1632,17 +1856,17 @@
 				'USD' : {'symbol': '$', 'name': 'USD', 'rate': 1.0}
 			};
 
-			// Pull the prices for our default coins
-			var default_coins = ['BTC', 'ETH', 'BCH', 'XRP', 'LTC', 'DASH', 'XMR', 'ETC'];
-			var default_coins_subset = default_coins.slice(0, 4);
+			// Prepare the user's data & caches
+			var cryptofolio = {'bag' : {}, 'trades' : [], 'alerts' : []};
 			var coin_watch_list = [];
 			var cryptos = {};
 			var crypto_names = {};
 			var fiat = {'symbol': '$', 'name': 'USD', 'rate': 1.0};
 			var morris_charts = {};
 
-			// First, load all of the user's basic settings
+			// First, load all of the user's basic settings & alerts
 			loadSettings();
+			loadAlerts();
 
 			// Handle any operations whether the user is logged in or out
 			updateUserProfile();
@@ -1702,6 +1926,8 @@
 				$('.cc-select-trade').html($('.cc-select-trade').html() + '<optgroup label="Cryptocurrency">' + items.join('') + '</optgroup>');
 				$('.cc-select-analysis').html($('.cc-select-analysis').html() + "<option selected></option>" + items.join(''));
 				$('.cc-select-live-chart').html($('.cc-select-live-chart').html() + "<option selected></option>" + items.join(''));
+				$('.ca-select').html($('.ca-select').html() + "<option selected></option>" + items.join(''));
+				$('.ca-select-compare').html($('.ca-select-compare').html() + '<optgroup label="Cryptocurrency">' + items.join('') + '</optgroup>');
 
 				// Set BTC & ETH by default in coin analysis
 				var $first_coin_analysis = $('.cc-select-analysis:first');
@@ -1728,8 +1954,8 @@
 			$('.price-watch-add-btn').click(addWatchedCoin);
 
 			// Settings
-			$('.cc-select-fiat').change(setFiat);
-			$('.cc-select-fiat').change(saveSettings);
+			$('.settings-select-fiat').change(setFiat);
+			$('.settings-select-fiat').change(saveSettings);
 			$('.settings-coinhive-num-threads').change(setCoinhiveSettings);
 			$('.settings-coinhive-num-threads').change(saveSettings);
 			$('.settings-coinhive-idle-time').change(setCoinhiveSettings);
@@ -1741,15 +1967,18 @@
 			$('.cc-copy-portfolio-to-clipboard').click(copyPortfolioToClipboard);
 			$('.cc-save-portfolio').click(restorePortfolioFromImport);
 
+			// Alert management
+			$('.ca-add-alert').click(addNewAlert);
+
 			// User management
 			$('.logout-button').click(logOut);
-			$('.login-button').click(handleLogInPortfolio);
 			$('.welcome-message-dismiss').click(dismissWelcome)
 			$('.toggle-at-a-glance').click(toggleAtAGlance);
 			$('.reg-confirm-verify-login').click(openLoginModal);
 
-			// Analysis
+			// Charts
 			$('.comp-chart-time').click(changeComparisonChartTimescale);
+			$('.totals-chart-time').click(changeTotalsChartTimescale);
 
 			function closeDropdowns() {
 				$('.navbar-collapse').collapse('hide');
@@ -1909,7 +2138,6 @@
 							cryptofolio.trades = [];
 
 							// Reload the data on the page
-							buildTradeHistory();
 							refreshTrades();
 							save(true);
 							load();
@@ -1923,6 +2151,7 @@
 				});
 			}
 
+			/*
 			function handleLogInPortfolio() {
 				// Determine if we're storing locally or clearing out
 				var bStoreLocal = !!$(this).hasClass('login-button-store-local');
@@ -1961,6 +2190,7 @@
 					$login_confirm_modal.modal('hide');
 				}
 			}
+			*/
 
 			function updateUserProfile() {
 				var bHideWelcome = localStorage.getItem('hide-welcome-message');
@@ -2297,6 +2527,128 @@
 				quotes[pair]["CHANGE24H"] = quotes[pair]["PRICE"] - quotes[pair]["OPEN24HOUR"];
 				quotes[pair]["CHANGEPCT24H"] = quotes[pair]["CHANGE24H"]/quotes[pair]["OPEN24HOUR"] * 100;
 				displayQuote(quotes[pair]);
+				updateAlertFromQuote(result.FROMSYMBOL);
+			}
+
+			function addAlertRow() {
+				var newThRow = $('.ca-tr-alert-skeleton').clone(false);
+				newThRow.removeClass().addClass('ca-tr-alert');
+				newThRow.find('.ca-btn-edit').click(showEditAlert);
+				newThRow.data('alert-date', Date.now());
+				newThRow.prependTo('.ca-tbody');
+			}
+
+			function addNewAlert() {
+				addAlertRow();
+				showEditAlert.call($('.ca-tr-alert:first'));
+			}
+
+			function showEditAlert() {
+				// Get the row editor
+				var $editRow = $('.ca-row-skeleton').clone(false);
+				$editRow.removeClass('ca-row-skeleton').addClass('ca-row');
+
+				// Get the tr
+				var $thRow = $(this).closest('.ca-tr-alert');
+
+				// Replace the values of the row editor with the values of the tr
+				var alertType = $thRow.find('.ca-td-alert-type').data('alert-type');
+				if (alertType) {
+					$editRow.find('.ca-select-alert-type').val(alertType);
+				}
+
+				var condition = $thRow.find('.ca-td-condition').data('condition');
+				if (condition) {
+					$editRow.find('.ca-select-condition').val(condition);
+				}
+
+				$editRow.find('.ca-select').val($thRow.find('.ca-td-watch').data('watch'));
+				$editRow.find('.ca-select-compare').val($thRow.find('.ca-td-compare-to').data('compare-to'));
+				$editRow.find('.ca-compare-value').val($thRow.find('.ca-td-compare-to').data('compare-to-value'));
+				$editRow.data('alert-date', $thRow.data('alert-date'));
+
+				updateSelectionCompareSymbol.call($editRow);
+				setAlertRowEvents($editRow);
+
+				// Replace the contents
+				$thRow.html("<td colspan=5></td>").find('td').append($editRow);
+			}
+
+			function setAlertRowEvents(row) {
+				row.find('.ca-select-compare').change(updateSelectionCompareSymbol);
+				row.find('.ca-save-alert').click(saveAlertRow);
+				row.find('.ca-remove-alert').click(removeAlertRow);
+			}
+
+			function saveAlertRow() {
+				var $tr_alert = $(this).closest('.ca-tr-alert');
+
+				// Validate the result
+				if (!$tr_alert.find('.ca-select').val() || 
+					!$tr_alert.find('.ca-select-compare').val() || 
+					!$tr_alert.find('.ca-compare-value').val()) {
+					return;
+				}
+
+				// Get the watched crypto
+				var watch_crypto = $tr_alert.find('.ca-select').val();
+				if (cryptos.hasOwnProperty(watch_crypto)) {
+					watch_crypto = cryptos[watch_crypto];
+				} else { return; }
+
+				// Construct the alert
+				var alert = {
+					'date'              : $tr_alert.data('alert-date'),
+					'alert-type'        : $tr_alert.find('.ca-select-alert-type').val(),
+					'watch'             : watch_crypto.symbol,
+					'condition'         : $tr_alert.find('.ca-select-condition').val(),
+					'compare-to'        : $tr_alert.find('.ca-select-compare').val(),
+					'compare-to-value'  : parseFloat($tr_alert.find('.ca-compare-value').val())
+				};
+
+				// Edit or add
+				if ($tr_alert.data('alert-id') || $tr_alert.data('alert-id') === 0) {
+					saveAlert(alert, $tr_alert.data('alert-id'));
+				} else {
+					saveAlert(alert);
+				}
+
+				// Reload the data
+				constructAlertManage();
+				updateAlerts();
+			}
+
+			function removeAlertRow() {
+				var $tr_alert = $(this).closest('.ca-tr-alert');
+
+				// Remove the record from the alert list
+				if ($tr_alert.data('alert-id') || $tr_alert.data('alert-id') === 0) {
+					removeAlert($tr_alert.data('alert-id'));
+				}
+
+				// Remove this table row from the alert management
+				$tr_alert.remove();
+
+				// Reload the data
+				constructAlertManage();
+				updateAlerts();
+			}
+
+			function updateSelectionCompareSymbol() {
+				var row = $(this).closest('.ca-row');
+				var val = row.find('.ca-select-compare').val();
+				if (!val)
+					return;
+
+				// Update the symbol
+				if (fiat_currencies.hasOwnProperty(val)) {
+					row.find('.ca-abbr-crypto-compare').hide();
+					row.find('.ca-abbr-fiat-compare').show().html(fiat_currencies[val].symbol);
+				} else {
+					var crypto = cryptos[val];
+					row.find('.ca-abbr-fiat-compare').hide();
+					row.find('.ca-abbr-crypto-compare').show().html(crypto.symbol);
+				}
 			}
 
 			function addCoinRow() {
@@ -2409,7 +2761,7 @@
 
 			function refreshCharts()
 			{
-				generateMonthlyChartData();
+				generateTotalsChartData();
 
 				var $page = $('.page-item:visible');
 
@@ -2419,13 +2771,160 @@
 				}
 				else if ($page.attr('id') == 'page-details')
 				{
-					//displayMonthlyChart();
-					displayMonthlyChartBreakdown();
+					//displayTotalsChart();
+					displayTotalsChartBreakdown();
+					displayTotalsChartBreakdownPie();
 				}
 				else if ($page.attr('id') == 'page-performance')
 				{
-					//displayMonthlyChart();
+					//displayTotalsChart();
 				}
+			}
+
+			function updateAlerts() {
+				// Do nothing if we have an invalid alerts object
+				if (!cryptofolio || !cryptofolio.hasOwnProperty('alerts') || !cryptofolio.alerts)
+					return;
+
+				// Get the first cp-row
+				var cp = $('.cp-alerts');
+				var row = $('.cp-alert-row-skeleton');
+
+				// Remove all other cp-rows
+				cp.empty();
+
+				// Nothing in bag - show defaults
+				if (cryptofolio.alerts.length < 1)
+				{
+					for (var i = 0; i < default_alerts.length; i++) {
+						setAlertBadge(row, default_alerts[i], i);
+					}
+				}
+				else
+				{
+					for (var i = 0; i < cryptofolio.alerts.length; i++) {
+						setAlertBadge(row, cryptofolio.alerts[i], i);
+					}
+				}
+
+				function setAlertBadge(row, alert, id) {
+					var newRow = row.clone(true);
+
+					// Get the current value
+					var intended_value = parseFloat(alert["compare-to-value"]);
+					var current_value = convertToValue(alert["watch"], alert["compare-to"]);
+
+					var bPassValidation = current_value > intended_value;
+					if (alert["condition"] == 'less')
+						bPassValidation = current_value < intended_value;
+
+					// Determine if the condition is met
+					if (bPassValidation) {
+						newRow.find('.panel').removeClass('panel-warning').addClass('panel-success');
+						newRow.find('.cp-alert-status-active').hide();
+						newRow.find('.cp-alert-status-complete').show();
+					} else {
+						newRow.find('.panel').removeClass('panel-success').addClass('panel-warning');
+						newRow.find('.cp-alert-status-complete').hide();
+						newRow.find('.cp-alert-status-active').show();
+					}
+
+					// Format the date
+					var dateObj = new Date(alert['date']);
+					formatted_date = (dateObj.getMonth()+1) + "/" + dateObj.getDate() + "/" + dateObj.getFullYear();
+
+					// Format the description
+					var condition = ">";
+					if (alert['condition'] == 'less') {
+						condition = "<";
+					}
+
+					// Set units alongside description and value
+					var compare_to = alert['compare-to-value'] + " " + alert['compare-to'];
+					if (fiat_currencies.hasOwnProperty(alert['compare-to'])) {
+						compare_to = fiat_currencies[alert["compare-to"]].symbol + alert['compare-to-value'];
+						current_value = fiat_currencies[alert["compare-to"]].symbol + (current_value).toFixed(2);
+					} else {
+						current_value = (current_value).toString() + " " + alert["compare-to"];
+					}
+
+					newRow.removeClass('cp-alert-row-skeleton').addClass('cp-alert-row cp-alert-row-id-' + id);
+					newRow.find('.cp-alert-desc').html("1 " + alert['watch'] + " " + condition + " " + compare_to);
+					newRow.find('.cp-alert-date').html("Set on <strong>" + formatted_date + "</strong>");
+					newRow.find('.cp-alert-current').html("1 " + alert["watch"] + " = <span class=\"cp-alert-current-price\">" + current_value + "</span>");
+
+					newRow.appendTo('.cp-alerts');
+				}
+			}
+
+			function updateAlertFromQuote(symbol) {
+				var alerts;
+				if (cryptofolio.alerts.length > 0) {
+					alerts = cryptofolio.alerts;
+				} else {
+					alerts = default_alerts;
+				}
+
+				for (var i = 0; i < alerts.length; i++) {
+					if (alerts[i]['watch']      == symbol ||
+						alerts[i]['compare-to'] == symbol) {
+						updateAlertBadge(alerts[i], i);						
+					}
+				}
+			}
+
+			function updateAlertBadge(alert, id) {
+				// Get the row by alert ID
+				var row = $('.cp-alert-row-id-' + id);
+
+				// Get the watch and comparison units
+				var watch      = alert["watch"];
+				var compare_to = alert["compare-to"];
+
+				// Get the current value
+				var intended_value = parseFloat(alert["compare-to-value"]);
+				var current_value = convertToValue(watch, compare_to);
+
+				var bPassValidation = current_value > intended_value;
+				if (alert["condition"] == 'less')
+					bPassValidation = current_value < intended_value;
+
+				// Determine if the condition is met
+				if (bPassValidation) {
+					row.find('.panel').removeClass('panel-warning').addClass('panel-success');
+					row.find('.cp-alert-status-active').hide();
+					row.find('.cp-alert-status-complete').show();
+				} else {
+					row.find('.panel').removeClass('panel-success').addClass('panel-warning');
+					row.find('.cp-alert-status-complete').hide();
+					row.find('.cp-alert-status-active').show();
+				}
+
+				// Set units alongside description and value
+				if (fiat_currencies.hasOwnProperty(compare_to)) {
+					current_value = fiat_currencies[compare_to].symbol + (current_value).toFixed(2);
+				} else {
+					current_value = (current_value).toString() + " " + compare_to;
+				}
+
+				row.find('.cp-alert-current-price').html(current_value);
+			}
+
+			function convertToValue(from_unit, to_unit) {
+				if (cryptos.hasOwnProperty(from_unit)) {
+					from_unit = cryptos[from_unit];
+				} else { return 0; }
+
+				// Now test it
+				if (fiat_currencies.hasOwnProperty(to_unit)) {
+					to_unit = fiat_currencies[to_unit];
+					convertedValue = (from_unit.price_usd * to_unit.rate);
+				} else if (cryptos.hasOwnProperty(to_unit)) {
+					to_unit = cryptos[to_unit];
+					convertedValue = (from_unit.price_btc / to_unit.price_btc).toString();
+				} else { return 0; }
+
+				return fromSatoshis(parseInt(toSatoshis(convertedValue)));
 			}
 
 			function updateCoinPrices() {
@@ -2673,8 +3172,8 @@
 				});
 			}
 
-			var mc_data, mc_portfolio_data, mc_breakdown_data, mc_breakdown_pie_data;
-			function generateMonthlyChartData() {
+			var tc_data, tc_portfolio_data, tc_breakdown_data, tc_breakdown_pie_data;
+			function generateTotalsChartData() {
 				// Make sure the bag is calculated
 				if (!cryptofolio || !cryptofolio.hasOwnProperty('bag') || !cryptofolio.bag)
 					calculateBag();
@@ -2700,27 +3199,43 @@
 					});
 				}
 
+				// What is our timescale?
+				var timescale = $('input[name=totals-chart-time]:checked').val();
+				var timescale_type = 'daily', aggregate = 1, limit = 90, data_length = 90;
+
+				if (timescale_to_chart.hasOwnProperty(timescale)) {
+					timescale_type = timescale_to_chart[timescale].data;
+					data_length    = (timescale_type == 'daily') ? 90 : 720;
+					aggregate      = timescale_to_chart[timescale].aggregate;
+					limit          = timescale_to_chart[timescale].limit;
+				}
+
 				var coin_prices = [], coin_totals = [];
 				for (var j = 0; j < coin_ids.length; j++)
 				{	
 					var coin_id = coin_ids[j];
-					
-					for (var inner_key = 0; inner_key < price_data_daily.length; inner_key++)
+
+					for (let i = data_length, j = limit; i >= data_length - (aggregate * limit) && j >= 0; i -= aggregate, j--)
 					{
-						inner_val = price_data_daily[inner_key];
+						// Determine where to get the price data from
+						let inner_val;
+						if (timescale_type == 'hourly')
+							inner_val = price_data_hourly[i];
+						else
+							inner_val = price_data_daily[i];
 
 						if (inner_val.hasOwnProperty(coin_id))
 						{
-							if (!coin_prices[inner_key])
-								coin_prices[inner_key] = {'y': inner_val['y']};
-							coin_prices[inner_key][coin_id] = (inner_val[coin_id] * fiat.rate).toFixed(2);
+							if (!coin_prices[j])
+								coin_prices[j] = {'y': inner_val['y']};
+							coin_prices[j][coin_id] = (inner_val[coin_id] * fiat.rate).toFixed(2);
 
-							if (!coin_totals[inner_key])
-								coin_totals[inner_key] = {'y': inner_val['y']};
+							if (!coin_totals[j])
+								coin_totals[j] = {'y': inner_val['y']};
 
 							var value = (cryptofolio.bag.hasOwnProperty(coin_id)) ? 
 								cryptofolio.bag[coin_id].value : (b_use_defaults ? 1 : 0);
-							coin_totals[inner_key][coin_id] = (inner_val[coin_id] * value * fiat.rate).toFixed(2);
+							coin_totals[j][coin_id] = (inner_val[coin_id] * value * fiat.rate).toFixed(2);
 						}
 					}
 				}
@@ -2750,38 +3265,38 @@
 					sum_total += parseFloat(v);
 				});
 
-				mc_data = {'data' : coin_prices, 'labels' : coin_labels};
-				mc_portfolio_data = {'data' : diff_data}
-				mc_breakdown_data = {'data' : coin_totals, 'labels' : coin_labels};
-				mc_breakdown_pie_data = {'data' : final_totals, 'total' : sum_total};
+				tc_data = {'data' : coin_prices, 'labels' : coin_labels};
+				tc_portfolio_data = {'data' : diff_data}
+				tc_breakdown_data = {'data' : coin_totals, 'labels' : coin_labels};
+				tc_breakdown_pie_data = {'data' : final_totals, 'total' : sum_total};
 			}
 
-			function displayMonthlyChart() {
+			function displayTotalsChart() {
 				// Make sure that we have all the data first
-				if (mc_data['data'][0].length < mc_data['labels'].length) {
+				if (tc_data['data'][0].length < tc_data['labels'].length) {
 					return;
 				}
 
 				// Clear the existing graph
-				$('#monthly-chart').empty();
+				$('#totals-chart').empty();
 
-				morris_charts['monthly-chart'] = Morris.Line({
-					element: 'monthly-chart',
-					data: mc_data['data'],
+				morris_charts['totals-chart'] = Morris.Line({
+					element: 'totals-chart',
+					data: tc_data['data'],
 					parseTime: true,
 					xkey: 'y',
-					ykeys: mc_data['labels'],
-					labels: mc_data['labels'],
+					ykeys: tc_data['labels'],
+					labels: tc_data['labels'],
 					preUnits: fiat.symbol,
 					pointSize: 1
 				});
 
 				// Clear the existing graph
-				$('#monthly-chart-diff').empty();
+				$('#totals-chart-diff').empty();
 
-				morris_charts['monthly-chart-diff'] = Morris.Line({
-					element: 'monthly-chart-diff',
-					data: mc_portfolio_data['data'],
+				morris_charts['totals-chart-diff'] = Morris.Line({
+					element: 'totals-chart-diff',
+					data: tc_portfolio_data['data'],
 					parseTime: true,
 					xkey: 'y',
 					ykeys: ['total'],
@@ -2791,44 +3306,46 @@
 				});
 			}
 
-			function displayMonthlyChartBreakdown() {
+			function displayTotalsChartBreakdown() {
 				// Portfolio totals breakdown
-				$('#monthly-chart-breakdown').empty();
+				$('#totals-chart-breakdown').empty();
 
 				// If there is no data, show a message
-				if (mc_breakdown_data['data'].length)
+				if (tc_breakdown_data['data'].length)
 				{
-					morris_charts['monthly-chart-breakdown'] = Morris.Area({
-						element: 'monthly-chart-breakdown',
-						data: mc_breakdown_data['data'],
+					morris_charts['totals-chart-breakdown'] = Morris.Area({
+						element: 'totals-chart-breakdown',
+						data: tc_breakdown_data['data'],
 						parseTime: true,
 						xkey: 'y',
-						ykeys: mc_breakdown_data['labels'],
-						labels: mc_breakdown_data['labels'],
+						ykeys: tc_breakdown_data['labels'],
+						labels: tc_breakdown_data['labels'],
 						preUnits: fiat.symbol,
 						pointSize: 0
 					});
 				}
 				else
 				{
-					$('#monthly-chart-breakdown').html('<div>No breakdown to display.</div>');
+					$('#totals-chart-breakdown').html('<div>No breakdown to display.</div>');
 				}
+			}
 
+			function displayTotalsChartBreakdownPie() {
 				// Totals Pie Chart
-				$('#monthly-chart-breakdown-pie').empty();
+				$('#totals-chart-breakdown-pie').empty();
 
-				if (mc_breakdown_pie_data['total'] > 0)
+				if (tc_breakdown_pie_data['total'] > 0)
 				{
-					var sum_total = mc_breakdown_pie_data['total'];
-					morris_charts['monthly-chart-breakdown-pie'] = Morris.Donut({
-						element: 'monthly-chart-breakdown-pie',
-						data: mc_breakdown_pie_data['data'],
+					var sum_total = tc_breakdown_pie_data['total'];
+					morris_charts['totals-chart-breakdown-pie'] = Morris.Donut({
+						element: 'totals-chart-breakdown-pie',
+						data: tc_breakdown_pie_data['data'],
 						formatter: function (y, data) { return (y/sum_total * 100).toFixed(2) + '%' }
 					});
 				}
 				else
 				{
-					$('#monthly-chart-breakdown-pie').html('<div>No breakdown to display.</div>');
+					$('#totals-chart-breakdown-pie').html('<div>No breakdown to display.</div>');
 				}
 			}
 
@@ -2850,6 +3367,31 @@
 
 				// Now update the coin analysis
 				updateCoinAnalysis();
+			}
+
+			function changeTotalsChartTimescale() {
+				// Uncheck all of the boxes
+				$('input[name=totals-chart-time]').prop('checked', false)
+
+				// Force the selection of the child checkbox
+				// We do this because the "check" change isn't set at this time
+				$(this).find('input').prop('checked', true);
+
+				// Get the timescale & validate
+				var timescale = $('input[name=totals-chart-time]:checked').val();
+				if (!timescale || !timescale_to_chart.hasOwnProperty(timescale))
+					return;
+
+				if (timescale_to_chart[timescale].data == 'hourly') {
+					collectHourlyPrices(doTotalsChartWork);
+				} else {
+					collectDailyPrices(doTotalsChartWork);
+				}
+
+				function doTotalsChartWork() {
+					generateTotalsChartData();
+					displayTotalsChartBreakdown();
+				}
 			}
 
 			function updateCoinAnalysis() {
@@ -3033,7 +3575,7 @@
 			}
 
 			function setFiat() {
-				var local_fiat = $('.cc-select-fiat').val();
+				var local_fiat = $('.settings-select-fiat').val();
 				fiat = fiat_currencies[local_fiat];
 			}
 
@@ -3074,7 +3616,7 @@
 
 			function saveSettings() {
 				var settings = {
-					'fiat'             : $('.cc-select-fiat').val(),
+					'fiat'             : $('.settings-select-fiat').val(),
 					'coin_watch_list'  : coin_watch_list,
 					'coinhive_threads' : $('.settings-coinhive-num-threads').val(),
 					'coinhive_idle'    : $('.settings-coinhive-idle-time').val(),
@@ -3101,7 +3643,7 @@
 
 				if (settings) {
 					if (settings['fiat']) {
-						$('.cc-select-fiat').val(settings['fiat']);
+						$('.settings-select-fiat').val(settings['fiat']);
 						setFiat();
 					}
 
@@ -3129,6 +3671,15 @@
 				}
 			}
 
+			function loadAlerts() {
+				var alerts_json = localStorage.getItem('cryptocurrency-alerts');
+				if (alerts_json) {
+					cryptofolio.alerts = JSON.parse(alerts_json);
+					constructAlertManage();
+					updateAlerts();
+				}				
+			}
+
 			function save(bLocalOnly)
 			{
 				// Make sure that save isn't called with a context passed in
@@ -3151,6 +3702,27 @@
 
 				// Update the export field
 				updatePortfolioExportField(json_portfolio);
+			}
+
+			function saveAlerts(bLocalOnly)
+			{
+				// Make sure that save isn't called with a context passed in
+				// bLocalOnly should strictly be handled as a boolean
+				bLocalOnly = (bLocalOnly === true)
+
+				// Prepare the alerts for storage
+				var json_alerts = JSON.stringify(cryptofolio.alerts);
+
+				// If we're logged in, save to the server
+				if (!bLocalOnly && loggedIn()) {
+					$.post('api/User/saveAlerts', { 'alerts' : json_alerts })
+					 .done(function(data) {
+					 	console.log("Alerts saved to server.");
+					});
+				} else {
+					// Save to local storage
+					localStorage.setItem('cryptocurrency-alerts', json_alerts);
+				}
 			}
 
 			function restorePortfolioFromImport()
@@ -3218,6 +3790,11 @@
 				$('.pm-th-tbody').html("<tr><td colspan=4><center><strong>You have no trades.</strong></center></td></tr>");
 			}
 
+			function clearAlerts() {
+				// Remove all rows, replace with default message
+				$('.ca-tbody').html("<tr><td colspan=5><center><strong>You have no alerts.</strong></center></td></tr>");
+			}
+
 			/**
 			 * If we have cookies set, check that we have both the session ID and a "logged in" cookie, which
 			 * strongly suggests that the user is currently logged in. Sanity and safety checks will be 
@@ -3245,17 +3822,27 @@
 								loadSettings();
 							}
 
+							if (data.hasOwnProperty('alerts') && data['alerts']) {
+								localStorage.setItem('cryptocurrency-alerts', data['alerts']);
+								loadAlerts();
+							}
+
 							// If we have a portfolio saved, load it
 							if (data['portfolio']) {
 								finishLoad(data['portfolio']);
 							} else {
 								// If we do not have a portfolio saved, but we have one stored locally,
-								// offer to store the user's local data to the server
+								// then save the local portfolio to the login
 								var json_portfolio = localStorage.getItem('cryptocurrency-portfolio');
 
-								if (json_portfolio && json_portfolio.length > 2)
+								if (json_portfolio && json_portfolio.length > 0)
 								{
-									$('#chooseLocalOrRemotePortfolio').modal('show');
+									// Load from local storage and save to the server
+									loadFromLocal();
+									save();
+
+									// Old method - give options
+									//$('#chooseLocalOrRemotePortfolio').modal('show');
 								}
 								else
 								{
@@ -3311,17 +3898,82 @@
 				clear();
 				calculateBag();
 				constructTradeManage();
-				collectHistoricalPrices();
+				constructAlertManage();
+				updateAlerts();
+				buildTradeHistory();
+				collectDailyPrices();
 				updateTotal();
 				updateCoinPrices();
 			}
 
-			function collectHistoricalPrices() {
+			function collectDailyPrices(callback) {
 				if (cryptofolio && cryptofolio.hasOwnProperty('bag') &&
 					cryptofolio.bag && Object.keys(cryptofolio.bag).length)
 				{
 					let coins = Object.keys(cryptofolio.bag);
-					getMultipleDailyPrices(coins);
+					getMultipleDailyPrices(coins, callback);
+				}
+				else
+				{
+					// Get default coin histories
+					getMultipleDailyPrices(default_coins_subset, callback);
+				}
+			}
+
+			function collectHourlyPrices(callback) {
+				if (cryptofolio && cryptofolio.hasOwnProperty('bag') &&
+					cryptofolio.bag && Object.keys(cryptofolio.bag).length)
+				{
+					let coins = Object.keys(cryptofolio.bag);
+					getMultipleHourlyPrices(coins, callback);
+				}
+				else
+				{
+					// Get default coin histories
+					getMultipleHourlyPrices(default_coins_subset, callback);
+				}
+			}
+
+			function constructAlertManage() {
+				// Start fresh
+				clearAlerts();
+
+				if (cryptofolio && cryptofolio.hasOwnProperty('alerts') &&
+					Array.isArray(cryptofolio.alerts) && cryptofolio.alerts.length) {
+					// Empty the alert mgmt table
+					$('.ca-tbody').html("");
+
+					for (var i = 0; i < cryptofolio.alerts.length; i++) {
+						// Get the alert
+						var alert = cryptofolio.alerts[i];
+
+						// Add a new coin row
+						addAlertRow();
+						$alertRow = $('.ca-tr-alert:first');
+
+						// Save the alert ID to the row
+						$alertRow.data('alert-id', i).data('alert-date', alert['date']);
+
+						// Parse the values
+						var compare_to_value = parseFloat(alert['compare-to-value']);
+
+						// Make everything look nice
+						var alertType = 'Price';
+						if (alert['alert-type'] == 'volume-alert') {
+							alertType = 'Transaction Volume';
+						}
+
+						var condition = 'Greater Than';
+						if (alert['condition'] == 'less') {
+							condition = 'Less Than';
+						}
+
+						// Add the data and record to the alert history for management
+						$alertRow.find('.ca-td-alert-type').data('alert-type', alert['alert-type']).html(alertType);
+						$alertRow.find('.ca-td-condition').data('condition', alert['condition']).html(condition);
+						$alertRow.find('.ca-td-watch').data('watch', alert['watch']).html(alert['watch']);
+						$alertRow.find('.ca-td-compare-to').data('compare-to', alert['compare-to']).data('compare-to-value', alert['compare-to-value']).html(compare_to_value + " " + alert['compare-to']);
+					}
 				}
 			}
 
@@ -3372,8 +4024,6 @@
 			function fromSatoshis(v) {
 				return parseFloat(v) / 100000000;
 			}
-
-			var cryptofolio = {'bag' : {}, 'trades' : []};
 
 			function loadTrades(portfolio) {
 				// Wipe out the existing trades
@@ -3430,7 +4080,7 @@
 			}
 
 			function removeTrade(trade_id) {
-				if (cryptofolio && cryptofolio.hasOwnProperty('trades') && cryptofolio.trades) {
+				if (cryptofolio && cryptofolio.hasOwnProperty('trades') && Array.isArray(cryptofolio.trades)) {
 					if (Number.isInteger(trade_id) && trade_id >= 0 && trade_id < cryptofolio.trades.length) {
 						cryptofolio.trades.splice(trade_id, 1);
 					}
@@ -3441,7 +4091,7 @@
 			}
 
 			function saveTrade(trade, trade_id) {
-				if (cryptofolio && cryptofolio.hasOwnProperty('trades') && cryptofolio.trades) {
+				if (cryptofolio && cryptofolio.hasOwnProperty('trades') && Array.isArray(cryptofolio.trades)) {
 					if (Number.isInteger(trade_id) && trade_id >= 0 && trade_id < cryptofolio.trades.length) {
 						cryptofolio.trades[trade_id] = trade;
 					} else {
@@ -3451,6 +4101,30 @@
 
 				// Save everything
 				save();
+			}
+
+			function removeAlert(alert_id) {
+				if (cryptofolio && cryptofolio.hasOwnProperty('alerts') && Array.isArray(cryptofolio.alerts)) {
+					if (Number.isInteger(alert_id) && alert_id >= 0 && alert_id < cryptofolio.alerts.length) {
+						cryptofolio.alerts.splice(alert_id, 1);
+					}
+				}
+
+				// Save everything
+				saveAlerts();
+			}
+
+			function saveAlert(alert, alert_id) {
+				if (cryptofolio && cryptofolio.hasOwnProperty('alerts') && Array.isArray(cryptofolio.alerts)) {
+					if (Number.isInteger(alert_id) && alert_id >= 0 && alert_id < cryptofolio.alerts.length) {
+						cryptofolio.alerts[alert_id] = alert;
+					} else {
+						cryptofolio.alerts.push(alert);
+					}
+				}
+
+				// Save everything
+				saveAlerts();
 			}
 
 			function calculateBag() {
