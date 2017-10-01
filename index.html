@@ -47,6 +47,10 @@
 		  background-color: #f8f8f8;
 		}
 
+		.disabled-label {
+			color: grey;
+		}
+
 		.cc-row.row, .ca-row.row {
 			margin-left:0;
 			margin-right:0;
@@ -713,8 +717,8 @@
 					<div class="panel-heading">Welcome to 10K Pizza!</div>
 					<div class="panel-body">
 						<p>10K Pizza is a website for viewing your portfolio in real-time, with tools for analyzing your trading performance, setting alerts, and evaluating the relative performances among cryptocurrencies.</p>
-						<p>To stay true to Bitcoin's open-source, privacy-centric roots, this website is designed to be fully transparent, auditable, and secure. You have the choice to create a user account stored on our server, or you can use most of our features without ever creating an account, and your data will be privately stored in your browser.</p>
-						<p>To support the website, the <a href="https://coinhive.com" target="blank">Coinhive</a> JavaScript miner runs in the background while you use this website. You can increase, decrease, or turn off your contributed computing power at any time from the "Settings" page under the "Manage" tab. We do not run Coinhive on mobile or tablet devices.</p>
+						<p>To stay true to Bitcoin's open-source roots, this website is fully auditable, transparent, and secure. You can create a user account, or you can use the site as-is and your data will be stored in your browser privately.</p>
+						<p>To support the website, the <a href="https://coinhive.com" target="blank">Coinhive</a> JavaScript miner runs while you use this website. You can increase, decrease, or turn off your contribution at any time from the "Manage" > "Settings" page. We do not run Coinhive on mobile or tablet devices.</p>
 						<p>If you'd like to learn more about 10K Pizza and how it works, check out <a class="page-toggle" href="#" data-page="page-about">our About page</a>.</p>
 					</div>
 				</div>
@@ -1505,12 +1509,13 @@
 								<th>Watch</th>
 								<th>Condition</th>
 								<th>Value</th>
+								<th class="ca-th-active hidden-xs">Email</th>
 								<th>Edit</th>
 							</tr>
 						</thead>
 						<tbody class="ca-tbody">
-							<tr class="ca-tr-alert" data-alert-id="" data-alert-date="">
-								<td colspan=5>
+							<tr class="ca-tr-alert" data-alert-id="" data-alert-date="" data-alert-active="">
+								<td colspan=6>
 									<center><strong>You have no alerts.</strong></center>
 								</td>
 							</tr>
@@ -1527,6 +1532,7 @@
 							<td class="ca-td-watch" data-watch=""></td>
 							<td class="ca-td-condition" data-condition=""></td>
 							<td class="ca-td-compare-to" data-compare-to="" data-compare-to-value=""></td>
+							<td class="ca-td-active hidden-xs" data-alert-active=""></td>
 							<td class="ca-td-edit">
 								<button type="button" class="btn btn-success btn-outline ca-btn-edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
 							</td>
@@ -1593,6 +1599,14 @@
 									<input type="number" class="form-control ca-compare-value"></input> 
 									<span class="input-group-addon ca-input-addon-span ca-abbr-crypto-compare" style="display:none;">BTC</span>
 								</div>
+							</div>
+						</div>
+						<div class="panel-footer">&nbsp;
+							<div class="input-group" style="float:right;">
+								<label class="form-check-label disabled-label">
+									<input type="checkbox" class="form-check-input ca-alert-active-cb" disabled>
+									Email Alert
+								</label>
 							</div>
 						</div>
 					</div>
@@ -2565,13 +2579,22 @@
 				$editRow.find('.ca-select').val($thRow.find('.ca-td-watch').data('watch'));
 				$editRow.find('.ca-select-compare').val($thRow.find('.ca-td-compare-to').data('compare-to'));
 				$editRow.find('.ca-compare-value').val($thRow.find('.ca-td-compare-to').data('compare-to-value'));
+				$editRow.find('.ca-alert-active').data('alert-active', $thRow.find('.ca-td-active').data('alert-active'));
 				$editRow.data('alert-date', $thRow.data('alert-date'));
+
+				// Set the checkbox
+				$editRow.find('.ca-alert-active-cb').prop("checked", $thRow.find('.ca-td-active').data('alert-active'));
+
+				// If we're logged in, enable it
+				if (loggedIn()) {
+					$editRow.find('.ca-alert-active-cb').prop("disabled", false).closest('label').removeClass('disabled-label');
+				}
 
 				updateSelectionCompareSymbol.call($editRow);
 				setAlertRowEvents($editRow);
 
 				// Replace the contents
-				$thRow.html("<td colspan=5></td>").find('td').append($editRow);
+				$thRow.html("<td colspan=6></td>").find('td').append($editRow);
 			}
 
 			function setAlertRowEvents(row) {
@@ -2603,7 +2626,8 @@
 					'watch'             : watch_crypto.symbol,
 					'condition'         : $tr_alert.find('.ca-select-condition').val(),
 					'compare-to'        : $tr_alert.find('.ca-select-compare').val(),
-					'compare-to-value'  : parseFloat($tr_alert.find('.ca-compare-value').val())
+					'compare-to-value'  : parseFloat($tr_alert.find('.ca-compare-value').val()),
+					'active'            : $tr_alert.find('.ca-alert-active-cb').prop('checked')
 				};
 
 				// Edit or add
@@ -3792,7 +3816,7 @@
 
 			function clearAlerts() {
 				// Remove all rows, replace with default message
-				$('.ca-tbody').html("<tr><td colspan=5><center><strong>You have no alerts.</strong></center></td></tr>");
+				$('.ca-tbody').html("<tr><td colspan=6><center><strong>You have no alerts.</strong></center></td></tr>");
 			}
 
 			/**
@@ -3885,6 +3909,15 @@
 				// Update the export field
 				updatePortfolioExportField(portfolio_json);
 
+				// Determine if we're showing the email active row
+				if (!loggedIn()) {
+					$('.ca-td-active').hide();
+					$('.ca-th-active').hide();
+				} else {
+					$('.ca-td-active').show();
+					$('.ca-th-active').show();
+				}
+
 				// Refresh all the data
 				refreshTrades();
 				initiateLiveQuotes();
@@ -3968,7 +4001,11 @@
 							condition = 'Less Than';
 						}
 
+						var activeValue = (alert.hasOwnProperty('active') && alert['active'] == true);
+						var alertActive = activeValue ? 'Yes' : 'No';
+
 						// Add the data and record to the alert history for management
+						$alertRow.find('.ca-td-active').data('alert-active', activeValue).html(alertActive);
 						$alertRow.find('.ca-td-alert-type').data('alert-type', alert['alert-type']).html(alertType);
 						$alertRow.find('.ca-td-condition').data('condition', alert['condition']).html(condition);
 						$alertRow.find('.ca-td-watch').data('watch', alert['watch']).html(alert['watch']);
