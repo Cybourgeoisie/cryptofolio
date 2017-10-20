@@ -2535,6 +2535,19 @@
 				}
 				quotes[pair]["CHANGE24H"] = quotes[pair]["PRICE"] - quotes[pair]["OPEN24HOUR"];
 				quotes[pair]["CHANGEPCT24H"] = quotes[pair]["CHANGE24H"]/quotes[pair]["OPEN24HOUR"] * 100;
+
+				// If the price returned is invalid, use the CoinMarketCap value
+				if (result.hasOwnProperty('PRICE') && isNaN(result.PRICE)) {
+					// Get the cached info from CMC
+					if (!cryptos.hasOwnProperty(result.FROMSYMBOL)) {
+						return;
+					}
+
+					var crypto = cryptos[result.FROMSYMBOL];
+					quotes[pair].PRICE = crypto.price_btc;
+					quotes[pair].CHANGEPCT24H = crypto.delta_24h;
+				}
+
 				displayQuote(quotes[pair]);
 				updateAlertFromQuote(result.FROMSYMBOL);
 			}
