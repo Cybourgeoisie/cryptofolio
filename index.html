@@ -26,6 +26,10 @@
 	<!-- Metis Menu -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.css" integrity="sha256-OufFdETrXbY5YtILsSTzlY+4Ttmq+hUfR1mMYLmKlWo=" crossorigin="anonymous" />
 
+	<!-- Cryptocoins Icons -->
+	<link rel="stylesheet" href="./cryptocoins/webfont/cryptocoins.css" />
+	<link rel="stylesheet" href="./cryptocoins/webfont/cryptocoins-colors.css" />
+
 	<!--
 		TODO:
 			- Add coin performance information (not sure where to put it... maybe a UI change for it)
@@ -673,13 +677,6 @@
 					</li>
 				</ul>
 
-				<div style="margin:10px;color:grey;font-style:italic;" class="hidden-xs">
-					<center>
-						<span style="font-size:95%">Powered with Coinhive</span><br />
-						<small>See <a href="#" class="page-toggle" data-page="page-about">About</a> For More Info</small>
-					</center>
-				</div>
-
 				<div style="margin:10px;" class="hidden-xs">
 					<center><a target="blank" href="https://twitter.com/10K_Pizza" style="text-decoration:none;">
 						<i class="fa fa-twitter" aria-hidden="true"></i> @10K_Pizza
@@ -708,7 +705,6 @@
 					<div class="panel-body">
 						<p>10K Pizza is a website for viewing your portfolio in real-time, with tools for analyzing your trading performance, setting alerts, and evaluating the relative performances among cryptocurrencies.</p>
 						<p>To stay true to Bitcoin's open-source roots, this website is fully auditable, transparent, and secure. You can create a user account, or you can use the site as-is and your data will be stored in your browser privately.</p>
-						<p>To support the website, the <a href="https://coinhive.com" target="blank">Coinhive</a> JavaScript miner runs while you use this website. You can increase, decrease, or turn off your contribution at any time from the "Manage" > "Settings" page. We do not run Coinhive on mobile or tablet devices.</p>
 						<p>If you'd like to learn more about 10K Pizza and how it works, check out <a class="page-toggle" href="#" data-page="page-about">our About page</a>.</p>
 					</div>
 				</div>
@@ -1356,103 +1352,6 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Coinhive Mining
-						<span style="float:right">
-							<a href="#" class="page-toggle" data-page="page-about">
-								<i class="fa fa-info-circle fa-fw"></i> More Info
-							</a>
-						</span>
-					</div>
-					<div class="panel-body">
-						<div class="panel panel-primary settings-coinhive-mobile" style="display:none">
-							<div class="panel-body">
-								<em>Mobile Device Found:</em> Coinhive is turned off for mobile phones and tablets.
-							</div>
-						</div>
-
-						<div class="col-xs-6 col-sm-3 form-group">
-							<div class="input-group">
-								<label>Coinhive Override</label><br />
-								<small>(Turn on / off the miner here)</small>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group">
-							<div class="input-group">
-								<!--
-									10K Pizza Note: The miner is off by default for when users pull
-									the repository from Github. The API key can also be changed below
-									if users pull the code and want to change the API key.
-								-->
-								<select class="form-control settings-coinhive-override">
-									<option value="on">On</option>
-									<option value="off" selected="selected">Off</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="clearfix visible-xs"></div>
-
-						<div class="col-xs-6 col-sm-3 form-group">
-							<div class="input-group">
-								<label>Hashes / second</label><br />
-								<small>(Your real-time CPU contribution according to the following settings)</small>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group">
-							<div class="input-group">
-								<span><span class="settings-coinhive-contribution">0</span> hashes/sec</span>
-							</div>
-						</div>
-
-						<div class="clearfix"></div>
-
-						<div class="col-xs-6 col-sm-3 form-group">
-							<div class="input-group">
-								<label>Processor Threads</label><br />
-								<small>(To be compatible with older browsers, we recommend 2 threads minimum)</small>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group">
-							<div class="input-group">
-								<input type="number" value="2" step="1" min="0" max="16" class="form-control settings-coinhive-num-threads">
-							</div>
-						</div>
-
-						<div class="clearfix visible-xs"></div>
-
-						<div class="col-xs-6 col-sm-3 form-group">
-							<div class="input-group">
-								<label>Idle Time</label><br />
-								<small>(We recommend 0.8 - the higher the number, the less time spent mining. Range is 0.0 (full speed) to 1.0 (turned off))</small>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group">
-							<div class="input-group">
-								<input type="number" value="0.8" step="0.05" min="0.0" max="1.0"  class="form-control settings-coinhive-idle-time">
-							</div>
-						</div>
-
-						<div class="clearfix"></div>
-
-						<div class="col-xs-6 col-sm-3 form-group">
-							<div class="input-group">
-								<label>Contributor Name</label><br />
-								<small>(If you'd like to be recognized for your contribution, provide a name here. Otherwise, leave blank to remain anonymous.)</small>
-							</div>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group">
-							<div class="input-group">
-								<input type="text" value="" class="form-control settings-coinhive-contributor-name">
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</div>
 		</div>
 
 		<div id="page-save-restore" class="page-item page-wrapper-buffer" style="display:none;">
@@ -1639,6 +1538,8 @@
 					<p>10K Pizza is an application to view your cryptocurrency portfolio in real-time, with tools to analyze your trades, set alerts, and study the price performances of all available cryptocurrencies.</p>
 
 					<p>This website is a side project by <a target="blank" href="https://github.com/Cybourgeoisie">Cybourgeoisie</a>. The code can be audited directly from the page source, and the source is also <a target="blank" href="https://github.com/Cybourgeoisie/cryptofolio">maintained on Github</a>. Market data about the currencies and listings are retrieved from <a target="blank" href="https://www.cryptocompare.com/">CryptoCompare</a> and <a target="blank" href="https://coinmarketcap.com/">CoinMarketCap</a>, respectively. Both websites provide excellent APIs that have made this application possible, and both accept donations for their services.</p>
+
+					<p>10K Pizza also makes use of <a href="https://labs.allienworks.net/icons/cryptocoins/" target="blank">CryptoCoins</a>, a cryptocurrency icon package.</p>
 				</div>
 			</div>
 
@@ -1658,20 +1559,6 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-header small-page-header">Coinhive Integration</h3>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-12">
-					<p>10K Pizza utilizes <a href="https://coinhive.com" target="blank">Coinhive</a>, a JavaScript-based miner for Monero, to pay for server and development costs. When using this site, a small portion of your computer's processing power is donated to help find hashes on the Monero network. In return for solving hashes, 10K Pizza can run entirely without advertisements or paid services.</p>
-					<p>You have the freedom to give more or less processing power to find hashes when using this website. You can even turn off Coinhive completely, and your user account and quality of experience will not be affected. Your Coinhive settings can be changed in the "Settings" page under the "Manage" tab.</p>
-					<p>Thank you for helping to support 10K Pizza!</p>
-				</div>
-			</div>
-
-			<!--<div class="row">
-				<div class="col-sm-12">
 					<h3 class="page-header small-page-header">Donate</h3>
 				</div>
 			</div>
@@ -1681,12 +1568,54 @@
 					<p>If you find this application helpful, please consider contributing to its development by sending a donation in your preferred cryptocurrency:</p>
 
 					<div class="row">
+						<div class="col-xs-offset-1 col-sm-offset-3 col-sm-1 col-xs-2">
+							<center><i style="font-size:30pt" class="cc BTC" title="BTC"></i></center>
+						</div>
+						<div class=" col-sm-1 col-xs-2">
+							<center><i style="font-size:30pt" class="cc ETH" title="ETH"></i></center>
+						</div>
+						<div class=" col-sm-1 col-xs-2">
+							<center><i style="font-size:30pt" class="cc LTC" title="LTC"></i></center>
+						</div>
+						<div class=" col-sm-1 col-xs-2">
+							<center><i style="font-size:30pt" class="cc XMR" title="XMR"></i></center>
+						</div>
+						<div class=" col-sm-1 col-xs-2">
+							<center><i style="font-size:30pt" class="cc DCR" title="DCR"></i></center>
+						</div>
+					</div>
+
+					<br />
+
+					<div class="row">
 						<div class="col-xs-3 col-sm-2 col-sm-offset-1">
 							<center><big><label>Bitcoin</label></big></center>
 						</div>
 						<div class="col-xs-8 form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" size="50" readonly="readonly" value="1Kf44DXNZVa1X48vR8YS19XJEjG1KQWBsY"></input>
+								<input type="text" class="form-control" size="50" readonly="readonly" value="1DvKL6bsvFbPLHzpfyi1gN14UTLeTMteP1"></input>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-3 col-sm-2 col-sm-offset-1">
+							<center><big><label>Bitcoin Cash</label></big></center>
+						</div>
+						<div class="col-xs-8 form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" size="50" readonly="readonly" value="1aXsChnzsjJZ5K5moNqeuxzniJ6p4atra"></input>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-3 col-sm-2 col-sm-offset-1">
+							<center><big><label>Ethereum</label></big></center>
+						</div>
+						<div class="col-xs-8 form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" size="50" readonly="readonly" value="0x0963f59FB09D899768Bcd2599529d2CAaC855d2c"></input>
 							</div>
 						</div>
 					</div>
@@ -1697,7 +1626,7 @@
 						</div>
 						<div class="col-xs-8 form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" size="50" readonly="readonly" value="LaTXY5ZKQTXAiQYdZ4yaXyDMWc42jN9JLe"></input>
+								<input type="text" class="form-control" size="50" readonly="readonly" value="LTXtDghDffVX6jarwskRsgP63qYyuh8AC3"></input>
 							</div>
 						</div>
 					</div>
@@ -1712,8 +1641,19 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="row">
+						<div class="col-xs-3 col-sm-2 col-sm-offset-1">
+							<center><big><label>Decred</label></big></center>
+						</div>
+						<div class="col-xs-8 form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" size="50" readonly="readonly" value="DsiRCP7pvKF5RgEuUgT77cHVtBdwRwSWNxV"></input>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>-->
+			</div>
 
 			<div class="row">
 				<div class="col-sm-12">
@@ -1815,9 +1755,6 @@
 	<!-- Socket.io -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js" integrity="sha256-WKvqiY0jZHWQZIohYEmr9KUC5rEaYEOFTq+ByllJK8w=" crossorigin="anonymous"></script>
 
-	<!-- Coinhive Miner -->
-	<script src="https://coinhive.com/lib/coinhive.min.js"></script>
-
 	<!-- CryptoCompare Streamer Utils -->
 	<script src="./ccc-streamer-utilities.js"></script>
 
@@ -1901,14 +1838,6 @@
 			// See if the user is verifying their account
 			checkVerification();
 
-			// Start coinhive
-			runCoinhive();
-
-			// If the user is on mobile, then notify that coinhive is turned off
-			if (isMobileOrTablet()) {
-				$('.settings-coinhive-mobile').show();
-			}
-
 			// Get the fiat exchange rates
 			$.getJSON("https://api.fixer.io/latest?base=USD", function(data) {
 				$.each(fiat_currencies, function(k, v) {
@@ -1983,13 +1912,6 @@
 			// Settings
 			$('.settings-select-fiat').change(setFiat);
 			$('.settings-select-fiat').change(saveSettings);
-			$('.settings-coinhive-num-threads').change(setCoinhiveSettings);
-			$('.settings-coinhive-num-threads').change(saveSettings);
-			$('.settings-coinhive-idle-time').change(setCoinhiveSettings);
-			$('.settings-coinhive-idle-time').change(saveSettings);
-			$('.settings-coinhive-override').change(setCoinhiveSettings);
-			$('.settings-coinhive-override').change(saveSettings);
-			$('.settings-coinhive-contributor-name').change(saveSettings);
 
 			// Portfolio management
 			$('.cc-add-coin').click(addNewTrade);
@@ -3620,77 +3542,10 @@
 				fiat = fiat_currencies[local_fiat];
 			}
 
-			function toggleCoinhiveMinerSettings() {
-				var num_threads = $('.settings-coinhive-num-threads');
-				var idle_time   = $('.settings-coinhive-idle-time');
-				var contributor = $('.settings-coinhive-contributor-name');
-				var override    = $('.settings-coinhive-override').val();
-
-				if (override == 'off') {
-					num_threads.prop("disabled", true);
-					idle_time.prop("disabled", true);
-					contributor.prop("disabled", true);
-				} else {
-					num_threads.prop("disabled", false);
-					idle_time.prop("disabled", false);
-					contributor.prop("disabled", false);
-				}
-			}
-
-			function setCoinhiveSettings() {
-				// Get the coinhive settings
-				var num_threads = $('.settings-coinhive-num-threads').val();
-				var idle_time   = $('.settings-coinhive-idle-time').val();
-				var override    = $('.settings-coinhive-override').val();
-
-				// Flip the UI
-				toggleCoinhiveMinerSettings();
-
-				// Only proceed if we have a valid coinhive miner active & if we're not on mobile
-				if (!coinhive_miner || isMobileOrTablet()) {
-					return;
-				}
-
-				if (override == 'off') {
-					// Turn off the miner
-					coinhive_miner.stop();
-					console.log("Coinhive override: Off");
-					return;
-				}
-
-				if (num_threads >= 0 && idle_time >= 0) {
-					num_threads = parseInt(num_threads);
-					idle_time = parseFloat(idle_time);
-				} else {
-					console.log("Coinhive settings are invalid.");
-					return;
-				}
-
-				if (num_threads > 0 && idle_time < 1.0) {
-					// If the coinhive miner is off, turn it back on
-					if (!coinhive_miner.isRunning()) {
-						console.log("Turned on coinhive miner.");
-						coinhive_miner.start();
-					}
-
-					console.log("Updated coinhive miner settings: " + num_threads + " threads, " + idle_time + " throttle.");
-
-					coinhive_miner.setNumThreads(num_threads);
-					coinhive_miner.setNumThreads(idle_time);
-				} else {
-					console.log("Turned off coinhive miner.");
-					coinhive_miner.stop();
-				}
-			}
-
 			function saveSettings() {
 				var settings = {
 					'fiat'              : $('.settings-select-fiat').val(),
-					'coin_watch_list'   : coin_watch_list,
-					'coinhive_threads'  : $('.settings-coinhive-num-threads').val(),
-					'coinhive_idle'     : $('.settings-coinhive-idle-time').val(),
-					'coinhive_contrib'  : $('.settings-coinhive-contributor-name').val(),
-					'coinhive_override' : $('.settings-coinhive-override').val()
+					'coin_watch_list'   : coin_watch_list
 				};
 
 				var json_settings = JSON.stringify(settings);
@@ -3724,22 +3579,6 @@
 								coin_watch_list.push(local_coin_watch_list[i]);
 							}
 						}
-					}
-
-					if (settings['coinhive_threads'] || settings['coinhive_idle']) {
-						if (settings['coinhive_threads'])
-							$('.settings-coinhive-num-threads').val(settings['coinhive_threads']);
-
-						if (settings['coinhive_idle'])
-							$('.settings-coinhive-idle-time').val(settings['coinhive_idle']);
-
-						if (settings['coinhive_contrib'])
-							$('.settings-coinhive-contributor-name').val(settings['coinhive_contrib']);
-
-						if (settings['coinhive_override'])
-							$('.settings-coinhive-override').val(settings['coinhive_override']);
-
-						setCoinhiveSettings();
 					}
 				}
 			}
@@ -4297,58 +4136,6 @@
 							cryptofolio.bag[coin].fiat = fromSatoshis(cryptofolio.bag[coin].fiat);
 						}
 					}
-				}
-			}
-
-			var coinhive_miner;
-			function runCoinhive() {
-				// Get the threads, throttle, and username (if provided) from the settings page
-				// Must load settings prior to this
-				var threads  = $('.settings-coinhive-num-threads').val();
-				var throttle = $('.settings-coinhive-idle-time').val();
-				var override = $('.settings-coinhive-override').val();
-				var username = $('.settings-coinhive-contributor-name').val();
-
-				if (username) {
-					coinhive_miner = new CoinHive.User('hFoJcWkxkCnOkqbwT9hCcHJ3cv8sG8JO', username, {
-						threads:     threads,
-						autoThreads: false,
-						throttle:    throttle,
-						forceASMJS:  false
-					});
-				} else {
-					coinhive_miner = new CoinHive.Anonymous('hFoJcWkxkCnOkqbwT9hCcHJ3cv8sG8JO', {
-						threads:     threads,
-						autoThreads: false,
-						throttle:    throttle,
-						forceASMJS:  false
-					});
-				}
-
-				// Do not run if on mobile or tablet
-				if (!isMobileOrTablet()) {
-					// Do not run if override is set to off
-					if (override == 'off') {
-						console.log("Not running coinhive miner - override set.");
-					} else if (threads < 1 || throttle >= 1) {
-						console.log("Not running coinhive miner - threads = " + threads + ", throttle = " + throttle);
-					} else {
-						coinhive_miner.start();						
-					}
-				} else {
-					console.log("Not running coinhive miner - mobile / tablet detected.");
-				}
-
-				// Update stats once per second
-				setInterval(updateCoinhiveStats, 2000);
-
-				var $CoinhiveHashesPerSec = $('span.settings-coinhive-contribution');
-				function updateCoinhiveStats() {
-					var hashesPerSecond = coinhive_miner.getHashesPerSecond();
-					if (hashesPerSecond) {
-						hashesPerSecond = hashesPerSecond.toFixed(3);
-					}
-					$CoinhiveHashesPerSec.html(hashesPerSecond);
 				}
 			}
 		});
