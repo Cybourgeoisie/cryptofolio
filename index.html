@@ -1846,7 +1846,7 @@
 				});
 			});
 
-			$.getJSON('https://api.coinmarketcap.com/v1/ticker/', function(data) {
+			$.getJSON('https://api.coinmarketcap.com/v1/ticker/?limit=0', function(data) {
 				var items = [];
 
 				$.each(data, function(key, crypto) {
