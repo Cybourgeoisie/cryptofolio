@@ -114,6 +114,9 @@
 		  .pm-th-tr-event {
 		  	font-size:80%;
 		  }
+		  .shrink-font-small-screens-80 {
+		  	font-size:80%;
+		  }
 		}
 		.navbar-top-links {
 		  margin-right: 0;
@@ -206,19 +209,19 @@
 		  background-color: transparent;
 		  transition: all .5s;
 		}
-		.btn-primary.btn-outline {
+		.btn-primary.btn-outline, .text-color-primary {
 		  color: #428bca;
 		}
-		.btn-success.btn-outline {
+		.btn-success.btn-outline, .text-color-success {
 		  color: #5cb85c;
 		}
-		.btn-info.btn-outline {
+		.btn-info.btn-outline, .text-color-info {
 		  color: #5bc0de;
 		}
-		.btn-warning.btn-outline {
+		.btn-warning.btn-outline, .text-color-warning {
 		  color: #f0ad4e;
 		}
-		.btn-danger.btn-outline {
+		.btn-danger.btn-outline, .text-color-danger {
 		  color: #d9534f;
 		}
 		.btn-primary.btn-outline:hover,
@@ -1020,43 +1023,174 @@
 		</div>
 
 		<!--
-		<div id="page-performance" class="page-item" style="display:none;">
+		<div id="page-performance" class="page-item page-wrapper-buffer" style="display:none;">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1 class="page-header">Performance</h1>
+					<h1 class="page-header">Trade Performance</h1>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-header small-page-header">Portfolio Performance</h3>
+					<h3 class="page-header small-page-header">
+						<div class="shrink-font-small-screens-80" style="float:right">4.5% USD</div>
+						Bitcoin
+					</h3>
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-sm-12">
-					<div id="totals-chart-diff">
-						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+			<div class="row tp-row-skeleton">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<strong>10/11/2017 9:31 AM:</strong> Bought <strong>10 BTC</strong> for <strong>$50000</strong>
+					</div>
+					<div class="panel-body">
+						<div class="col-xs-6 col-sm-3 form-group"><label>Trade Rate</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm">
+								<strong>USD:</strong> $5000
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-3 form-group"><label>Current Rate</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm">
+								<strong>USD:</strong> $6000
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-3 form-group"><label>Difference</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm">
+								<strong>USD:</strong> <span class="text-color-success">$1000</span>
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-3 form-group"><label>Change</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm">
+								<strong>USD:</strong> <span class="text-color-success">16.67%</span>
+							</button>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<label>Current Value:</label> &nbsp;
+						<button type="button" class="btn btn-outline btn-success btn-sm">
+							$60000
+						</button>
 					</div>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-header small-page-header">Cryptocurrency Performance</h3>
+					<h3 class="page-header small-page-header">
+						<div class="shrink-font-small-screens-80" style="float:right">35% USD</div>
+						Litecoin
+					</h3>
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-sm-12">
-					<div id="totals-chart">
-						<center><big><i class="fa fa-spinner fa-pulse fa-fw"></i></big></center>
+			<div class="row tp-row-skeleton">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<strong>10/11/2017 9:31 AM:</strong> Bought <strong>20 LTC</strong> for <strong>4 ETH</strong>
 					</div>
+					<div class="panel-body">
+						<div class="col-xs-6 col-sm-3 form-group"><label>Trade Rate</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
+								<strong>ETH:</strong> 0.2<br />
+								<strong>BTC:</strong> 0.015<br />
+								<strong>USD:</strong> $25
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-3 form-group"><label>Current Rate</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
+								<strong>ETH:</strong> 0.5<br />
+								<strong>BTC:</strong> 0.01<br />
+								<strong>USD:</strong> $55
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-3 form-group"><label>Difference</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
+								<strong>ETH:</strong> <span class="text-color-success">0.05</span><br />
+								<strong>BTC:</strong> <span class="text-color-danger"> -0.005</span><br />
+								<strong>USD:</strong> <span class="text-color-success">$35</span>
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-3 form-group"><label>Change</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
+								<strong>ETH:</strong> <span class="text-color-success">20%</span><br />
+								<strong>BTC:</strong> <span class="text-color-danger"> -37%</span><br />
+								<strong>USD:</strong> <span class="text-color-success">120%</span>
+							</button>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<label>Current Value:</label> &nbsp;
+						<button type="button" class="btn btn-outline btn-success btn-sm">
+							5 ETH
+						</button> &nbsp;
+
+						<button type="button" class="btn btn-outline btn-danger btn-sm">
+							0.20 BTC
+						</button> &nbsp;
+
+						<button type="button" class="btn btn-outline btn-success btn-sm">
+							$1100
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="row tp-row-skeleton">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<strong>10/14/2017 9:31 AM:</strong> Sold <strong>10 LTC</strong> for <strong>1.8 ETH</strong>
+					</div>
+					<div class="panel-body">
+						<div class="col-xs-6 col-sm-3 form-group"><label>Trade Rate</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
+								<strong>ETH:</strong> 0.18<br />
+								<strong>BTC:</strong> 0.015<br />
+								<strong>USD:</strong> $60
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-3 form-group"><label>Current Rate</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
+								<strong>ETH:</strong> 0.5<br />
+								<strong>BTC:</strong> 0.01<br />
+								<strong>USD:</strong> $55
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-3 form-group"><label>Difference</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
+								<strong>ETH:</strong> <span class="text-color-danger">-0.02</span><br />
+								<strong>BTC:</strong> <span class="text-color-danger">-0.001</span><br />
+								<strong>USD:</strong> <span class="text-color-danger">-$5</span>
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-3 form-group"><label>Change</label><br />
+							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
+								<strong>ETH:</strong> <span class="text-color-danger">-4%</span><br />
+								<strong>BTC:</strong> <span class="text-color-danger">-2%</span><br />
+								<strong>USD:</strong> <span class="text-color-danger">-8%</span>
+							</button>
+						</div>
+					</div>
+
+					<div class="panel-footer">
+						<label>Current Value:</label> &nbsp;
+						<button type="button" class="btn btn-outline btn-success btn-sm">
+							5 ETH
+						</button> &nbsp;
+
+						<button type="button" class="btn btn-outline btn-danger btn-sm">
+							0.20 BTC
+						</button> &nbsp;
+
+						<button type="button" class="btn btn-outline btn-success btn-sm">
+							$1100
+						</button>
+					</div>
+
 				</div>
 			</div>
 		</div>
 		-->
-
 
 		<div id="page-trade-history" class="page-item page-wrapper-buffer" style="display:none;">
 			<div class="row">
@@ -2409,6 +2543,9 @@
 						symbol = alternate_coin_symbols[symbol];
 					}
 
+					// Need to be a LOT pickier to sift out bad pairs (for example, a token that only trades on ED gets a rogue BTC pair elsewhere).
+					// https://min-api.cryptocompare.com/data/top/pairs?fsym=DRGN&limit=10
+
 					if (!symbol) return;
 					socket_subscription.push('5~CCCAGG~' + symbol + '~BTC');
 				});
@@ -2458,8 +2595,15 @@
 				quotes[pair]["CHANGE24H"] = quotes[pair]["PRICE"] - quotes[pair]["OPEN24HOUR"];
 				quotes[pair]["CHANGEPCT24H"] = quotes[pair]["CHANGE24H"]/quotes[pair]["OPEN24HOUR"] * 100;
 
+				// Get the last updated price. If it's not recent, default to CMC
+				// Recent => 5 minutes
+				var time_in_seconds = (new Date().getTime()) / 1000;
+
 				// If the price returned is invalid, use the CoinMarketCap value
-				if (result.hasOwnProperty('PRICE') && isNaN(result.PRICE)) {
+				if ((result.hasOwnProperty('LASTUPDATE') && (time_in_seconds - result.LASTUPDATE) > 300) ||
+					(result.hasOwnProperty('PRICE') && isNaN(result.PRICE))) {
+					console.log("Pulling CMC Value: " + result.FROMSYMBOL);
+
 					// Get the cached info from CMC
 					if (!cryptos.hasOwnProperty(result.FROMSYMBOL)) {
 						return;
@@ -2649,6 +2793,12 @@
 				var $cc_buy_date = row.find('.cc-buy-date');
 				var $cc_remove = row.find('.cc-remove-coin');
 				var $cc_save = row.find('.cc-save-coin');
+
+				// If the buy date has no value, set this exact date and time
+				if (!$cc_buy_date.val()) {
+					var now = new Date();
+					$cc_buy_date.val(now.toLocaleString('en-US'));
+				}
 
 				$cc_select.change(updateSelectionSymbol);
 				$cc_select_trade.change(updateSelectionTradeSymbol);
