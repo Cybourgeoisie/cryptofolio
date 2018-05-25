@@ -1299,16 +1299,22 @@
 					<h3 class="page-header small-page-header">
 						<div class="btn-group btn-group-sm" data-toggle="buttons" role="group" aria-label="Chart Timescale" style="float:right;">
 							<label class="btn btn-default btn-outline comp-chart-time">
-								<input type="radio" name="comp-chart-time" value="1day" autocomplete="off">1 day
-							</label>
-							<label class="btn btn-default btn-outline comp-chart-time">
-								<input type="radio" name="comp-chart-time" value="1wk" autocomplete="off">1 week
-							</label>
-							<label class="btn btn-default btn-outline comp-chart-time">
 								<input type="radio" name="comp-chart-time" value="1mo" autocomplete="off">1 mo.
 							</label>
 							<label class="btn btn-default btn-outline comp-chart-time active">
 								<input type="radio" name="comp-chart-time" value="3mo" autocomplete="off" checked>3 mo.
+							</label>
+							<label class="btn btn-default btn-outline comp-chart-time">
+								<input type="radio" name="comp-chart-time" value="6mo" autocomplete="off">6 mo.
+							</label>
+							<label class="btn btn-default btn-outline comp-chart-time">
+								<input type="radio" name="comp-chart-time" value="12mo" autocomplete="off">1 yr.
+							</label>
+							<label class="btn btn-default btn-outline comp-chart-time">
+								<input type="radio" name="comp-chart-time" value="24mo" autocomplete="off">2 yr.
+							</label>
+							<label class="btn btn-default btn-outline comp-chart-time">
+								<input type="radio" name="comp-chart-time" value="36mo" autocomplete="off">3 yr.
 							</label>
 						</div>
 
@@ -1972,6 +1978,7 @@
 			// See if the user is verifying their account
 			checkVerification();
 
+
 			// Get the fiat exchange rates
 			$.getJSON("https://api.fixer.io/latest?base=USD", function(data) {
 				$.each(fiat_currencies, function(k, v) {
@@ -1980,7 +1987,22 @@
 				});
 			});
 
-			$.getJSON('https://api.coinmarketcap.com/v1/ticker/?limit=0', function(data) {
+			$.ajax({
+				dataType: "json",
+				url: 'https://api.coinmarketcap.com/v1/ticker/?limit=0',
+				timeout: 500,
+				complete: function(data, status) {
+					var errorCodes = ["error", "timeout", "abort", "parsererror"];
+					if (errorCodes.indexOf(status) === -1) {
+						displayDefaultCurrencies(data.responseJSON);
+					} else {
+						// Fall back to the default
+						$.getJSON('https://s3.amazonaws.com/www.10k.pizza/data/coin-market-cap.json', displayDefaultCurrencies);
+					}
+				}
+			});
+
+			function displayDefaultCurrencies(data) {
 				var items = [];
 
 				$.each(data, function(key, crypto) {
@@ -2033,7 +2055,7 @@
 
 				// Load any previous values
 				load();
-			});
+			}
 
 			// Set the initial events
 			$('.page-toggle').click(pageToggle);
@@ -3235,7 +3257,7 @@
 						}
 
 						// Get the coin's prices over the last day
-						promises.push($.getJSON('https://min-api.cryptocompare.com/data/histoday?fsym=' + search_coin_id + '&tsym=USD&limit=90', function( data ) {
+						promises.push($.getJSON('https://min-api.cryptocompare.com/data/histoday?fsym=' + search_coin_id + '&tsym=USD&limit=1095', function( data ) {
 							if (!data.hasOwnProperty('Data')) return;
 							price_labels_daily.push(coin_id);
 
@@ -3308,12 +3330,13 @@
 				}
 
 				// What is our timescale?
+				var dailyLimit = 1095;
 				var timescale = $('input[name=totals-chart-time]:checked').val();
-				var timescale_type = 'daily', aggregate = 1, limit = 90, data_length = 90;
+				var timescale_type = 'daily', aggregate = 1, limit = dailyLimit, data_length = dailyLimit;
 
 				if (timescale_to_chart.hasOwnProperty(timescale)) {
 					timescale_type = timescale_to_chart[timescale].data;
-					data_length    = (timescale_type == 'daily') ? 90 : 720;
+					data_length    = (timescale_type == 'daily') ? dailyLimit : 720;
 					aggregate      = timescale_to_chart[timescale].aggregate;
 					limit          = timescale_to_chart[timescale].limit;
 				}
@@ -3462,7 +3485,13 @@
 				'1day' : { 'data' : 'hourly', 'aggregate' : 1,  limit : 24 },
 				'1wk'  : { 'data' : 'hourly', 'aggregate' : 3,  limit : 56 },
 				'1mo'  : { 'data' : 'hourly', 'aggregate' : 12, limit : 60 },
-				'3mo'  : { 'data' : 'daily',  'aggregate' : 1,  limit : 90 }
+				'3mo'  : { 'data' : 'daily',  'aggregate' : 1,  limit : 90 },
+				'6mo'  : { 'data' : 'daily',  'aggregate' : 1,  limit : 180 },
+				'12mo'  : { 'data' : 'daily',  'aggregate' : 1,  limit : 365 },
+				'18mo'  : { 'data' : 'daily',  'aggregate' : 1,  limit : 365+180 },
+				'24mo'  : { 'data' : 'daily',  'aggregate' : 1,  limit : 365+365 },
+				'30mo'  : { 'data' : 'daily',  'aggregate' : 1,  limit : 365+365+180 },
+				'36mo'  : { 'data' : 'daily',  'aggregate' : 1,  limit : 365+365+365 },
 			};
 
 			function changeComparisonChartTimescale() {
@@ -3556,12 +3585,13 @@
 				var comparison_label = first_coin + '-' + last_coin;
 
 				// What is our timescale?
+				var dailyLimit = 1095;
 				var timescale = $('input[name=comp-chart-time]:checked').val();
-				var timescale_type = 'daily', aggregate = 1, limit = 90, data_length = 90;
+				var timescale_type = 'daily', aggregate = 1, limit = dailyLimit, data_length = dailyLimit;
 
 				if (timescale_to_chart.hasOwnProperty(timescale)) {
 					timescale_type = timescale_to_chart[timescale].data;
-					data_length    = (timescale_type == 'daily') ? 90 : 720;
+					data_length    = (timescale_type == 'daily') ? dailyLimit : 720;
 					aggregate      = timescale_to_chart[timescale].aggregate;
 					limit          = timescale_to_chart[timescale].limit;
 				}
