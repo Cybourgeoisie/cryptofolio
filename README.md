@@ -6,6 +6,10 @@ A single-page cryptocurrency portfolio with extra bells and whistles.
 
 This code forms the basis for [10K Pizza](https://www.10k.pizza), which runs this code on production along with a backend to manage user logins and additional email alert functionality.
 
+### Aside: Installing with the server code
+
+If you're interested in running the site without a backend, this repository is all you'll need. If you'd like to include the backend code (which features a database, registration and login), you can pull the server and front-end from https://github.com/Cybourgeoisie/10KPizza.
+
 ## Installation
 
 To download and install the 10K Pizza cryptofolio locally, you'll need to clone with the "recursive" flag since this repository includes the latest cryptocoins repo as well:
@@ -21,25 +25,19 @@ Feel free to add issues to the repository as necessary. If you want to get my at
 Any crypto donations are welcome and greatly appreciated:
 
 **Bitcoin:**
-
-1DvKL6bsvFbPLHzpfyi1gN14UTLeTMteP1
+```1DvKL6bsvFbPLHzpfyi1gN14UTLeTMteP1```
 
 **Bitcoin Cash:**
-
-1aXsChnzsjJZ5K5moNqeuxzniJ6p4atra
+```1aXsChnzsjJZ5K5moNqeuxzniJ6p4atra```
 
 **Ethereum:**
-
-0x0963f59FB09D899768Bcd2599529d2CAaC855d2c
+```0x0963f59FB09D899768Bcd2599529d2CAaC855d2c```
 
 **Litecoin:**
-
-LTXtDghDffVX6jarwskRsgP63qYyuh8AC3
+```LTXtDghDffVX6jarwskRsgP63qYyuh8AC3```
 
 **Monero:**
-
-41zJ821YXfp952H7XAFNpZimo1gsF8V8mhd8ioSYf6tvesq5Tjm2rW5F1qM4uCFFgATQztxXowd5Q9pR3hpQvgcz5Z4QMha
+```41zJ821YXfp952H7XAFNpZimo1gsF8V8mhd8ioSYf6tvesq5Tjm2rW5F1qM4uCFFgATQztxXowd5Q9pR3hpQvgcz5Z4QMha```
 
 **Decred:**
-
-DsiRCP7pvKF5RgEuUgT77cHVtBdwRwSWNxV
+```DsiRCP7pvKF5RgEuUgT77cHVtBdwRwSWNxV```
