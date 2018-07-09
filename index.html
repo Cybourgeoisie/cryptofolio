@@ -723,7 +723,7 @@
 			</div>
 
 			<div class="row at-a-glance">
-				<div class="col-sm-5">
+				<div class="col-sm-6">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<div class="row">
@@ -740,9 +740,45 @@
 					</div>
 				</div>
 
-				<div class="col-sm-7">
+				<div class="col-sm-6">
 					<div class="row half-padding">
-						<div class="col-xs-4 half-padding">
+						<div class="col-xs-6 half-padding">
+							<div class="panel panel-success">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-12">
+											<span class="cf-crypto large"></span>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									<span class="pull-left"><strong>Crypto</strong></span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xs-6 half-padding">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-12">
+											<span class="cf-reserve large"></span>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									<span class="pull-left"><strong>Reserve</strong></span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<div class="row half-padding">
+						<div class="col-xs-6 col-sm-3 half-padding">
 							<div class="panel panel-info">
 								<div class="panel-heading">
 									<div class="row">
@@ -758,7 +794,7 @@
 							</div>
 						</div>
 
-						<div class="col-xs-4 half-padding">
+						<div class="col-xs-6 col-sm-3 half-padding">
 							<div class="panel panel-success">
 								<div class="panel-heading">
 									<div class="row">
@@ -774,7 +810,7 @@
 							</div>
 						</div>
 
-						<div class="col-xs-4 half-padding">
+						<div class="col-xs-6 col-sm-3 half-padding">
 							<div class="panel panel-success">
 								<div class="panel-heading">
 									<div class="row">
@@ -790,6 +826,23 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="col-xs-6 col-sm-3 half-padding">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-12">
+											<span class="cf-sold large"></span>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									<span class="pull-left"><strong>Sold</strong></span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -1408,8 +1461,23 @@
 							<div class="col-xs-6 col-sm-3 form-group">
 								<label>Bought</label>
 								<div class="input-group">
-									<select class="form-control cc-select"></select>
-									<!--<input class="form-control cc-select">-->
+									<select class="form-control cc-select">
+										<option value=""></option>
+										<optgroup label="Fiat Currency - Sold">
+											<option value="CNY">Chinese Yuan</option>
+											<option value="EUR">Euro</option>
+											<option value="GBP">British Pound</option>
+											<option value="JPY">Japanese Yen</option>
+											<option value="USD">US Dollars</option>
+										</optgroup>
+										<optgroup label="Fiat Currency on Reserve">
+											<option value="CNY-RES">Chinese Yuan Reserve</option>
+											<option value="EUR-RES">Euro Reserve</option>
+											<option value="GBP-RES">British Pound Reserve</option>
+											<option value="JPY-RES">Japanese Yen Reserve</option>
+											<option value="USD-RES">US Dollars Reserve</option>
+										</optgroup>
+									</select>
 								</div>
 							</div>
 							<div class="col-xs-6 col-sm-3 form-group">
@@ -1432,8 +1500,14 @@
 											<option value="JPY">Japanese Yen</option>
 											<option value="USD">US Dollars</option>
 										</optgroup>
+										<optgroup label="Fiat Currency on Reserve">
+											<option value="CNY-RES">Chinese Yuan Reserve</option>
+											<option value="EUR-RES">Euro Reserve</option>
+											<option value="GBP-RES">British Pound Reserve</option>
+											<option value="JPY-RES">Japanese Yen Reserve</option>
+											<option value="USD-RES">US Dollars Reserve</option>
+										</optgroup>
 									</select>
-									<!--<input class="form-control cc-select-trade">-->
 								</div>
 							</div>
 							<div class="col-xs-6 col-sm-3 form-group">
@@ -1957,7 +2031,12 @@
 				'EUR' : {'symbol': '€', 'name': 'GBP', 'rate': 1.0},
 				'GBP' : {'symbol': '£', 'name': 'GBP', 'rate': 1.0},
 				'JPY' : {'symbol': '¥', 'name': 'JPY', 'rate': 1.0},
-				'USD' : {'symbol': '$', 'name': 'USD', 'rate': 1.0}
+				'USD' : {'symbol': '$', 'name': 'USD', 'rate': 1.0},
+				'CNY-RES' : {'symbol': '¥', 'name': 'CNY', 'rate': 1.0},
+				'EUR-RES' : {'symbol': '€', 'name': 'GBP', 'rate': 1.0},
+				'GBP-RES' : {'symbol': '£', 'name': 'GBP', 'rate': 1.0},
+				'JPY-RES' : {'symbol': '¥', 'name': 'JPY', 'rate': 1.0},
+				'USD-RES' : {'symbol': '$', 'name': 'USD', 'rate': 1.0}
 			};
 
 			// Prepare the user's data & caches
@@ -1990,7 +2069,7 @@
 			$.ajax({
 				dataType: "json",
 				url: 'https://api.coinmarketcap.com/v1/ticker/?limit=0',
-				timeout: 500,
+				timeout: 1000,
 				complete: function(data, status) {
 					var errorCodes = ["error", "timeout", "abort", "parsererror"];
 					if (errorCodes.indexOf(status) === -1) {
@@ -2034,7 +2113,7 @@
 				$("#price-watch-add-coin").autocomplete({source: Object.keys(crypto_names)});
 
 				// Add our list
-				$('.cc-select').html($('.cc-select').html() + "<option selected></option>" + items.join(''));
+				$('.cc-select').html($('.cc-select').html() + '<optgroup label="Cryptocurrency">' + items.join('') + '</optgroup>');
 				$('.cc-select-trade').html($('.cc-select-trade').html() + '<optgroup label="Cryptocurrency">' + items.join('') + '</optgroup>');
 				$('.cc-select-analysis').html($('.cc-select-analysis').html() + "<option selected></option>" + items.join(''));
 				$('.cc-select-live-chart').html($('.cc-select-live-chart').html() + "<option selected></option>" + items.join(''));
@@ -2493,7 +2572,7 @@
 						breakdownRow.getElementsByClassName('cp-breakdown-fiat')[0].innerHTML = fiat.symbol + (cryptofolio.bag[symbol].value * quote.PRICE * fiat.rate).toFixed(2);
 					}
 				}
-				else
+				else if (cryptos.hasOwnProperty(symbol))
 				{
 					cryptos[symbol].price_usd = (quote.PRICE * BTC_PRICE).toFixed(2);
 					cryptos[symbol].price_btc = quote.PRICE;
@@ -2518,7 +2597,7 @@
 				}
 
 				// Update the fiat value of this symbol
-				if (cryptofolio && cryptofolio.hasOwnProperty('bag') && cryptofolio.bag && cryptofolio.bag.hasOwnProperty(symbol)) {
+				if (cryptofolio && cryptofolio.hasOwnProperty('bag') && cryptofolio.bag && cryptofolio.bag.hasOwnProperty(symbol) && cryptos.hasOwnProperty(symbol)) {
 					cryptofolio.bag[symbol].fiat = cryptofolio.bag[symbol].value * cryptos[symbol].price_usd;
 				}
 
@@ -3077,6 +3156,10 @@
 				else
 				{
 					$.each(cryptofolio.bag, function(key, crypto) {
+						if (fiat_currencies.hasOwnProperty(crypto.name)) {
+							return;
+						}
+
 						var newRow = row.clone(true);
 						newRow.removeClass('cp-row-skeleton').addClass('cp-row cp-row-' + crypto.symbol);
 						newRow.data('coin', crypto.symbol);
@@ -3141,12 +3224,25 @@
 
 				if (Object.keys(cryptofolio.bag).length) {
 					$.each(cryptofolio.bag, function(k, crypto) {
+
 						var newRow = $br_row.clone(true);
-						newRow.removeClass().addClass('cp-breakdown-row cp-breakdown-' + crypto.symbol);
-						newRow.find('.cp-breakdown-name').html(crypto.name);
-						newRow.find('.cp-breakdown-balance').html(crypto.value.toString() + " " + crypto.symbol);
-						newRow.find('.cp-breakdown-fiat').html(fiat.symbol + (crypto.value * cryptos[crypto.symbol].price_btc * BTC_PRICE * fiat.rate).toFixed(2));
-						newRow.appendTo('.cp-breakdown-tbody');
+						if (fiat_currencies.hasOwnProperty(crypto.symbol)) {
+							if (crypto.symbol.indexOf("-RES") === -1) {
+								return;
+							}
+
+							newRow.removeClass().addClass('cp-breakdown-row cp-breakdown-' + crypto.symbol);
+							newRow.find('.cp-breakdown-name').html(crypto.name);
+							newRow.find('.cp-breakdown-balance').html(crypto.value.toString() + " " + crypto.symbol);
+							newRow.find('.cp-breakdown-fiat').html(fiat.symbol + (crypto.value * fiat.rate).toFixed(2));
+							newRow.appendTo('.cp-breakdown-tbody');
+						} else {
+							newRow.removeClass().addClass('cp-breakdown-row cp-breakdown-' + crypto.symbol);
+							newRow.find('.cp-breakdown-name').html(crypto.name);
+							newRow.find('.cp-breakdown-balance').html(crypto.value.toString() + " " + crypto.symbol);
+							newRow.find('.cp-breakdown-fiat').html(fiat.symbol + (crypto.value * cryptos[crypto.symbol].price_btc * BTC_PRICE * fiat.rate).toFixed(2));
+							newRow.appendTo('.cp-breakdown-tbody');
+						}
 					});
 				} else {
 					// Notify that this is an example
@@ -3367,6 +3463,23 @@
 							var value = (cryptofolio.bag.hasOwnProperty(coin_id)) ? 
 								cryptofolio.bag[coin_id].value : (b_use_defaults ? 1 : 0);
 							coin_totals[j][coin_id] = (inner_val[coin_id] * value * fiat.rate).toFixed(2);
+						}
+						else if (fiat_currencies.hasOwnProperty(coin_id))
+						{
+							if (coin_id.indexOf("-RES") === -1) {
+								continue;
+							}
+
+							if (!coin_prices[j])
+								coin_prices[j] = {'y': inner_val['y']};
+							coin_prices[j][coin_id] = (fiat_currencies[coin_id].rate).toFixed(2);
+
+							if (!coin_totals[j])
+								coin_totals[j] = {'y': inner_val['y']};
+
+							var value = (cryptofolio.bag.hasOwnProperty(coin_id)) ? 
+								cryptofolio.bag[coin_id].value : (b_use_defaults ? 1 : 0);
+							coin_totals[j][coin_id] = (value * fiat.rate).toFixed(2);
 						}
 					}
 				}
@@ -3662,19 +3775,30 @@
 			}
 
 			// Keep some DOM elements in memory to reduce processing time
-			var $CFTotal = $('.cf-total');
+			var $CFTotal      = $('.cf-total');
 			var $CFInvestment = $('.cf-investment');
-			var $CFDiff      = $('.cf-diff');
-			var $CFDiffPerc = $('.cf-diff-perc');
+			var $CFDiff       = $('.cf-diff');
+			var $CFDiffPerc   = $('.cf-diff-perc');
+			var $CFSold       = $('.cf-sold');
+			var $CFCrypto     = $('.cf-crypto');
+			var $CFReserve    = $('.cf-reserve');
 
 			function updateTotal() {
 				// Make sure all calculations are up to date
 				if (!cryptofolio || !cryptofolio.hasOwnProperty('bag') || !cryptofolio.bag)
 					calculateBag();
 
-				var total = 0;
+				var total = 0, sold = 0, in_crypto = 0, reserve = 0;
 				$.each(cryptofolio.bag, function(key, crypto) {
-					total = parseFloat(total + crypto.fiat * fiat.rate);
+					if (fiat_currencies.hasOwnProperty(crypto.symbol) && crypto.symbol.indexOf("-RES") === -1) {
+						sold = parseFloat(sold + crypto.fiat * fiat.rate);
+					} else if (fiat_currencies.hasOwnProperty(crypto.symbol)) {
+						reserve = parseFloat(reserve + crypto.fiat * fiat.rate);
+						total = parseFloat(total + crypto.fiat * fiat.rate);
+					} else {
+						in_crypto = parseFloat(in_crypto + crypto.fiat * fiat.rate);
+						total = parseFloat(total + crypto.fiat * fiat.rate);
+					}
 				});
 
 				var investment = 0;
@@ -3683,7 +3807,7 @@
 						var trade = cryptofolio.trades[i];
 						var buy = parseFloat(trade.traded_value);
 						if (buy > 0) {
-							if (fiat_currencies.hasOwnProperty(trade.traded)) {
+							if (fiat_currencies.hasOwnProperty(trade.traded) && trade.traded.indexOf("-RES") === -1) {
 								var rate = fiat.rate / fiat_currencies[trade.traded].rate;
 								investment = parseFloat(investment + buy * rate);
 							}
@@ -3695,6 +3819,9 @@
 				if (!investment) investment = 0;
 			
 				$CFInvestment.html(fiat.symbol + (investment).toFixed(2));
+				$CFSold.html(fiat.symbol + (sold).toFixed(2));
+				$CFReserve.html(fiat.symbol + (reserve).toFixed(2));
+				$CFCrypto.html(fiat.symbol + (in_crypto).toFixed(2));
 
 				var diff = (investment >= 0.01) ? (total - investment) : (0);
 				var diff_perc = (investment >= 0.01) ? (diff / investment * 100) : (0);
@@ -4240,9 +4367,9 @@
 
 				for (var i = 0; i < cryptofolio.trades.length; i++) {
 					var hodl      = cryptofolio.trades[i]['bought'];
-					var hodl_val  = cryptofolio.trades[i]['bought_value'];
+					var hodl_val  = parseFloat(cryptofolio.trades[i]['bought_value']);
 					var trade     = cryptofolio.trades[i]['traded'];
-					var trade_val = cryptofolio.trades[i]['traded_value'];
+					var trade_val = parseFloat(cryptofolio.trades[i]['traded_value']);
 					var buy_date  = cryptofolio.trades[i]['date'];
 					var datetime  = Date.parse(buy_date + " GMT");
 
@@ -4255,9 +4382,16 @@
 					var hodl_crypto  = cryptos[hodl];
 
 					// Now do some maths
-					hodl_val   = toSatoshis(hodl_val);
-					hodl_fiat  = hodl_val * hodl_crypto.price_usd;
-					trade_val  = toSatoshis(trade_val);
+					if (!hodl_crypto && fiat_currencies.hasOwnProperty(hodl)) {
+						hodl_fiat  = hodl_val;
+					} else {
+						hodl_val   = toSatoshis(hodl_val);
+						hodl_fiat  = hodl_val * hodl_crypto.price_usd;
+					}
+
+					if (!fiat_currencies.hasOwnProperty(trade)) {
+						trade_val  = toSatoshis(trade_val);
+					}
 
 					// Only convert if the value is not a fiat currency already
 					trade_fiat = trade_val;
@@ -4270,12 +4404,21 @@
 
 					// Deal with all Math in 10^8, (in BTC, Satoshis)
 					if (!cryptofolio.bag.hasOwnProperty(hodl)) {
-						cryptofolio.bag[hodl] = {
-							'symbol' : hodl_crypto.symbol,
-							'name'   : hodl_crypto.name,
-							'value'  : hodl_val,
-							'fiat'   : hodl_fiat
-						};
+						if (fiat_currencies.hasOwnProperty(hodl)) {
+							cryptofolio.bag[hodl] = {
+								'symbol' : hodl,
+								'name'   : hodl,
+								'value'  : hodl_val,
+								'fiat'   : hodl_fiat
+							};
+						} else {
+							cryptofolio.bag[hodl] = {
+								'symbol' : hodl_crypto.symbol,
+								'name'   : hodl_crypto.name,
+								'value'  : hodl_val,
+								'fiat'   : hodl_fiat
+							};							
+						}
 					} else {
 						cryptofolio.bag[hodl].value += hodl_val;
 						cryptofolio.bag[hodl].fiat  += hodl_fiat;
@@ -4292,9 +4435,16 @@
 									'fiat'   : -1 * trade_fiat
 								};
 							}
+						} else if (!(fiat_currencies.hasOwnProperty(trade) && trade.indexOf("-RES") === -1)) {
+							cryptofolio.bag[trade] = {
+								'symbol' : trade,
+								'name'   : trade,
+								'value'  : -1 * trade_val,
+								'fiat'   : -1 * trade_fiat
+							};
 						}
 					} else {
-						if (!fiat_currencies.hasOwnProperty(trade)) {
+						if (!(fiat_currencies.hasOwnProperty(trade) && trade.indexOf("-RES") === -1)) {
 							cryptofolio.bag[trade].value -= trade_val;
 							cryptofolio.bag[trade].fiat  -= trade_fiat;
 						}
