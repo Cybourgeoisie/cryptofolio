@@ -616,11 +616,11 @@
 									<i class="fa fa-pie-chart fa-fw"></i> Details
 								</a>
 							</li>
-							<!--<li>
+							<li>
 								<a href="#" class="page-toggle" data-page="page-performance">
 									<i class="fa fa-line-chart fa-fw"></i> Performance
 								</a>
-							</li>-->
+							</li>
 							<li>
 								<a href="#" class="page-toggle" data-page="page-trade-history">
 									<i class="fa fa-calendar fa-fw"></i> Trade History
@@ -788,7 +788,39 @@
 									</div>
 								</div>
 								<div class="panel-footer">
-									<span class="pull-left"><strong>Investment</strong></span>
+									<span class="pull-left"><strong>Total Investment</strong></span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xs-6 col-sm-3 half-padding">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-12">
+											<span class="cf-sold large"></span>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									<span class="pull-left"><strong>Sold to Fiat</strong></span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xs-6 col-sm-3 half-padding">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-12">
+											<span class="cf-active-investment large"></span>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									<span class="pull-left"><strong>Active Investment</strong></span>
 									<div class="clearfix"></div>
 								</div>
 							</div>
@@ -810,6 +842,7 @@
 							</div>
 						</div>
 
+						<!--
 						<div class="col-xs-6 col-sm-3 half-padding">
 							<div class="panel panel-success">
 								<div class="panel-heading">
@@ -826,22 +859,7 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="col-xs-6 col-sm-3 half-padding">
-							<div class="panel panel-info">
-								<div class="panel-heading">
-									<div class="row">
-										<div class="col-xs-12">
-											<span class="cf-sold large"></span>
-										</div>
-									</div>
-								</div>
-								<div class="panel-footer">
-									<span class="pull-left"><strong>Sold</strong></span>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
+						-->
 
 					</div>
 				</div>
@@ -1075,7 +1093,6 @@
 			</div>
 		</div>
 
-		<!--
 		<div id="page-performance" class="page-item page-wrapper-buffer" style="display:none;">
 			<div class="row">
 				<div class="col-sm-12">
@@ -1083,167 +1100,98 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-sm-12">
-					<h3 class="page-header small-page-header">
-						<div class="shrink-font-small-screens-80" style="float:right">4.5% USD</div>
-						Bitcoin
-					</h3>
-				</div>
-			</div>
-
-			<div class="row tp-row-skeleton">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<strong>10/11/2017 9:31 AM:</strong> Bought <strong>10 BTC</strong> for <strong>$50000</strong>
-					</div>
-					<div class="panel-body">
-						<div class="col-xs-6 col-sm-3 form-group"><label>Trade Rate</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm">
-								<strong>USD:</strong> $5000
-							</button>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group"><label>Current Rate</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm">
-								<strong>USD:</strong> $6000
-							</button>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group"><label>Difference</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm">
-								<strong>USD:</strong> <span class="text-color-success">$1000</span>
-							</button>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group"><label>Change</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm">
-								<strong>USD:</strong> <span class="text-color-success">16.67%</span>
-							</button>
-						</div>
-					</div>
-					<div class="panel-footer">
-						<label>Current Value:</label> &nbsp;
-						<button type="button" class="btn btn-outline btn-success btn-sm">
-							$60000
-						</button>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-12">
-					<h3 class="page-header small-page-header">
-						<div class="shrink-font-small-screens-80" style="float:right">35% USD</div>
-						Litecoin
-					</h3>
-				</div>
-			</div>
-
-			<div class="row tp-row-skeleton">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<strong>10/11/2017 9:31 AM:</strong> Bought <strong>20 LTC</strong> for <strong>4 ETH</strong>
-					</div>
-					<div class="panel-body">
-						<div class="col-xs-6 col-sm-3 form-group"><label>Trade Rate</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
-								<strong>ETH:</strong> 0.2<br />
-								<strong>BTC:</strong> 0.015<br />
-								<strong>USD:</strong> $25
-							</button>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group"><label>Current Rate</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
-								<strong>ETH:</strong> 0.5<br />
-								<strong>BTC:</strong> 0.01<br />
-								<strong>USD:</strong> $55
-							</button>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group"><label>Difference</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
-								<strong>ETH:</strong> <span class="text-color-success">0.05</span><br />
-								<strong>BTC:</strong> <span class="text-color-danger"> -0.005</span><br />
-								<strong>USD:</strong> <span class="text-color-success">$35</span>
-							</button>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group"><label>Change</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
-								<strong>ETH:</strong> <span class="text-color-success">20%</span><br />
-								<strong>BTC:</strong> <span class="text-color-danger"> -37%</span><br />
-								<strong>USD:</strong> <span class="text-color-success">120%</span>
-							</button>
-						</div>
-					</div>
-					<div class="panel-footer">
-						<label>Current Value:</label> &nbsp;
-						<button type="button" class="btn btn-outline btn-success btn-sm">
-							5 ETH
-						</button> &nbsp;
-
-						<button type="button" class="btn btn-outline btn-danger btn-sm">
-							0.20 BTC
-						</button> &nbsp;
-
-						<button type="button" class="btn btn-outline btn-success btn-sm">
-							$1100
-						</button>
-					</div>
-				</div>
-			</div>
-
-			<div class="row tp-row-skeleton">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<strong>10/14/2017 9:31 AM:</strong> Sold <strong>10 LTC</strong> for <strong>1.8 ETH</strong>
-					</div>
-					<div class="panel-body">
-						<div class="col-xs-6 col-sm-3 form-group"><label>Trade Rate</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
-								<strong>ETH:</strong> 0.18<br />
-								<strong>BTC:</strong> 0.015<br />
-								<strong>USD:</strong> $60
-							</button>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group"><label>Current Rate</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
-								<strong>ETH:</strong> 0.5<br />
-								<strong>BTC:</strong> 0.01<br />
-								<strong>USD:</strong> $55
-							</button>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group"><label>Difference</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
-								<strong>ETH:</strong> <span class="text-color-danger">-0.02</span><br />
-								<strong>BTC:</strong> <span class="text-color-danger">-0.001</span><br />
-								<strong>USD:</strong> <span class="text-color-danger">-$5</span>
-							</button>
-						</div>
-						<div class="col-xs-6 col-sm-3 form-group"><label>Change</label><br />
-							<button type="button" class="btn btn-outline btn-default btn-sm" style="text-align:left">
-								<strong>ETH:</strong> <span class="text-color-danger">-4%</span><br />
-								<strong>BTC:</strong> <span class="text-color-danger">-2%</span><br />
-								<strong>USD:</strong> <span class="text-color-danger">-8%</span>
-							</button>
+			<section class="tp-all">
+				<section class="tp-section">
+					<div class="row tp-coin-header">
+						<div class="col-sm-12">
+							<h3 class="page-header small-page-header">
+								<!--<div class="shrink-font-small-screens-80 tp-coin-perf" style="float:right">4.5% USD</div>-->
+								<span class="tp-coin-name">Bitcoin</span>
+								<button type="button" class="btn btn-default btn-sm btn-outline tp-section-toggle" style="float:right"><span>Hide</span> <i class="fa fa-minus" aria-hidden="true"></i></button>
+							</h3>
 						</div>
 					</div>
 
-					<div class="panel-footer">
-						<label>Current Value:</label> &nbsp;
-						<button type="button" class="btn btn-outline btn-success btn-sm">
-							5 ETH
-						</button> &nbsp;
+					<section class="tp-section-content">
+						<div class="tp-coin-summary">
+							<div class="row tp-coin-summary-row">
+								<div class="panel panel-default">
+									<div class="panel-heading tp-coin-summary-desc">
+										Summary
+									</div>
+									<div class="panel-body tp-coin-summary-body">
+										<div class="col-xs-6 col-sm-3 form-group"><label>Average Buy Value</label><br />
+											<button type="button" class="btn btn-outline btn-default btn-sm tp-coin-summary-rate">
+												<strong>USD:</strong> $5000
+											</button>
+										</div>
+										<div class="col-xs-6 col-sm-3 form-group"><label>Current Value</label><br />
+											<button type="button" class="btn btn-outline btn-default btn-sm tp-coin-summary-current-rate">
+												<strong>USD:</strong> $6000
+											</button>
+										</div>
+										<div class="col-xs-6 col-sm-3 form-group"><label>Difference</label><br />
+											<button type="button" class="btn btn-outline btn-default btn-sm tp-coin-summary-difference">
+												<strong>USD:</strong> <span class="text-color-success">$1000</span>
+											</button>
+										</div>
+										<div class="col-xs-6 col-sm-3 form-group"><label>Change</label><br />
+											<button type="button" class="btn btn-outline btn-default btn-sm tp-coin-summary-change">
+												<strong>USD:</strong> <span class="text-color-success">16.67%</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-						<button type="button" class="btn btn-outline btn-danger btn-sm">
-							0.20 BTC
-						</button> &nbsp;
-
-						<button type="button" class="btn btn-outline btn-success btn-sm">
-							$1100
-						</button>
-					</div>
-
-				</div>
-			</div>
+						<div class="tp-all-trades">
+							<div class="row tp-trade-row">
+								<div class="panel panel-default">
+									<div class="panel-heading tp-trade-desc">
+										<strong>10/11/2017 9:31 AM:</strong> Bought <strong>10 BTC</strong> for <strong>$50000</strong>
+									</div>
+									<div class="panel-body tp-trade-body">
+										<div class="col-xs-6 col-sm-3 form-group"><label>Trade Rate</label><br />
+											<button type="button" class="btn btn-outline btn-default btn-sm tp-trade-rate">
+												<strong>USD:</strong> $5000
+											</button>
+										</div>
+										<div class="col-xs-6 col-sm-3 form-group"><label>Current Rate</label><br />
+											<button type="button" class="btn btn-outline btn-default btn-sm tp-trade-current-rate">
+												<strong>USD:</strong> $6000
+											</button>
+										</div>
+										<div class="col-xs-6 col-sm-3 form-group"><label>Difference</label><br />
+											<button type="button" class="btn btn-outline btn-default btn-sm tp-trade-difference">
+												<strong>USD:</strong> <span class="text-color-success">$1000</span>
+											</button>
+										</div>
+										<div class="col-xs-6 col-sm-3 form-group"><label>Change</label><br />
+											<button type="button" class="btn btn-outline btn-default btn-sm tp-trade-change">
+												<strong>USD:</strong> <span class="text-color-success">16.67%</span>
+											</button>
+										</div>
+									</div>
+									<div class="panel-footer">
+										<label>Current Value:</label> &nbsp;
+										<button type="button" class="btn btn-outline btn-success btn-sm tp-current-value-usd">
+											x
+										</button> &nbsp;
+										<button type="button" class="btn btn-outline btn-success btn-sm tp-current-value-btc">
+											x
+										</button> &nbsp;
+										<button type="button" class="btn btn-outline btn-success btn-sm tp-current-value-eth">
+											x
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</section>
+			</section>
 		</div>
-		-->
 
 		<div id="page-trade-history" class="page-item page-wrapper-buffer" style="display:none;">
 			<div class="row">
@@ -2246,6 +2194,19 @@
 				}
 			}
 
+			function toggleTpSection() {
+				var $el = $(this).closest('.tp-section').find('.tp-section-content');
+				if ($el.is(":visible")) {
+					$el.hide();
+					$(this).find('i.fa').removeClass().addClass('fa fa-plus');
+					$(this).find('span').html("Show");
+				} else {
+					$el.show();
+					$(this).find('i.fa').removeClass().addClass('fa fa-minus');
+					$(this).find('span').html("Hide");
+				}
+			}
+
 			$('#login-form').validator().on('submit', function (e) {
 				if (!e.isDefaultPrevented()) {
 					e.preventDefault();
@@ -2409,6 +2370,10 @@
 				{
 					buildTradeHistory();
 				}
+				else if (page == 'page-performance')
+				{
+					buildTradePerformance();
+				}
 				else if (page == 'page-manage')
 				{
 					// TODO: Need to only trigger if bag changed
@@ -2425,6 +2390,205 @@
 				if (page != 'page-index')
 				{
 					haltLiveQuotes();
+				}
+			}
+
+			function buildTradePerformance() {
+				// Copy the first section
+				var $tp_all = $('.tp-all');
+				var $tp_section = $('.tp-section:first').clone(false);
+				var $tp_coin_summary_row = $tp_section.find('.tp-coin-summary-row').clone(false);
+				var $tp_trade_row = $tp_section.find('.tp-trade-row:first').clone(false);
+
+				// Clear out the table
+				$tp_all.empty();
+
+				// For each coin in the bag
+				if (cryptofolio && cryptofolio.hasOwnProperty('bag') && 
+					cryptofolio.bag && cryptofolio.hasOwnProperty('trades') && 
+					cryptofolio.trades && cryptofolio.trades.length)
+				{
+					// Iterate over the trades
+					for (var coin in cryptofolio.bag) {
+						// Skip fiat
+						if (fiat_currencies.hasOwnProperty(coin) || coin.indexOf("-RES") !== -1) {
+							continue;
+						}
+
+						// Only added properties
+						if (!cryptofolio.bag.hasOwnProperty(coin)) {
+							continue;
+						}
+
+						// Prepare the new section
+						$new_section = $tp_section.clone(false);
+						$new_section.find('.tp-coin-name').html(cryptos[coin].name);
+						$new_section.find('.tp-coin-perf').html("");
+						
+						// Empty the trade section
+						$new_section.find('.tp-all-trades').empty();
+
+						// Keep track of how much of the total we've accounted for, in FIFO/LILO
+						var total_bag = cryptofolio.bag[coin].value;
+						var total_so_far = 0;
+
+						var btc_init_total = 0, eth_init_total = 0, usd_init_total = 0;
+						var btc_final_total = 0, eth_final_total = 0, usd_final_total = 0;
+
+						// Find the latest trades to make up for the current holdings
+						for (var key = cryptofolio.trades.length - 1; key >= 0; key--) {
+							var trade = cryptofolio.trades[key];
+
+							// Make sure it's for this coin
+							if (trade.bought != coin) {
+								continue;
+							}
+
+							if (trade.bought_value <= 0.00000010) {
+								continue;
+							}
+
+							if (total_so_far >= total_bag) {
+								break;
+							}
+
+							var bought_value = cryptofolio.trades[key].bought_value;
+							if ((total_so_far + bought_value) > total_bag) {
+								bought_value = total_bag - total_so_far;
+								bought_value = fromSatoshis(parseInt(toSatoshis(bought_value)));
+							}
+
+							if (bought_value <= 0.00000010) {
+								continue;
+							}
+
+							total_so_far += bought_value;
+
+							// Copy the trade section and clear out
+							$new_trade_row = $tp_trade_row.clone(false);
+
+							// Retrieve the performance
+							var bought_perf, bought_perf_color;
+
+							// Convert the trade datetime into a key
+							var datetime = Date.parse(trade.date);
+							var datetimeModulo = datetime % (24 * 60 * 60 * 1000);
+							datetime = datetime - datetimeModulo;
+
+							var usd_trade_rate, btc_trade_rate, eth_trade_rate;
+							var usd_current_rate, btc_current_rate, eth_current_rate;
+							var usd_diff, btc_diff, eth_diff;
+							var usd_change, btc_change, eth_change;
+
+							if (price_by_date.hasOwnProperty(datetime) && price_by_date[datetime].hasOwnProperty(trade.bought))
+							{
+								eth_trade_rate = price_by_date[datetime][trade.bought] / price_by_date[datetime]['ETH'];
+								eth_current_rate = cryptos[trade.bought].price_usd / cryptos['ETH'].price_usd;
+
+								eth_trade_rate = fromSatoshis(parseInt(toSatoshis(eth_trade_rate)));
+								eth_current_rate = fromSatoshis(parseInt(toSatoshis(eth_current_rate)));
+
+								btc_trade_rate = price_by_date[datetime][trade.bought] / price_by_date[datetime]['BTC'];
+								btc_current_rate = cryptos[trade.bought].price_usd / cryptos['BTC'].price_usd;
+
+								btc_trade_rate = fromSatoshis(parseInt(toSatoshis(btc_trade_rate)));
+								btc_current_rate = fromSatoshis(parseInt(toSatoshis(btc_current_rate)));
+
+								usd_trade_rate = price_by_date[datetime][trade.bought];
+								usd_current_rate = cryptos[trade.bought].price_usd;
+
+								usd_diff = (cryptos[trade.bought].price_usd - price_by_date[datetime][trade.bought]);
+								usd_diff = Math.round(usd_diff * 100) / 100;
+
+								usd_change = ((cryptos[trade.bought].price_usd / price_by_date[datetime][trade.bought]));
+								usd_change = Math.round(usd_change * 10000) / 100;
+
+								eth_diff = (eth_current_rate - eth_trade_rate);
+								eth_diff = fromSatoshis(parseInt(toSatoshis(eth_diff)));
+
+								eth_change = (eth_current_rate / eth_trade_rate);
+								eth_change = Math.round(eth_change * 10000) / 100;
+
+								btc_diff = (btc_current_rate - btc_trade_rate);
+								btc_diff = fromSatoshis(parseInt(toSatoshis(btc_diff)));
+
+								btc_change = (btc_current_rate / btc_trade_rate);
+								btc_change = Math.round(btc_change * 10000) / 100;
+
+								eth_init_total  += eth_trade_rate * bought_value;
+								btc_init_total  += btc_trade_rate * bought_value;
+								usd_init_total  += usd_trade_rate * bought_value;
+								eth_final_total += eth_current_rate * bought_value;
+								btc_final_total += btc_current_rate * bought_value;
+								usd_final_total += usd_current_rate * bought_value;
+
+								//usd_diff = ((cryptos[trade.bought].price_usd / price_by_date[datetime][trade.bought]));
+								//usd_diff = Math.round((100 - (usd_diff) * 100) * 100) / 100;
+
+								//bought_perf_color = (usd_diff > 0.99) ? '#5cb85c' : '#d9534f';
+							}
+
+							var desc = "<strong>" + trade.date + ":</strong> Bought <strong>" + bought_value + " " + trade.bought + "</strong>";
+							if (trade.traded) {
+								desc += " for <strong>" + trade.traded_value + " " + trade.traded + "</strong>";
+							}
+
+							// Set values
+							$new_trade_row.find('.tp-trade-desc').html(desc)
+							$new_trade_row.find('.tp-trade-rate').html("<strong>USD</strong>: $" + usd_trade_rate + "<br /><strong>BTC</strong>: " + btc_trade_rate + "<br /><strong>ETH</strong>: " + eth_trade_rate);
+							$new_trade_row.find('.tp-trade-current-rate').html("<strong>USD</strong>: $" + usd_current_rate + "<br /><strong>BTC</strong>: " + btc_current_rate + "<br /><strong>ETH</strong>: " + eth_current_rate);
+							$new_trade_row.find('.tp-trade-difference').html("<strong>USD</strong>: $" + usd_diff + "<br /><strong>BTC</strong>: " + btc_diff + "<br /><strong>ETH</strong>: " + eth_diff);
+							$new_trade_row.find('.tp-trade-change').html("<strong>USD</strong>: " + usd_change + "%<br /><strong>BTC</strong>: " + btc_change + "%<br /><strong>ETH</strong>: " + eth_change + "%");
+
+							// Set current value
+							$new_trade_row.find('.tp-current-value-usd').html( "$" + (usd_current_rate * bought_value).toFixed(2) );
+							$new_trade_row.find('.tp-current-value-btc').html( (btc_current_rate * bought_value).toFixed(8) + " BTC" );
+							$new_trade_row.find('.tp-current-value-eth').html( (btc_current_rate * bought_value).toFixed(8) + " ETH" );
+
+							// Append to this coin's section
+							$new_section.find('.tp-all-trades').append($new_trade_row);
+						}
+
+						eth_difference = eth_final_total - eth_init_total;
+						btc_difference = btc_final_total - btc_init_total;
+						usd_difference = usd_final_total - usd_init_total;
+
+						eth_change = eth_final_total / eth_init_total;
+						btc_change = btc_final_total / btc_init_total;
+						usd_change = usd_final_total / usd_init_total;
+
+						eth_init_total  = eth_init_total.toFixed(8);
+						btc_init_total  = btc_init_total.toFixed(8);
+						usd_init_total  = usd_init_total.toFixed(2);
+						eth_final_total = eth_final_total.toFixed(8);
+						btc_final_total = btc_final_total.toFixed(8);
+						usd_final_total = usd_final_total.toFixed(2);
+						eth_difference  = eth_difference.toFixed(8);
+						btc_difference  = btc_difference.toFixed(8);
+						usd_difference  = usd_difference.toFixed(2);
+						eth_change = Math.round(eth_change * 10000) / 100;
+						btc_change = Math.round(btc_change * 10000) / 100;
+						usd_change = Math.round(usd_change * 10000) / 100;
+
+						// Now summary
+						$coin_summary_row = $new_section.find('.tp-coin-summary');
+						$coin_summary_row.find('.tp-coin-summary-rate').html("<strong>USD</strong>: $" + usd_init_total + "<br /><strong>BTC</strong>: " + btc_init_total + "<br /><strong>ETH</strong>: " + eth_init_total);
+						$coin_summary_row.find('.tp-coin-summary-current-rate').html("<strong>USD</strong>: $" + usd_final_total + "<br /><strong>BTC</strong>: " + btc_final_total + "<br /><strong>ETH</strong>: " + eth_final_total);
+						$coin_summary_row.find('.tp-coin-summary-difference').html("<strong>USD</strong>: $" + usd_difference + "<br /><strong>BTC</strong>: " + btc_difference + "<br /><strong>ETH</strong>: " + eth_difference);
+						$coin_summary_row.find('.tp-coin-summary-change').html("<strong>USD</strong>: " + usd_change + "%<br /><strong>BTC</strong>: " + btc_change + "%<br /><strong>ETH</strong>: " + eth_change + "%");
+
+						// Append the coin's section to all sections
+						$tp_all.append($new_section);
+
+						// Trade performance
+						$new_section.find('.tp-section-toggle').click(toggleTpSection);
+					}
+				}
+
+				function isEmpty(el){return !$.trim(el.html())}
+
+				if (isEmpty($tp_all)){
+					$tp_all.append("<p>There is no trade history to measure performance.</p>");
 				}
 			}
 
@@ -2449,19 +2613,25 @@
 						// Retrieve the performance
 						var bought_perf, sold_perf;
 						var performance = '<i class="fa fa-spinner fa-pulse"></i>';
-						if (price_by_date.hasOwnProperty(key) && 
-							price_by_date[key].hasOwnProperty(trade.bought) &&
-							(price_by_date[key].hasOwnProperty(trade.traded) || fiat_currencies.hasOwnProperty(trade.traded))
+
+						// Convert the trade datetime into a key
+						var datetime = Date.parse(trade.date);
+						var datetimeModulo = datetime % (24 * 60 * 60 * 1000);
+						datetime = datetime - datetimeModulo;
+
+						if (price_by_date.hasOwnProperty(datetime) && 
+							(price_by_date[datetime].hasOwnProperty(trade.bought) || fiat_currencies.hasOwnProperty(trade.bought) || trade.bought.indexOf('-RES') !== -1) &&
+							(price_by_date[datetime].hasOwnProperty(trade.traded) || fiat_currencies.hasOwnProperty(trade.traded) || trade.traded.indexOf('-RES') !== -1)
 							)
 						{
 							if (cryptos.hasOwnProperty(trade.bought)) {
-								bought_perf = ((cryptos[trade.bought].price_usd / price_by_date[key][trade.bought]));
+								bought_perf = ((cryptos[trade.bought].price_usd / price_by_date[datetime][trade.bought]));
 								bought_perf_color = (bought_perf > 0.99) ? '#5cb85c' : '#d9534f';
 							}
 
 							var sold_perf;
 							if (!fiat_currencies.hasOwnProperty(trade.traded) && cryptos.hasOwnProperty(trade.traded)) {
-								sold_perf = (cryptos[trade.traded].price_usd / price_by_date[key][trade.traded]);
+								sold_perf = (cryptos[trade.traded].price_usd / price_by_date[datetime][trade.traded]);
 								sold_perf_color = (sold_perf >= 1.0) ? '#5cb85c' : '#d9534f';
 							}
 
@@ -3330,7 +3500,7 @@
 				});
 			}
 
-			var price_data_daily = [], price_labels_daily = [], price_by_date = [];
+			var price_data_daily = [], price_labels_daily = [], price_by_date = {};
 			function getMultipleDailyPrices(coins, callback) {
 				var promises = [], local_promises = [];
 
@@ -3775,13 +3945,14 @@
 			}
 
 			// Keep some DOM elements in memory to reduce processing time
-			var $CFTotal      = $('.cf-total');
-			var $CFInvestment = $('.cf-investment');
-			var $CFDiff       = $('.cf-diff');
-			var $CFDiffPerc   = $('.cf-diff-perc');
-			var $CFSold       = $('.cf-sold');
-			var $CFCrypto     = $('.cf-crypto');
-			var $CFReserve    = $('.cf-reserve');
+			var $CFTotal         = $('.cf-total');
+			var $CFInvestment    = $('.cf-investment');
+			var $CFActInvestment = $('.cf-active-investment');
+			var $CFDiff          = $('.cf-diff');
+			var $CFDiffPerc      = $('.cf-diff-perc');
+			var $CFSold          = $('.cf-sold');
+			var $CFCrypto        = $('.cf-crypto');
+			var $CFReserve       = $('.cf-reserve');
 
 			function updateTotal() {
 				// Make sure all calculations are up to date
@@ -3815,16 +3986,18 @@
 					}
 				}
 
-				$CFTotal.html(fiat.symbol + (total).toFixed(2));
+				$CFTotal.html(fiat.symbol + (total).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 				if (!investment) investment = 0;
+				var active_investment = investment - sold;
 			
-				$CFInvestment.html(fiat.symbol + (investment).toFixed(2));
-				$CFSold.html(fiat.symbol + (sold).toFixed(2));
-				$CFReserve.html(fiat.symbol + (reserve).toFixed(2));
-				$CFCrypto.html(fiat.symbol + (in_crypto).toFixed(2));
+				$CFInvestment.html(fiat.symbol + (investment).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+				$CFSold.html(fiat.symbol + (sold).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+				$CFActInvestment.html(fiat.symbol + (active_investment).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}))
+				$CFReserve.html(fiat.symbol + (reserve).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+				$CFCrypto.html(fiat.symbol + (in_crypto).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 
-				var diff = (investment >= 0.01) ? (total - investment) : (0);
-				var diff_perc = (investment >= 0.01) ? (diff / investment * 100) : (0);
+				var diff = (active_investment >= 0.01) ? (total - active_investment) : (0);
+				var diff_perc = (active_investment >= 0.01) ? (diff / active_investment * 100) : (0);
 
 				var color;
 				if (diff >= 0)
@@ -3840,8 +4013,8 @@
 					$CFDiffPerc.closest('.panel').removeClass('panel-success').addClass('panel-danger');
 				}
 
-				$CFDiff.html('<span style="color:' + color + '">' + fiat.symbol + diff.toFixed(2) + '</span>');
-				$CFDiffPerc.html('<span style="color:' + color + '">' + diff_perc.toFixed(2) + '%</span>');
+				$CFDiff.html('<span style="color:' + color + '">' + fiat.symbol + diff.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</span>');
+				$CFDiffPerc.html('<span style="color:' + color + '">' + diff_perc.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '%</span>');
 			}
 
 			function setFiat() {
@@ -4454,6 +4627,10 @@
 				// Now clean up the bag for use elsewhere
 				for (var coin in cryptofolio.bag) {
 					if (fiat_currencies.hasOwnProperty(coin)) {
+						// Neglect "essentially 0" values
+						if (cryptofolio.bag[coin].value <= 0.01) {
+							delete cryptofolio.bag[coin];
+						}
 						continue;
 					}
 
